@@ -26,7 +26,7 @@
 - A separate replacement preview retains isolated data and the same owner Access audience. It has no API secret.
 - Production Access is owner-only for uongb03@gmail.com, with OTP and no bypass policy. Worker host/audience settings match the production Access application.
 - Three Wix apex A records and the www Wix CNAME were replaced by proxied Worker custom domains, with exact-record checks and backup/restore handling. Main, www and preview route readback matched their intended Workers.
-- Real Cloudflare Browser Rendering checks of https://bdashh.com/dashboard/ and /api/sync successfully loaded the HTTPS page titled "Sign in ・ Cloudflare Access", identified the BDashh Private app/email form and returned no dashboard data.
+- Real Cloudflare Browser Rendering checks of https://bdashh.com/dashboard/ and /api/sync successfully loaded the HTTPS page titled "Sign in � Cloudflare Access", identified the BDashh Private app/email form and returned no dashboard data.
 - A later sequential browser check of https://www.bdashh.com/dashboard/ reached the same owner sign-in page. An earlier concurrent check was rate-limited; the successful sequential check is the evidence.
 - Canonical redirect smoke checks verify preservation of path/query, fixed HTTPS destination, rejection of unexpected hosts and rejection of POST requests.
 - All four Workers, including the inactive legacy Worker, have workers.dev/version-preview URLs disabled and no cron schedules. Production and preview daily AI flags are false; STARTUP_CHECK_ID is absent.
@@ -100,7 +100,7 @@ Live anonymous checks confirmed the public v57 dashboard still loads READ ONLY w
 
 Backups: operations/before-owner-controls-20261030.json and operations/releases/v57-owner-controls-20261030.json. Original ChatGPT Site and schedules remain unchanged.
 
-## GitHub repository access and source import — 30 October 2026
+## GitHub repository access and source import - 30 October 2026
 
 GitHub now reports installation 176991194 under Brian-Uong with selected-repository access. Brian-Uong/bdashh-private is private and reports read/write permission. Its existing main head, 0e96e4c83422885d166464a94568ac5180c5f026, contains only the starter README. The import preserves that commit as its parent.
 
@@ -109,3 +109,9 @@ The current standalone v57 source includes the authorized owner controls. All 10
 The upload allowlist excludes private-data, environment files, credentials, dependencies, build directories and audit artifacts. A credential-pattern scan allows only the explicitly identified dummy test key. Git attributes preserve original line endings. README now documents the current owner controls and manual release process instead of superseded launch/billing instructions.
 
 Cloudflare reports no production build triggers. R2 settings readback remains revision 1: public viewing on, OpenAI off, daily research off. No website deployment or paid AI call is part of this repository import. Source upload verification is recorded separately after remote readback.
+
+### Completed repository import
+
+At 2026-10-30T18:44:45.025Z, remote main points to import commit db262ec1987d09533c8eb0b4182667364e7c9f49, tree ef9d5d0e31beca776b7a568e1c708f191fd05848. GitHub readback confirms the repository remains private. All 154 remote file blob hashes and sizes match the local upload manifest, with no missing or extra files and no truncated tree response. The initial README commit is preserved as the import's parent. This verification record is a subsequent documentation-only commit.
+
+The private-repository access blocker is resolved. GitHub is now the stored source for the standalone v57 website and authorized owner controls. Future website publication still requires Brian's request. No deployment trigger, API setting, live dashboard data or original Site was changed during this work.

@@ -254,10 +254,22 @@
     "access_verified_at": "2026-10-30T18:39:45.940102+00:00",
     "read_access_verified": true,
     "write_permission_reported": true,
-    "source_upload_verified": false,
+    "source_upload_verified": true,
     "automatic_deployment_configured": false,
     "production_build_triggers": [],
     "production_changed_by_repository_setup": false,
-    "state": "prepared_for_import"
+    "state": "synchronized",
+    "write_access_verified": true,
+    "import_commit": "db262ec1987d09533c8eb0b4182667364e7c9f49",
+    "import_tree": "ef9d5d0e31beca776b7a568e1c708f191fd05848",
+    "source_files_verified": 154,
+    "source_verification_method": "Recursive Git tree blob hashes and sizes match every allowlisted local source file.",
+    "source_verified_at": "2026-10-30T18:44:45.025Z",
+    "source_version": 57,
+    "includes_owner_controls": true,
+    "private_data_and_credentials_excluded": true,
+    "production_settings_revision_at_check": 1,
+    "tests_passed_before_import": 100,
+    "dry_run_matches_deployed_worker": true
   }
 }
