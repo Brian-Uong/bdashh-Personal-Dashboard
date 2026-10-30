@@ -1,0 +1,18 @@
+import {eventCategories} from './categories.mjs';
+export const sections=[
+{key:'overview',name:'Today / overview',icon:'⌖',title:'Your day, in focus',sub:'Career, investments and your calendar — one clear view.'},
+{key:'Networking Tracker',name:'Networking',icon:'⌘',title:'Network intelligence',sub:'Every conversation is a potential next chapter.',head:3,start:4,label:2},
+{key:'Application Tracker',name:'Applications',icon:'↗',title:'Application operations',sub:'Track the opportunities that move your career forward.',head:3,start:4,label:2},
+{key:'Interview Practice Tracker',name:'Interview readiness',icon:'◈',title:'Interview readiness',sub:'Preparation, practice and feedback. Make each session count.',head:3,start:4,label:1},
+{key:'Monthly Check-In',name:'Monthly review',icon:'◷',title:'Monthly debrief',sub:'Review your progress. Refine your next move.',head:5,start:6,label:0},
+{key:'Potential Events',name:'Local events',icon:'⌾',title:'Event intelligence',sub:'Find the right room. Meet the right people.',head:3,start:4,label:0},
+{key:'Start Here',name:'Mission objectives',icon:'⚑',title:'Mission objectives',sub:'Your goals, priorities and career direction.',raw:true},
+{key:'Dashboard',name:'Workbook dashboard',icon:'▥',title:'Performance telemetry',sub:'Your original workbook calculations and targets.',raw:true},
+{key:'Rubric Reference',name:'Readiness reference',icon:'≡',title:'Readiness reference',sub:'The framework behind your career preparation.',raw:true}
+];
+export const text=v=>v==null?'':String(v).trim();
+export function parseDate(v){if(typeof v==='number'&&v>20000&&v<100000){return new Date(Math.round((v-25569)*864e5)).toISOString().slice(0,10)}const s=text(v);if(/^\d{4}-\d{2}-\d{2}$/.test(s)){const d=new Date(s+'T12:00:00Z');return !isNaN(d)&&d.toISOString().slice(0,10)===s?s:null}const m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);if(m)return parseDate(`${m[3]}-${m[1].padStart(2,'0')}-${m[2].padStart(2,'0')}`);return null}
+export function records(sheets,key){const def=sections.find(s=>s.key===key),rows=sheets[key]||[];if(!def||def.raw)return [];return rows.slice(def.start).map((cells,i)=>({cells,row:i+def.start,key})).filter(r=>text(r.cells[def.label])&&r.cells.some(v=>text(v)))}
+export function filterEvents(rows,f={}){return rows.filter(r=>{const c=r.cells,d=parseDate(c[1]);return (!f.category||eventCategories(c).some(category=>category.id===f.category))&&(!f.q||c.some(v=>text(v).toLowerCase().includes(f.q.toLowerCase())))&&(!f.free||text(c[7])===f.free)&&(!f.beginner||text(c[26])===f.beginner)&&(!f.company||text(c[21])===f.company)&&(!f.status||text(c[10])===f.status)&&(!f.from||(d&&d>=f.from))&&(!f.until||(d&&d<=f.until))})}
+export function monthMetrics(sheets,month){const inMonth=r=>{const d=parseDate(r.cells[0]);return d&&Number(d.slice(5,7))===month+1},n=records(sheets,'Networking Tracker').filter(inMonth),a=records(sheets,'Application Tracker').filter(inMonth),p=records(sheets,'Interview Practice Tracker').filter(inMonth);const yes=(r,col)=>text(r.cells[col]).toLowerCase()==='yes';return {contacts:n.length,outreaches:n.filter(r=>yes(r,6)).length,followups:n.filter(r=>yes(r,7)).length,interviews:n.filter(r=>yes(r,8)).length,events:new Set(n.filter(r=>text(r.cells[1])).map(r=>text(r.cells[0])+'|'+text(r.cells[1]).toLowerCase())).size,applications:a.length,practices:p.length,minutes:p.reduce((v,r)=>v+(Number(r.cells[5])||0),0)}}
+export function groupCount(rows,col){const groups={};rows.forEach(r=>{const k=text(r.cells[col])||'Not recorded';groups[k]=(groups[k]||0)+1});return Object.entries(groups).sort((a,b)=>b[1]-a[1])}

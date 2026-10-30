@@ -1,0 +1,35 @@
+/* Compact defaults; retain the established neon palette and all controls. */
+.skip-link{position:fixed;left:16px;top:-80px;z-index:99999;padding:12px 18px;background:#151b32;color:#98f1ee;border:2px solid currentColor;border-radius:12px}
+.skip-link:focus{top:16px}
+.nd-flow #tabBrief.section-field-guide{display:block;min-height:0;padding:0;margin:0 0 18px;border-radius:18px}
+.section-guide>summary{display:flex;align-items:center;gap:20px;justify-content:space-between;cursor:pointer;padding:15px 20px;color:#d2cce4;list-style:none;font-size:13px}
+.section-guide>summary::after{content:'＋';color:#77e0e7}
+.section-guide[open]>summary::after{content:'−'}
+.section-guide>summary small{margin-left:auto;color:#aaaac3;font-size:12px}
+.guide-content{display:grid;grid-template-columns:1fr 180px;gap:24px;padding:0 22px 22px}
+.nd-flow .section-guide h2{font-size:20px;margin:4px 0 8px}
+.nd-flow .section-guide p{font-size:13px;line-height:1.65}
+.nd-flow .section-guide .field-guide-topics{display:none}
+.nd-flow .pageheading{margin-bottom:22px}
+.nd-flow #connection{padding:12px 18px;border-radius:16px;margin-bottom:20px;min-height:0}
+.nd-flow #connection strong{font-size:13px}
+.nd-flow #connection p{font-size:12px;margin:3px 0 0;line-height:1.5}
+.nd-flow .section-actions{padding:14px 18px;border-radius:18px;margin:16px 0}
+.nd-flow .section-actions p{max-width:48ch}
+.nd-flow #feedback:empty{display:none}
+.nd-flow #feedback:not(:empty){padding:12px 16px;margin:10px 0;border-radius:12px;overflow-wrap:anywhere}
+.nd-flow .pd-daily-briefing{margin-top:0}
+.nd-flow .pd-panel>button[data-add-stock]{margin-right:10px}
+.nd-flow :is(button,a,summary,input,select,textarea):focus-visible{outline:2px solid #75e9eb;outline-offset:3px}
+.nd-flow :is(.record-editor,.stock-dialog){max-height:90dvh;overflow:auto}
+@media(max-width:700px){
+ .section-guide>summary{padding:13px 16px;gap:12px}
+ .section-guide>summary small{display:none}
+ .guide-content{display:block;padding:0 16px 16px}
+ .nd-flow .pageheading{margin-bottom:16px}
+ .nd-flow #connection{padding:12px 14px}
+ .nd-flow .section-actions p{max-width:none}
+ .nd-flow .section-actions-buttons .button{min-height:44px;min-width:130px}
+ .nd-flow .pd-mini-grid{gap:12px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}

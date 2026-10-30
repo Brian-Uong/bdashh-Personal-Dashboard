@@ -1,0 +1,15 @@
+# BDashh publication rules
+
+- This is Brian's personal dashboard at bdashh.com. His future business is separate. On 30 October 2026 he explicitly requested public testing and confirmed "I know this is for testing so its ok to make it public". Public visitors may read his actual saved dashboard; all writes and paid AI controls remain owner-only.
+- The owner explicitly selected dashboard version 57, source commit d824a7d2e6477d005b0d3912c363828f1da34aa4, for the website on 30 October 2026. New versions on the original ChatGPT Site must not be imported or published here until he asks. Development work alone does not authorize publishing a new feature version.
+- The owner explicitly authorized launching version 57 now and handling API credits later. Do not require funded AI or version 58 reconciliation as launch prerequisites. Keep daily AI flags and cron schedules disabled until activation is authorized and billing works. Preserve honest failure messages and saved results.
+- Production may expose only the approved read-only dashboard paths when PUBLIC_READ_ONLY is true. Cloudflare Access protects /owner; verified owner JWTs protect every write and paid AI operation. Preview stays private. Alternate public Workers URLs stay disabled. Never grant owner identity to a public visitor.
+- Keep secrets server-side. Preserve existing secret bindings during deploys; never export keys or log provider credentials.
+- Preserve user data, record IDs, fractional holdings and conditional writes. Preview and production use separate data buckets. Back up data before migration and do not overwrite owner edits with test fixtures.
+- Do not modify the original ChatGPT Site or its schedules as a side effect of this standalone website deployment.
+- Check browser/source portability and the relevant tests before publishing. Upload and checksum any changed static asset release before the Worker points to it. Record actual checks in VERIFICATION.md and migration-status.json; never claim unperformed browser or provider checks.
+- The authoritative publish policy is in migration-status.json. Later website feature-version changes require the owner's explicit instruction and corresponding policy update.
+
+- On 30 October 2026, after funded verification, Brian requested pausing API credit use while continuing development in ChatGPT. Keep production OPENAI_MODEL blank, both daily AI flags false, and cron triggers empty until he explicitly requests reactivation. Preserve the stored API secret. This later pause supersedes the earlier activation authorization.
+
+- On 30 October 2026 Brian authorized owner-operated Website controls for public/private visibility and OpenAI on/off. Persist these choices in private site-settings.json; authenticated owner changes are explicit authorization. Keep paid AI and daily research off at initial deployment. A passive twice-daily cron may check these settings but must do no AI or quote work while disabled. Preserve current settings across future deployments; never overwrite them with defaults. These controls are an authorized addition to the v57 baseline; do not import newer Site feature versions.

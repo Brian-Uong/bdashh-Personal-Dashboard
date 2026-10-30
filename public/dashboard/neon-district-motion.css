@@ -1,0 +1,163 @@
+/* Neon District Flow · motion layer. Load after neon-district-flow.css.
+   Charts replay once per Investments visit, when reached. Values never change. */
+.nd-flow { isolation: isolate; }
+.nd-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.nd-ambient > i {
+  position: absolute;
+  width: min(1000px, 95vw);
+  height: min(900px, 100vh);
+  left: -18%;
+  top: -24%;
+  background: radial-gradient(ellipse, #ff64d050, #a55aff24 42%, transparent 70%);
+  animation: nd-aurora 18s ease-in-out -6s infinite alternate;
+}
+.nd-ambient > i:nth-child(2) {
+  left: auto;
+  right: -22%;
+  top: 25%;
+  background: radial-gradient(ellipse, #68e8ff42, #787cff20 45%, transparent 70%);
+  animation-duration: 23s;
+  animation-delay: -9s;
+  animation-direction: alternate-reverse;
+}
+.nd-ambient svg {
+  position: absolute;
+  width: 120%;
+  height: 100%;
+  left: -10%;
+  opacity: .85;
+  /* Rasterize the ribbons once and move the layer, rather than repainting
+     a full-screen SVG's dash offsets on every frame. */
+  animation: nd-ribbon-drift 18s ease-in-out -7s infinite alternate;
+}
+.nd-ambient path {
+  fill: none;
+  stroke: #b5a4ff;
+  stroke-width: 1.3;
+  opacity: .24;
+}
+.nd-ambient .nd-ribbon-light {
+  stroke: #68e8ff;
+  stroke-width: 2;
+  stroke-dasharray: 180 580;
+  opacity: .6;
+}
+.nd-ambient .nd-ribbon-pink { stroke: #ff64d0; stroke-dashoffset: -380; }
+
+/* Only observed dashboard shells receive entry motion. Map engines and their
+   containers are excluded by the companion module; no persistent transforms. */
+.nd-flow .nd-enter:not(svg):not(.fill):not(i) {
+  animation: nd-card-arrive .38s cubic-bezier(.2,.7,.2,1) var(--nd-delay, 0ms) backwards;
+}
+.nd-flow :is(.metric, .pc-metrics article)::before {
+  background: linear-gradient(90deg, transparent, var(--nd-magenta), var(--nd-cyan), transparent);
+  transform-origin: left center;
+  animation: nd-edge-flow 8s ease-in-out infinite alternate;
+}
+.nd-flow .metric:nth-child(even)::before { animation-delay: -4s; }
+.nd-flow .pc-metrics article { position: relative; border-radius: 18px 24px 18px 18px; }
+.nd-flow .pc-metrics article::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  height: 2px;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  border-radius: 50%;
+}
+.nd-flow :is(.metric, .pc-metrics article):not(.nd-visible)::before { animation-play-state: paused; }
+.nd-flow .retro-art { animation: none; }
+.nd-flow .retro-art::after { animation: nd-orbit-flow 12s ease-in-out infinite alternate; }
+/* The hidden legacy illustrations still have SVG animation rules underneath
+   the theme. Stop their work entirely while retaining their sizing. */
+.nd-flow .retro-illustration * { animation: none !important; }
+.nd-flow .scene::after { animation: nd-scene-flow 16s ease-in-out infinite alternate; }
+.nd-flow .centre-node > span { animation: nd-node-float 7s ease-in-out infinite alternate; }
+.nd-flow :is(.gold-dot, .status > span, .intel-indicator i) { animation: nd-soft-pulse 6s ease-in-out infinite alternate; }
+.nd-flow .topbar { backdrop-filter: none; -webkit-backdrop-filter: none; }
+.nd-flow .retro-brief:not(.nd-visible) .retro-art,
+.nd-flow .retro-brief:not(.nd-visible) .retro-art::after { animation-play-state: paused; }
+.nd-flow .radar-plane { animation: nd-trail-flow 15s ease-in-out infinite alternate; }
+.nd-flow .command-panel:not(.nd-visible) :is(.radar-plane, .cube, .centre-node > span),
+.nd-flow .command-panel:not(.nd-visible) .scene::after { animation-play-state: paused; }
+.nd-flow .command-panel::before { animation: none; background: none; }
+.nd-flow :is(.eyebrow, .retro-kicker) {
+  background: linear-gradient(105deg, #ff9cde 15%, #c2acff 40%, #8cefff 60%, #ff9cde 85%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.nd-flow :is(.searchbox, input, textarea, select) {
+  transition: border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
+}
+.nd-flow :is(input, textarea, select):focus-visible,
+.nd-flow .searchbox:focus-within {
+  border-color: var(--nd-cyan);
+  box-shadow: 0 0 0 3px #68e8ff0d, 0 0 24px #68e8ff12;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .nd-flow :is(.button, .quiet, .pd-action) {
+    transition: translate .25s ease, border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
+  }
+  .nd-flow :is(.button, .quiet, .pd-action):not(:disabled):hover { translate: 0 -2px; }
+  .nd-flow :is(.button, .quiet, .pd-action):not(:disabled):active { translate: 0 0; }
+  .nd-flow.no-motion :is(.button, .quiet, .pd-action):hover { translate: none; }
+}
+
+/* Bars grow from their real zero/baseline. No looping or changing chart data. */
+.nd-flow .pc-legend.nd-enter { animation: none; }
+.nd-flow .fill.nd-enter, .nd-flow .pc-legend.nd-enter .pc-weight i {
+  transform-origin: left center;
+  animation: nd-bar-grow .7s cubic-bezier(.22,.7,.2,1) backwards;
+}
+.nd-flow .pc-chart-grid svg.nd-enter .pc-bar {
+  transform-box: view-box;
+  transform-origin: var(--nd-bar-origin);
+  animation: nd-bar-grow .7s cubic-bezier(.22,.7,.2,1) min(var(--nd-stagger, 0ms), 150ms) backwards;
+}
+.nd-flow #momentum svg.nd-enter rect {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: nd-column-grow .8s cubic-bezier(.22,.7,.2,1) backwards;
+}
+.nd-flow .pc-donut.nd-enter circle[pathLength] { animation: nd-arc-reveal .9s cubic-bezier(.22,.7,.2,1) backwards; }
+.nd-flow .pc-donut circle { transition: stroke-width .35s ease, filter .35s ease; }
+.nd-flow .pc-donut circle[pathLength]:hover { filter: drop-shadow(0 0 4px #b5a4ff55); }
+
+@keyframes nd-aurora { from { transform: translate3d(-6%, -7%, 0) scale(.94); opacity: .8; } to { transform: translate3d(30%, 24%, 0) scale(1.12); opacity: 1; } }
+@keyframes nd-ribbon-drift { from { transform: translate3d(-6%, -7%, 0) rotate(-4deg); } to { transform: translate3d(6%, 8%, 0) rotate(4deg); } }
+@keyframes nd-edge-flow { from { transform: scaleX(.65); opacity: .55; } to { transform: scaleX(1); opacity: 1; } }
+@keyframes nd-card-arrive { from { opacity: .8; translate: 0 6px; } to { opacity: 1; translate: 0 0; } }
+@keyframes nd-orbit-flow { from { transform: rotate(-16deg) scale(.96); } to { transform: rotate(8deg) scale(1.04); } }
+@keyframes nd-scene-flow { from { transform: translate3d(-5%, -3%, 0); opacity: .55; } to { transform: translate3d(5%, 3%, 0); opacity: 1; } }
+@keyframes nd-node-float { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+@keyframes nd-soft-pulse { from { opacity: .55; } to { opacity: 1; } }
+@keyframes nd-trail-flow { from { transform: translate(-50%, -40%) rotate(-15deg) scale(.97); } to { transform: translate(-48%, -44%) rotate(-6deg) scale(1.04); } }
+@keyframes nd-bar-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes nd-column-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes nd-arc-reveal { from { stroke-dasharray: 0 100; } }
+
+/* The existing Motion controls and OS preference remain authoritative. */
+.nd-flow.nd-page-hidden *, .nd-flow.nd-page-hidden *::before, .nd-flow.nd-page-hidden *::after { animation-play-state: paused !important; }
+.nd-flow:is(.no-motion, .nd-no-motion) *,
+.nd-flow:is(.no-motion, .nd-no-motion) *::before,
+.nd-flow:is(.no-motion, .nd-no-motion) *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .nd-flow *, .nd-flow *::before, .nd-flow *::after { animation: none !important; transition: none !important; }
+}
+@media (forced-colors: active) {
+  .nd-ambient { display: none; }
+  .nd-flow :is(.eyebrow, .retro-kicker) { background: none; color: CanvasText; }
+}
+@media (max-width: 650px) {
+  .nd-ambient svg { opacity: .6; }
+  .nd-ambient > i { animation-duration: 23s; }
+}

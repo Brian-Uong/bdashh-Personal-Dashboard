@@ -1,0 +1,14 @@
+node_modules/
+build/
+build-*/
+.wrangler/
+.dev.vars*
+.env*
+private-data/
+*.zip
+*.log
+wrangler.local.json
+coverage/
+site-settings.json
+*.pem
+*.key

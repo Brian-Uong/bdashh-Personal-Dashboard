@@ -1,0 +1,292 @@
+/*
+ * BRIAN'S DASH — NEON DISTRICT / CYBERPUNK THEME
+ * Theme-only stylesheet, v1.0 | October 2026
+ *
+ * Add as the LAST stylesheet in <head> after your existing CSS.
+ * No HTML structure changes, JavaScript, account data, or map engine changes.
+ * Remove the <link> to undo the theme.
+ * No external assets, font downloads, scripts, tracking or network calls.
+ *
+ * Tune the palette using only the custom properties in :root.
+ */
+
+:root {
+  color-scheme: dark;
+  --bg: #080715;
+  --panel: #121028;
+  --border: #40335e;
+  --text: #f6f2ff;
+  --muted: #afa7c8;
+  --gold: #39f4e7; /* Original dashboard uses --gold for primary accent. */
+  --blue: #a58aff;
+  --green: #70ffc9;
+  --pd-purple: #b48bff;
+  --pd-teal: #39f4e7;
+
+  --cyber-cyan: #39f4e7;
+  --cyber-pink: #ff4fc4;
+  --cyber-violet: #a58aff;
+  --cyber-green: #70ffc9;
+  --cyber-ink: #080715;
+  --cyber-surface: #131027;
+  --cyber-surface-raised: #1a1635;
+  --cyber-line: #514071;
+  --cyber-muted: #afa7c8;
+  --cyber-white: #f6f2ff;
+  --cyber-glow-cyan: 0 0 18px rgb(57 244 231 / 20%);
+  --cyber-glow-pink: 0 0 24px rgb(255 79 196 / 18%);
+}
+
+/* Subtle, static neon atmosphere; no layout or pointer events changed. */
+body {
+  color: var(--cyber-white);
+  background:
+    radial-gradient(ellipse 65% 55% at 88% -10%, rgb(164 77 255 / 15%), transparent 72%),
+    radial-gradient(ellipse 55% 65% at 0% 90%, rgb(0 242 234 / 8%), transparent 78%),
+    linear-gradient(130deg, #080715 0%, #0c0b1d 58%, #0b0719 100%);
+}
+::selection { color: #070814; background: #8bfef4; }
+
+/* Consistent high-visibility focus, keyboard accessible. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--cyber-cyan);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgb(57 244 231 / 13%);
+}
+:where(input[type="checkbox"], input[type="radio"]) { accent-color: var(--cyber-cyan); }
+
+/* Sidebar + navigation. */
+.sidebar {
+  background:
+    linear-gradient(180deg, rgb(255 79 196 / 5%), transparent 34%),
+    linear-gradient(175deg, #120d27 0%, #090819 78%);
+  border-right: 1px solid #5b3c7d;
+  box-shadow: 7px 0 35px rgb(4 1 13 / 40%), inset -1px 0 rgb(57 244 231 / 10%);
+}
+.brand { color: #fffaff; text-shadow: 0 0 22px rgb(255 79 196 / 20%); }
+.brandmark {
+  background: linear-gradient(135deg, #291a52, #111c31);
+  border: 1px solid var(--cyber-pink);
+  color: var(--cyber-cyan);
+  box-shadow: 0 0 0 3px rgb(255 79 196 / 7%), var(--cyber-glow-pink);
+}
+.brandmark span { background: #100a23; color: var(--cyber-pink); }
+.brand > div > span, .side-label { color: #b4a6d7; }
+.agent-label {
+  color: var(--cyber-cyan) !important;
+  border-color: rgb(57 244 231 / 48%);
+  background: rgb(57 244 231 / 6%);
+  box-shadow: 0 0 16px rgb(57 244 231 / 8%);
+}
+.nav-item { color: #bbb0d4; border-color: transparent; }
+.nav-item .nav-icon, .nav-item .nav-num { color: #ac9add; }
+.nav-item:hover { color: white; background: rgb(161 110 255 / 11%); }
+.nav-item.active {
+  background: linear-gradient(90deg, rgb(255 79 196 / 20%), rgb(57 244 231 / 7%) 80%, transparent);
+  color: #ffffff;
+  border-color: rgb(255 79 196 / 25%);
+  box-shadow: inset 3px 0 var(--cyber-pink), 0 0 20px rgb(255 79 196 / 7%);
+}
+.nav-item.active .nav-icon { color: var(--cyber-cyan); }
+.side-bottom { border-top-color: #453264; color: #aaa0c8; }
+.side-bottom a { color: var(--cyber-cyan); }
+.gold-dot { background: var(--cyber-green); box-shadow: 0 0 10px rgb(112 255 201 / 50%); }
+
+/* Top bar and button system. */
+.topbar {
+  background: rgb(13 10 30 / 90%);
+  border-bottom: 1px solid #51386f;
+  box-shadow: 0 7px 20px rgb(3 1 14 / 20%);
+}
+.topbar > div:first-child, #breadcrumb { color: #bdb2dc; }
+.top-divider { color: var(--cyber-pink); }
+.topbar .status { color: #c5eae4; }
+.topbar .status span { background: var(--cyber-green); box-shadow: 0 0 12px rgb(112 255 201 / 60%); }
+.button, .quiet { border-color: #5a4477; border-radius: 5px; }
+.button.gold {
+  background: linear-gradient(115deg, #49fff0, #7bcfff);
+  border-color: #5efced;
+  color: #071019;
+  box-shadow: 0 0 18px rgb(57 244 231 / 14%);
+}
+.button.gold:hover { filter: brightness(1.07); box-shadow: 0 0 24px rgb(57 244 231 / 28%); }
+.button.subtle, .quiet {
+  color: #e0d7f5;
+  background: linear-gradient(130deg, #221a40, #14122b);
+  border-color: #60487f;
+}
+.button.subtle:hover, .quiet:hover { border-color: var(--cyber-violet); color: #fffaff; }
+
+/* Readable headings, neon kicker details. */
+.pageheading h1 { color: #fdf8ff; text-shadow: 0 0 28px rgb(165 138 255 / 11%); }
+.pageheading h1 span { color: var(--cyber-pink); text-shadow: 0 0 17px rgb(255 79 196 / 46%); }
+.pageheading p, .dateblock small { color: #b9afce; }
+.eyebrow, .retro-kicker, .panel-heading .tiny, .pd-kicker { color: var(--cyber-cyan); }
+.tiny, .dateblock { color: #aa9fc9; }
+
+/* Card system — neon glass, but no changes to size, display or positioning. */
+.metric, .panel, .pd-panel, .pd-mini, .pd-overview-card, .contact-card, .event-card {
+  background: linear-gradient(145deg, rgb(31 22 58 / 97%), rgb(15 13 34 / 98%) 78%);
+  border-color: #493561;
+  box-shadow: inset 0 1px rgb(193 153 255 / 7%), 0 12px 28px rgb(5 3 18 / 19%);
+}
+.metric::before { border-top-color: var(--cyber-pink); }
+.metric-value { color: #f7f6ff; text-shadow: 0 0 20px rgb(57 244 231 / 9%); }
+.metric-label, .pd-mini > span { color: #8efcf2; }
+.metric small, .pd-mini small { color: #b8acce; }
+.metric:hover, .pd-mini:hover, .pd-panel:hover {
+  border-color: #70528d;
+  box-shadow: inset 0 1px rgb(193 153 255 / 9%), 0 12px 30px rgb(20 5 37 / 33%);
+}
+.panel-heading h2, .pd-panel-head h3, .pd-overview-card h3, .pd-mini strong { color: #fbf7ff; }
+.readiness-foot, .action p, .pd-overview-card p, .pd-note, .pd-empty { color: #b9b0cc; }
+.track { background: #302745; }
+.fill { background: linear-gradient(90deg, var(--cyber-violet), var(--cyber-cyan)); }
+
+/* Hero banners and dashboard briefing. */
+.retro-brief, .pd-hero {
+  background:
+    radial-gradient(circle at 92% 12%, rgb(255 79 196 / 15%), transparent 36%),
+    linear-gradient(110deg, #20143e, #121429 67%, #17102e);
+  border-color: #674480;
+  border-left-color: var(--cyber-pink);
+  box-shadow: 0 10px 36px rgb(5 3 21 / 28%), inset 0 1px rgb(255 255 255 / 4%);
+}
+.retro-brief h2, .pd-hero h2 { color: #fff9ff; }
+.retro-brief p, .pd-hero p { color: #c7bddb; }
+.retro-brief .gold-line { stroke: var(--cyber-pink); }
+.retro-brief .gold-fill { fill: var(--cyber-pink); }
+.retro-brief .cream-line { stroke: #82f6ed; }
+.retro-brief .cream { fill: #c5f8f4; }
+.retro-brief .suit { fill: #513b80; stroke: #b08cff; }
+.retro-brief .retro-halo { fill: rgb(57 244 231 / 4%); stroke: rgb(57 244 231 / 26%); }
+.pd-hero::after { border-color: rgb(57 244 231 / 24%); }
+.pd-orb {
+  background: radial-gradient(circle at 35% 28%, #5b398a, #16233d 72%);
+  border-color: rgb(57 244 231 / 55%);
+  color: #a6fff4;
+  box-shadow: 0 0 25px rgb(57 244 231 / 18%), inset 0 0 20px rgb(255 79 196 / 10%);
+}
+
+/* Interactive scene and charts: presentation only. */
+.scene {
+  background: radial-gradient(ellipse at 50% 54%, rgb(134 78 248 / 21%), rgb(11 12 31 / 65%) 70%);
+}
+.scene-grid {
+  background-image: linear-gradient(rgb(57 244 231 / 9%) 1px, transparent 1px),
+                    linear-gradient(90deg, rgb(57 244 231 / 9%) 1px, transparent 1px);
+}
+.centre-node > span { color: var(--cyber-pink); text-shadow: 0 0 25px rgb(255 79 196 / 43%); }
+.centre-node strong { color: #f8f4ff; text-shadow: 0 0 20px rgb(165 138 255 / 28%); }
+.scene-label { color: #9b96ce; }
+.model:hover .cube, .model:focus-visible .cube {
+  background: linear-gradient(135deg, var(--cyber-cyan), var(--cyber-violet));
+}
+.crosshair, .legend i, .map-footer i { color: var(--cyber-pink); }
+.chart text { fill: #bcb2d5; }
+
+/* Dashboard-specific content: buttons, data tables, chips, timeline. */
+.pd-action, .pd-connection-grid > div {
+  background: #1b1736;
+  border-color: #52416d;
+  color: #f0ebff;
+}
+.pd-action:hover { background: #251c48; border-color: var(--cyber-cyan); }
+.pd-action span, .pd-overview-card .quiet, .pd-overview-links a { color: var(--cyber-cyan); }
+.pd-overview-links a { background: #183342; border-color: #386e76; }
+.pd-overview-flag, .pd-status, .pd-pill {
+  color: #d5c6ff;
+  background: #271f4a;
+  border-color: #644f99;
+}
+.pd-table th, th { background: #261e43; color: #98fdf3; }
+.pd-table td, td { border-color: #403451; color: #ded5ef; }
+.pd-table td b, .pd-newslist b { color: #fffaff; }
+.pd-table td a, .pd-spotlight a, .pd-newslist a, .pd-timeline a,
+.pd-inline-links a, .pd-overview-links a, td a, .action a {
+  color: #6dfff0;
+  text-decoration-color: rgb(109 255 240 / 55%);
+}
+.pd-price-date, .pd-notes, .pd-spotlight small, .pd-timeline > div > span small { color: #afa5c5; }
+.pd-timeline > div, .pd-newslist > div { border-bottom-color: #39314d; }
+.pd-timeline > div > span { color: #ff88d6; }
+.pd-panel-head, .readiness-row { border-bottom-color: #403354; }
+
+/* Contact cards, record cards, input controls and dialogs. */
+.contact-card:hover, .event-card:hover { border-color: var(--cyber-pink); }
+.contact-card h3, .event-card h3 { color: #f7f3ff; }
+.contact-company, .contact-open, .network-detail a,
+.network-block h3, .geo-heading h2 span { color: #ff8bd6; }
+.contact-card p, .contact-fit, .draft-readiness, .network-block p { color: #c1b6d8; }
+.avatar { background: #2c204f; color: var(--cyber-cyan); }
+.badge { background: #2c214d; border-color: #624b8a; color: #d8caff; }
+.badge.gold-badge { background: #3f1c47; border-color: #974276; color: #ffc4ed; }
+.message-block, .network-summary span { background: #1a1733; border-color: #503b6b; }
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), select, textarea {
+  background-color: #15142c;
+  color: #f6f1ff;
+  border-color: #5a4676;
+}
+input::placeholder, textarea::placeholder { color: #aaa0c5; opacity: 1; }
+input:disabled, select:disabled, textarea:disabled { opacity: .65; }
+.calendar, .cal-day, .cal-head { border-color: #453758; }
+.cal-head { background: #211934; color: #d7caed; }
+.cal-day button { background: #2a2045; color: #f0e9ff; }
+.cal-day button:hover { background: #3e2860; }
+dialog, #setup {
+  background: #130f29;
+  color: #f6f2ff;
+  border: 1px solid #705091;
+  box-shadow: 0 25px 90px rgb(0 0 0 / 70%), 0 0 38px rgb(255 79 196 / 9%);
+}
+dialog::backdrop { background: rgb(4 2 16 / 78%); }
+.dialog-head, #setup section { border-color: #49385e; }
+#setup h3 { color: #ff9ddf; }
+#setup p { color: #c9bcde; }
+#setup input[type="url"] { background: #161331; border-color: #604780; color: #fffaff; }
+#setupStatus { color: #9dfff2; }
+.connection { background: linear-gradient(100deg, #191431, #15132b); border-color: #564373; border-left-color: var(--cyber-cyan); }
+.connection .signal { color: var(--cyber-cyan); }
+.connection p, .connection strong { color: #c9bfe0; }
+footer { border-color: #3d3153; color: #aaa0c2; }
+footer b { color: var(--cyber-pink); }
+
+/* Map CHROME ONLY. Deliberately do not restyle canvas, tiles, map SDK, markers,
+ * photorealistic viewer, geometry, z-index or map interactions. */
+#mapDock .geo-root, #eventMapHost .geo-root { --gold: var(--cyber-cyan); }
+.geo-kicker, .geo-directory-head span:last-child,
+.geo-location-action, .geo-coordinates, .geo-homebar > div > span { color: var(--cyber-cyan); }
+.geo-heading h2, .geo-metrics b { color: #f7f4ff; }
+.geo-badge { color: #ff99dd; border-color: #74518c; background: rgb(255 79 196 / 5%); }
+.geo-metrics, .geo-homebar, .geo-directory, .geo-dossier, .geo-search {
+  background: #15132b;
+  border-color: #4a3865;
+}
+.geo-workspace { border-color: #584175; }
+.geo-metrics > div, .geo-directory-head, .geo-location, .geo-evidence, .geo-contacts { border-color: #413450; }
+.geo-location:hover { background: #252047; }
+.geo-location.selected {
+  background: linear-gradient(90deg, rgb(255 79 196 / 16%), transparent);
+  border-left-color: var(--cyber-pink);
+}
+.geo-tabs { border-color: #584272; background: #13102b; }
+.geo-tabs button { color: #b9acd8; }
+.geo-tabs button[aria-pressed="true"] { background: var(--cyber-cyan); color: #08111b; }
+.geo-check input { accent-color: var(--cyber-cyan); }
+.geo-map-tools .button { background: rgb(15 12 36 / 90%); border-color: #674d8c; color: #e7deff; }
+.geo-map-stamp b { color: #8df9ef; }
+.geo-map-stamp span { color: #d7c9ee; }
+.geo-homebar summary, .geo-evidence a, .geo-commute > a { color: #ff99dd; }
+.geo-commute h4 { color: var(--cyber-cyan); }
+.geo-homebar form { background: #16132e; border-color: #64497f; }
+.geo-homebar input { background: #110e27; border-color: #5a4875; }
+.event-map-wrap { background: #100e25; border-color: #523c71; }
+.event-map-wrap > summary { color: #8cfbf0; }
+
+/* Keep no-motion and OS reduced-motion settings authoritative. */
+@media (prefers-reduced-motion: reduce) {
+  .button, .metric, .panel, .pd-mini, .pd-action, .contact-card, .event-card { transition: none; }
+}
+@media (forced-colors: active) {
+  .button, .nav-item.active, .metric, .panel, .pd-panel, .pd-action { border-color: CanvasText; box-shadow: none; }
+}

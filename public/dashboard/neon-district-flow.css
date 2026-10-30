@@ -1,0 +1,369 @@
+/* Brian's Dash — Neon District Flow v1.0
+ * Load LAST, then add nd-flow to the existing dashboard root.
+ * Explicit nd-* hooks only: no layout reset, scripts, imports or remote assets.
+ * See README.md for mapping hooks to existing components and removal.
+ */
+
+.nd-flow {
+  --nd-navy: #090e20;
+  --nd-plum: #21132f;
+  --nd-surface: #15172c;
+  --nd-text: #f2efff;
+  --nd-muted: #bcb9d4;
+  --nd-magenta: #ff64d0;
+  --nd-cyan: #68e8ff;
+  --nd-line: rgba(202, 176, 242, .23);
+  --nd-radius: 20px 24px 20px 20px;
+  color-scheme: dark;
+  color: var(--nd-text);
+  background-color: var(--nd-navy);
+  background-image:
+    radial-gradient(ellipse at 8% 0%, rgba(255, 100, 208, .13), transparent 48%),
+    radial-gradient(ellipse at 95% 50%, rgba(104, 232, 255, .09), transparent 45%),
+    linear-gradient(145deg, var(--nd-navy), var(--nd-plum));
+}
+
+/* Attach only to dashboard-owned panel shells, never map SDK internals.
+ * No overflow, transforms, positioning, dimensions or z-index on cards:
+ * popovers, sticky children and existing grid / drag behavior retain their layout.
+ */
+.nd-flow :where(:is(.nd-card, .panel, .metric, .pd-panel, .pd-mini, .pd-overview-card, .contact-card, .event-card), :is(.nd-hero, .retro-brief, .pd-hero), :is(.nd-toolbar, .section-toolbar, .connection)) {
+  color: var(--nd-text);
+  border: 1px solid var(--nd-line);
+  border-radius: var(--nd-radius);
+  background-color: var(--nd-surface);
+  background-image:
+    radial-gradient(ellipse at 0% 0%, rgba(255, 100, 208, .10), transparent 60%),
+    linear-gradient(130deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .01));
+  box-shadow: 0 16px 42px rgba(2, 4, 17, .24), inset 0 1px 0 rgba(255, 255, 255, .065);
+  transition: border-color .35s ease, box-shadow .35s ease;
+}
+
+/* Explicit glass opt-in; avoid on shells containing fixed-position children. */
+@supports ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+  .nd-flow .nd-glass {
+    background-color: rgba(21, 23, 44, .90);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+}
+
+.nd-flow :is(.nd-hero, .retro-brief, .pd-hero) {
+  border-radius: 36px 52px 32px 24px;
+  background-image:
+    radial-gradient(ellipse at 85% 0%, rgba(104, 232, 255, .13), transparent 56%),
+    radial-gradient(ellipse at 5% 100%, rgba(255, 100, 208, .18), transparent 60%),
+    linear-gradient(125deg, #161b33, #281730);
+}
+
+.nd-flow :is(.nd-toolbar, .section-toolbar, .connection) { border-radius: 22px 30px 22px 30px; }
+.nd-flow :is(.nd-title, .panel-heading h2, .pd-panel-head h3) { color: var(--nd-text); letter-spacing: -.025em; }
+.nd-flow :is(.nd-kicker, .eyebrow, .retro-kicker, .pd-kicker) { color: var(--nd-magenta); letter-spacing: .12em; }
+.nd-flow .nd-muted { color: var(--nd-muted); }
+.nd-flow .nd-accent { color: var(--nd-cyan); }
+.nd-flow .nd-link { color: var(--nd-cyan); text-underline-offset: .22em; }
+.nd-flow .nd-link:hover { text-decoration: underline; }
+
+/* Career discovery and the existing application tracker share one hub. */
+.nd-flow .career-tabs {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  gap: 5px;
+  padding: 5px;
+  margin: 0 0 24px;
+  border: 1px solid var(--nd-line);
+  border-radius: 22px;
+  background: #111226;
+}
+.nd-flow .career-tabs [role="tab"] {
+  min-height: 44px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 17px;
+  background: transparent;
+  color: var(--nd-muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.nd-flow .career-tabs [aria-selected="true"] {
+  color: var(--nd-text);
+  border-color: #ff64d050;
+  background: linear-gradient(110deg, #ff64d030, #68e8ff15);
+}
+.nd-flow .career-tabs [role="tab"]:hover { color: var(--nd-text); }
+.nd-flow .career-tabs [role="tab"]:focus-visible { outline: 2px solid var(--nd-cyan); outline-offset: 3px; }
+.nd-flow .career-applications-heading { margin-bottom: 22px; }
+.nd-flow .career-applications-heading h2 { font-size: 26px; margin: 10px 0; }
+.nd-flow .career-applications-heading p { color: var(--nd-muted); line-height: 1.7; }
+@media (max-width: 600px) {
+  .nd-flow .career-tabs { width: 100%; }
+  .nd-flow .career-tabs [role="tab"] { flex: 1; padding: 10px 12px; }
+}
+
+/* Hooks preserve native button states, input types, sizes and event handlers. */
+.nd-flow :where(:is(.nd-button, .button, .quiet, .pd-action), .nd-input, :is(.nd-tab, .nav-item), :is(.nd-badge, .badge, .pd-pill, .pd-status)) {
+  color: var(--nd-text);
+  border: 1px solid var(--nd-line);
+  border-radius: 14px 19px 14px 19px;
+  background-color: #1d1c36;
+}
+.nd-flow :where(:is(.nd-button, .button, .quiet, .pd-action), :is(.nd-tab, .nav-item)) {
+  transition: border-color .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
+.nd-flow :is(.nd-button-primary, .button.gold) {
+  color: #100c20;
+  background-color: var(--nd-cyan);
+  background-image: linear-gradient(110deg, var(--nd-cyan), #a4c5ff 65%, #edafff);
+  border-color: transparent;
+}
+.nd-flow :is(.nd-tab, .nav-item):where([aria-selected="true"], [aria-current="page"], .is-active) {
+  color: var(--nd-cyan);
+  border-color: var(--nd-cyan);
+  background-color: #192b40;
+}
+.nd-flow .nd-input::placeholder { color: var(--nd-muted); opacity: 1; }
+.nd-flow :where(:is(.nd-button, .button, .quiet, .pd-action), :is(.nd-tab, .nav-item), .nd-link, .nd-input):focus-visible {
+  outline: 2px solid var(--nd-cyan);
+  outline-offset: 4px;
+}
+.nd-flow :where(:is(.nd-button, .button, .quiet, .pd-action), :is(.nd-tab, .nav-item)):where(:disabled, [aria-disabled="true"]) {
+  opacity: .55;
+  box-shadow: none;
+}
+
+@media (hover: hover) {
+  .nd-flow :where(:is(.nd-card, .panel, .metric, .pd-panel, .pd-mini, .pd-overview-card, .contact-card, .event-card), :is(.nd-hero, .retro-brief, .pd-hero)):hover {
+    border-color: rgba(104, 232, 255, .48);
+    box-shadow: 0 18px 44px rgba(2, 4, 17, .3), 0 0 24px rgba(255, 100, 208, .065);
+  }
+  .nd-flow :where(:is(.nd-button, .button, .quiet, .pd-action), :is(.nd-tab, .nav-item)):where(:not(:disabled):not([aria-disabled="true"])):hover {
+    border-color: var(--nd-magenta);
+    box-shadow: 0 0 18px rgba(255, 100, 208, .16);
+  }
+}
+
+/* Opt-in only for a purely decorative div, NOT an img, canvas, map or chart.
+ * Replaces its old background image with self-contained ambient light ribbons.
+ * No pseudo-elements: existing badges and decoration slots are not commandeered.
+ */
+.nd-flow :is(.nd-flow-art, .retro-art) {
+  border-radius: 42% 58% 53% 47% / 52% 38% 62% 48%;
+  background-color: #10162b;
+  background-image:
+    radial-gradient(ellipse at 22% 72%, rgba(255, 100, 208, .30), transparent 44%),
+    radial-gradient(ellipse at 82% 26%, rgba(104, 232, 255, .24), transparent 46%),
+    repeating-linear-gradient(154deg, transparent 0 28px, rgba(104, 232, 255, .13) 29px, transparent 31px 57px),
+    linear-gradient(135deg, #12192c, #291735);
+  background-size: 150% 150%, 150% 150%, 180% 180%, 100% 100%;
+  box-shadow: inset 0 0 40px rgba(9, 14, 32, .5);
+  animation: nd-flow-drift 24s ease-in-out infinite alternate;
+}
+
+/* Optional treatment for an EXISTING timeline/list. CSS creates no data or labels.
+ * Apply to its present wrapper/items; existing links and live values stay intact.
+ */
+.nd-flow .nd-timeline {
+  border-inline-start: 2px solid var(--nd-cyan);
+  border-image: linear-gradient(var(--nd-magenta), var(--nd-cyan)) 1;
+}
+.nd-flow .nd-timeline-item {
+  border-radius: 16px 24px 16px 12px;
+  border: 1px solid var(--nd-line);
+  background-color: #191a30;
+}
+
+@keyframes nd-flow-drift {
+  from { background-position: 0% 10%, 90% 70%, 0% 0%, 0% 0%; }
+  to { background-position: 85% 65%, 10% 15%, 45% 35%, 0% 0%; }
+}
+
+/* OS preference + manual root flag. Only this theme's motion is targeted. */
+.nd-flow.nd-no-motion :is(.nd-flow-art, .retro-art) { animation: none; }
+.nd-flow.nd-no-motion :where(:is(.nd-card, .panel, .metric, .pd-panel, .pd-mini, .pd-overview-card, .contact-card, .event-card), :is(.nd-hero, .retro-brief, .pd-hero), :is(.nd-toolbar, .section-toolbar, .connection), :is(.nd-button, .button, .quiet, .pd-action), :is(.nd-tab, .nav-item)) {
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nd-flow :is(.nd-flow-art, .retro-art) { animation: none; }
+  .nd-flow :where(:is(.nd-card, .panel, .metric, .pd-panel, .pd-mini, .pd-overview-card, .contact-card, .event-card), :is(.nd-hero, .retro-brief, .pd-hero), :is(.nd-toolbar, .section-toolbar, .connection), :is(.nd-button, .button, .quiet, .pd-action), :is(.nd-tab, .nav-item)) { transition: none; }
+}
+
+@media (forced-colors: active) {
+  .nd-flow { color: CanvasText; background: Canvas; }
+  .nd-flow :where(:is(.nd-card, .panel, .metric, .pd-panel, .pd-mini, .pd-overview-card, .contact-card, .event-card), :is(.nd-hero, .retro-brief, .pd-hero), :is(.nd-toolbar, .section-toolbar, .connection), :is(.nd-button, .button, .quiet, .pd-action), .nd-input, :is(.nd-tab, .nav-item), :is(.nd-badge, .badge, .pd-pill, .pd-status), .nd-timeline-item) {
+    color: CanvasText; background: Canvas; border-color: CanvasText; box-shadow: none;
+  }
+  .nd-flow :is(.nd-flow-art, .retro-art) { background: Canvas; animation: none; box-shadow: none; }
+  .nd-flow :where(.nd-link, .nd-accent) { color: LinkText; }
+  .nd-flow :where(:is(.nd-button, .button, .quiet, .pd-action), :is(.nd-tab, .nav-item), .nd-link, .nd-input):focus-visible { outline-color: Highlight; }
+}
+
+/* Brian's Dash integration — current component selectors, 2026-10-28.
+ * Existing scripts, media, layout and map engines remain unchanged.
+ */
+.nd-flow {
+  --bg: var(--nd-navy); --panel: var(--nd-surface); --border: var(--nd-line);
+  --text: var(--nd-text); --muted: var(--nd-muted);
+  --gold: var(--nd-cyan); --blue: #b5a4ff;
+}
+.nd-flow .sidebar { background: linear-gradient(165deg, #21152e, #0b1022 80%); border-right-color: var(--nd-line); }
+.nd-flow .topbar { background: rgba(12, 15, 33, .94); border-bottom-color: var(--nd-line); }
+.nd-flow .brandmark { border-radius: 16px 22px 16px 12px; }
+.nd-flow .nav-item { border-radius: 14px 21px 14px 21px; background-color: transparent; }
+.nd-flow .nav-item.active { color: var(--nd-text); border-color: rgba(255,100,208,.38); background: linear-gradient(100deg, #ff64d02b, #68e8ff0d); box-shadow: inset 3px 0 var(--nd-magenta); }
+.nd-flow .metric::before { border: 0; height: 2px; top: 0; left: 22px; width: 34%; border-radius: 50%; background: linear-gradient(90deg, var(--nd-magenta), transparent); }
+.nd-flow :is(.pd-connection-grid > div, .pd-overview-links a, .pd-action, dialog, .event-map-wrap) { border-radius: 18px 25px 18px 14px; }
+.nd-flow .retro-brief::after { background: none; }
+.nd-flow .retro-art { position: relative; }
+/* The SVG here is a decorative field assistant only. Hide its paint but retain
+ * its sizing; no images, maps or data graphics elsewhere are targeted. */
+.nd-flow .retro-art > .retro-illustration { visibility: hidden; }
+.nd-flow .retro-art::after { content: ''; position: absolute; inset: 16% 9%; pointer-events: none; border: 1px solid #68e8ff55; border-inline-color: transparent; border-radius: 48% 52% 62% 38%; transform: rotate(-16deg); box-shadow: 0 -14px 30px #ff64d019, 0 14px 30px #68e8ff19; }
+/* The existing radar-plane is explicitly aria-hidden and pointer-events:none.
+ * Convert only that decoration into curved district trails; retain all models. */
+.nd-flow .scene { background: radial-gradient(ellipse at 15% 80%, #ff64d018, transparent 60%), radial-gradient(ellipse at 85% 20%, #68e8ff13, transparent 60%), #0f1327; }
+.nd-flow .scene-grid { background: none; }
+.nd-flow .scene .orbit, .nd-flow .radar-plane > * { display: none; }
+.nd-flow .radar-plane { width: 82%; height: 55%; aspect-ratio: auto; top: 47%; border-radius: 43% 57% 65% 35%; transform: translate(-50%, -40%) rotate(-15deg); border: 1px solid #68e8ff55; border-inline-color: transparent; background: radial-gradient(ellipse, #ff64d012, transparent 70%); box-shadow: 0 -22px 0 -21px #ff64d08c, 0 28px 0 -27px #68e8ff80, 0 60px 0 -59px #ff64d04d; }
+.nd-flow .scene::after { background: linear-gradient(120deg, transparent 20%, #ff64d010 40%, #68e8ff0d 60%, transparent 80%); background-size: 200% 200%; animation: nd-flow-drift 24s ease-in-out infinite alternate; }
+.nd-flow .model .cube { border-radius: 12px 18px 12px 8px; }
+.nd-flow .centre-node > span { color: var(--nd-magenta); }
+.nd-flow .track, .nd-flow .fill { border-radius: 99px; }
+/* Existing Motion button toggles .no-motion on body. */
+.nd-flow.no-motion .retro-art, .nd-flow.no-motion .scene::after { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .nd-flow .scene::after { animation: none; }
+}
+@media (forced-colors: active) {
+  .nd-flow .retro-art, .nd-flow .scene { background: Canvas; }
+  .nd-flow .radar-plane, .nd-flow .retro-art::after, .nd-flow .scene::after { display: none; }
+}
+
+/* Saved-data summaries are raw panel content, unlike panels with padded child
+ * headers/tables. Give only these shells their missing content inset. */
+.nd-flow .pd-panel:has(> .pd-kicker) {
+  padding: clamp(24px, 2.2vw, 32px);
+  min-width: 0;
+}
+.nd-flow .pd-overview-insights {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+.nd-flow .pd-overview-insights > .pd-panel { margin-bottom: 0; }
+.nd-flow .pd-panel > .pd-kicker {
+  display: block;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: .11em;
+  overflow-wrap: anywhere;
+}
+.nd-flow .pd-panel:has(> .pd-kicker) > h2 {
+  margin: 14px 0 22px;
+  font-size: clamp(26px, 2.2vw, 32px);
+  line-height: 1.2;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.nd-flow .pd-panel:has(> .pd-kicker) > h3 {
+  margin: 16px 0;
+  font-size: 20px;
+  line-height: 1.35;
+}
+.nd-flow .pd-panel:has(> .pd-kicker) > p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--nd-muted);
+  overflow-wrap: anywhere;
+}
+.nd-flow .pd-panel:has(> .pd-kicker) > .pd-note {
+  padding: 0;
+  margin: 22px 0;
+  font-size: 13px;
+}
+.nd-flow .pd-panel > .pd-mini-grid {
+  gap: 16px;
+  margin: 0;
+}
+.nd-flow .pd-panel > .pd-mini-grid > div {
+  min-width: 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--nd-line);
+  color: var(--nd-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.nd-flow .pd-panel > .pd-mini-grid strong {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--nd-text);
+  font-size: 17px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 1100px) {
+  .nd-flow .pd-overview-insights { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .nd-flow .pd-panel:has(> .pd-kicker) { padding: 24px; }
+  .nd-flow .pd-panel > .pd-mini-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+}
+
+/* Filter bars need their own inset, not card paint on a bare flex row. */
+.nd-flow .section-toolbar {
+  padding: 16px;
+  border-radius: 20px;
+  gap: 12px;
+  align-items: center;
+}
+.nd-flow .section-toolbar .searchbox {
+  flex: 1 1 280px;
+  min-width: 0;
+  min-height: 46px;
+  border-radius: 13px;
+  background: #111329;
+}
+.nd-flow .section-toolbar .searchbox input { min-width: 0; width: 100%; font-size: 15px; }
+.nd-flow .section-toolbar :is(select, .button) { min-height: 44px; border-radius: 13px; }
+.nd-flow #recordCount { font-size: 11px; line-height: 1.5; letter-spacing: .07em; white-space: normal; }
+.nd-flow .network-controls { gap: 16px; }
+.nd-flow .network-controls label { flex: 1 1 190px; min-width: 0; }
+.nd-flow .network-controls select { width: 100%; min-width: 0; min-height: 44px; border-radius: 12px; }
+.nd-flow .network-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 20px; }
+.nd-flow .contact-card { min-width: 0; padding: 24px; line-height: 1.6; overflow-wrap: anywhere; }
+.nd-flow .contact-card:hover { transform: none; }
+.nd-flow .contact-top { flex-wrap: wrap; gap: 14px; }
+.nd-flow .contact-card h3 { font-size: 21px; line-height: 1.35; }
+.nd-flow .network-summary > span { flex: 1 1 170px; border-radius: 14px; line-height: 1.6; }
+.nd-flow .pd-panel-head { flex-wrap: wrap; row-gap: 12px; }
+.nd-flow .pd-actions { grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
+.nd-flow .event-filters { gap: 14px; }
+.nd-flow .event-filters label { min-width: 0; flex: 1 1 160px; }
+.nd-flow .event-filters :is(input, select) { width: 100%; min-width: 0; min-height: 44px; border-radius: 12px; }
+.nd-flow .event-operation { min-width: 0; border-radius: 20px; }
+.nd-flow .pd-daily-briefing > p { max-width: 85ch; }
+.nd-flow main:has(> #personalView:not([hidden]) > .pd-daily-briefing) { max-width: none; }
+.nd-flow #personalView > .pd-daily-briefing { width: 100%; }
+.nd-flow #personalView > .pd-daily-briefing > p { max-width: none; }
+.nd-flow .pd-daily-briefing a { color: var(--nd-cyan); text-decoration: underline; text-underline-offset: .2em; overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+  .nd-flow .section-toolbar { padding: 14px; }
+  .nd-flow .section-toolbar .searchbox { flex-basis: 100%; }
+  .nd-flow .section-toolbar select { flex: 1 1 130px; min-width: 0; }
+  .nd-flow #recordCount { flex-basis: 100%; }
+  .nd-flow .contact-card { padding: 22px; }
+}
+
+/* Both overview summaries are now bounded; following cards can share the full
+ * dashboard width again. Each summary retains its own natural height. */
+@media (min-width: 1101px) {
+  .nd-flow #dailySnapshot { align-items: start; }
+  .nd-flow #overview > :is(.main-grid, .bottom-grid) {
+    align-items: start;
+    gap: 20px;
+  }
+}
+@media (max-width: 1100px) {
+  .nd-flow #dailySnapshot { align-items: start; }
+}

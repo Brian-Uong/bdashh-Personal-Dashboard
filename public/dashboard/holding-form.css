@@ -1,0 +1,45 @@
+.nd-flow .position-heading-actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.nd-flow [data-add-stock] { white-space:nowrap; }
+.nd-flow .holdings-notice { margin:0 0 18px; color:#7dffd0; font-size:13px; line-height:1.7; }
+.nd-flow .holdings-notice:empty { display:none; }
+.nd-flow .holding-price-pending { color:#ffdb9f; }
+.nd-flow.holding-dialog-open { overflow:hidden; }
+.nd-flow .holding-dialog { width:min(560px,94vw); max-width:94vw; max-height:92vh; padding:28px; border:1px solid #77618d; border-radius:26px; background:radial-gradient(ellipse at 0 0,#63364b33,transparent 65%),#101425; color:var(--nd-text); overflow:auto; overscroll-behavior:contain; }
+.nd-flow .holding-dialog::backdrop { background:#030716cc; backdrop-filter:none; }
+.nd-flow .holding-dialog header { display:flex; justify-content:space-between; align-items:start; gap:14px; }
+.nd-flow .holding-dialog h2 { font-size:28px; margin:12px 0; }
+.nd-flow .holding-dialog header button { min-width:44px; min-height:44px; }
+.nd-flow .holding-intro { color:var(--nd-muted); font-size:14px; line-height:1.7; margin:8px 0 24px; }
+.nd-flow .holding-field { display:flex; flex-direction:column; gap:9px; font-size:13px; color:var(--nd-text); margin-bottom:20px; }
+.nd-flow .holding-field input { width:100%; min-width:0; min-height:48px; padding:12px 14px; border-radius:13px; }
+.nd-flow .holding-field input[name=ticker] { text-transform:uppercase; }
+.nd-flow .holding-field small { color:var(--nd-muted); font-size:11px; line-height:1.6; }
+.nd-flow .holding-fields { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.nd-flow .holding-cost { display:flex; justify-content:space-between; align-items:center; padding:18px; border:1px solid var(--nd-line); border-radius:15px; background:#68e8ff0a; gap:16px; }
+.nd-flow .holding-cost span { color:var(--nd-muted); font-size:12px; }
+.nd-flow .holding-cost strong { color:var(--nd-cyan); font-size:22px; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+.nd-flow .holding-help,.nd-flow .holding-form-status { font-size:12px; line-height:1.7; margin:18px 0; color:var(--nd-muted); }
+.nd-flow .holding-form-status { color:#ffdb9f; }
+.nd-flow .holding-form-status:empty { display:none; }
+.nd-flow .holding-dialog footer { display:flex; justify-content:flex-end; flex-wrap:wrap; gap:12px; margin-top:24px; padding:0; letter-spacing:normal; }
+.nd-flow .holding-dialog button:disabled { opacity:.6; cursor:wait; }
+.nd-flow .position-manage { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+.nd-flow .position-manage button { min-height:44px; padding:9px 18px; background:#68e8ff09; border:1px solid var(--nd-line); border-radius:14px; color:var(--nd-text); font-size:12px; cursor:pointer; transition:background .2s ease,border-color .2s ease; }
+.nd-flow .position-manage [data-remove-stock] { color:#d3a9bf; background:transparent; }
+.nd-flow .position-manage button:hover { border-color:var(--nd-cyan); background:#68e8ff18; }
+.nd-flow .holding-modes { display:flex; flex-wrap:wrap; gap:8px; padding:6px; margin-bottom:24px; background:#080d1d; border:1px solid var(--nd-line); border-radius:18px; }
+.nd-flow .holding-modes button { flex:1; min-height:44px; padding:10px; border:1px solid transparent; border-radius:13px; background:transparent; color:var(--nd-muted); cursor:pointer; }
+.nd-flow .holding-modes [aria-pressed=true] { background:#a58aff22; border-color:#a58aff66; color:var(--nd-text); }
+.nd-flow .holding-result { color:var(--nd-cyan); font-size:13px; line-height:1.7; }
+.nd-flow .holding-result:empty { display:none; }
+.nd-flow .holding-danger { background:#9d2853; color:#fff; border:1px solid #fc88b2; }
+.nd-flow .holding-danger:hover { background:#b12d5e; }
+.nd-flow .position-manage button:focus-visible,.nd-flow .holding-modes button:focus-visible { outline:2px solid var(--nd-cyan); outline-offset:3px; }
+@media(prefers-reduced-motion:reduce){ .nd-flow .position-manage button { transition:none; } }
+.nd-flow.no-motion .position-manage button { transition:none; }
+@media(max-width:500px){
+ .nd-flow .holding-dialog { padding:20px; border-radius:20px; }
+ .nd-flow .holding-fields { grid-template-columns:1fr; gap:0; }
+ .nd-flow .holding-dialog footer button { flex:1; }
+ .nd-flow .holding-dialog footer { position:sticky; bottom:-20px; margin:24px -20px -20px; padding:16px 20px; background:#101425; z-index:1; }
+}

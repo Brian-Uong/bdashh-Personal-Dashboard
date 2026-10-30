@@ -1,0 +1,31 @@
+/* Decorative instruments. Their movement does not represent live data. */
+.agent-label{display:inline-block;font:8px 'IBM Plex Mono',monospace;letter-spacing:3px;color:var(--gold);margin-top:7px}
+.command-panel{position:relative;overflow:hidden}
+.command-panel:before{content:'';position:absolute;top:0;left:-25%;width:25%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:edge-trace 8s linear infinite;pointer-events:none}
+.radar-plane{position:absolute;left:50%;top:52%;width:340px;aspect-ratio:1;transform:translate(-50%,-40%) rotateX(48deg);pointer-events:none;z-index:-1;isolation:isolate;border-radius:50%;border:1px solid #77baff44;background:repeating-radial-gradient(circle at center,transparent 0,transparent calc(25% - 1px),#66a9db33 25%,transparent calc(25% + 1px)),linear-gradient(90deg,transparent calc(50% - .5px),#66a9db33 50%,transparent calc(50% + .5px)),linear-gradient(transparent calc(50% - .5px),#66a9db33 50%,transparent calc(50% + .5px));box-shadow:0 0 50px #64a9db0c,inset 0 0 40px #64a9db0c}
+.radar-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent 0deg,transparent 265deg,#64a9db04 275deg,#64a9db22 325deg,#dbb75b66 358deg,transparent 360deg);animation:radar-rotate 8s linear infinite;will-change:transform}
+.radar-sweep:after{content:'';position:absolute;width:50%;height:1px;top:50%;left:50%;background:linear-gradient(90deg,#dbb75b33,var(--gold));transform-origin:left;transform:rotate(-90deg);box-shadow:0 0 8px #dbb75b88}
+.radar-ping{position:absolute;inset:0;border:1px solid #64a9db77;border-radius:50%;animation:radar-ping 5s ease-out infinite;pointer-events:none}
+.radar-ping.delayed{animation-delay:2.5s}
+.radar-blip{position:absolute;width:5px;height:5px;border:1px solid var(--gold);border-radius:50%;background:#dbb75b66;box-shadow:0 0 8px #dbb75b66;animation:blip-detect 8s linear infinite}
+.radar-blip:after{content:'';position:absolute;inset:-5px;border:1px solid #dbb75b55;border-radius:50%}
+.radar-blip.b1{top:24%;left:60%;animation-delay:-1s}.radar-blip.b2{top:70%;left:30%;animation-delay:-4s}.radar-blip.b3{top:56%;left:82%;animation-delay:-6s}
+.scene:after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 0%,transparent 47%,#64a9db06 49.7%,#64a9db15 50%,transparent 50.4%,transparent 100%);background-size:100% 200%;animation:scanline 11s linear infinite;pointer-events:none;z-index:-1}
+.scene .lower{font-size:7px;letter-spacing:1.5px;max-width:40%;text-align:right;line-height:1.8;top:12px;right:25px;bottom:auto}
+.model .cube{animation:module-float 6s ease-in-out infinite}.model:nth-child(2n) .cube{animation-delay:-2s}.model:nth-child(3n) .cube{animation-delay:-4s}.model:hover .cube,.model:focus-visible .cube{animation-play-state:paused}
+.gold-dot,.status>span{animation:status-pulse 4s ease-in-out infinite}
+.crosshair{display:inline-block;animation:crosshair-rotate 25s linear infinite}
+.intel-indicator{display:inline-flex;align-items:center;gap:7px;color:#829cb1;font:8px 'IBM Plex Mono',monospace;letter-spacing:1px}
+.intel-indicator i{width:4px;height:4px;display:inline-block;background:var(--gold);animation:status-pulse 3s ease-in-out infinite}
+@keyframes radar-rotate{to{transform:rotate(360deg)}}
+@keyframes radar-ping{0%{transform:scale(.15);opacity:0}10%{opacity:.5}85%,100%{transform:scale(1);opacity:0}}
+@keyframes blip-detect{0%,12%{opacity:.95}35%,95%{opacity:.12}100%{opacity:.95}}
+@keyframes status-pulse{0%,100%{opacity:.45;box-shadow:0 0 0 0 #dbb75b00}50%{opacity:1;box-shadow:0 0 9px 1px #dbb75b33}}
+@keyframes scanline{from{background-position:0 100%}to{background-position:0 -100%}}
+@keyframes edge-trace{from{left:-25%}to{left:125%}}
+@keyframes module-float{0%,100%{translate:0 0}50%{translate:0 -5px}}
+@keyframes crosshair-rotate{to{transform:rotate(360deg)}}
+.no-motion *,.no-motion *:before,.no-motion *:after{animation:none!important;transition:none!important}
+.no-motion .radar-sweep{transform:rotate(35deg);opacity:.4}.no-motion .radar-ping{display:none}.no-motion .radar-blip{opacity:.55}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.radar-ping{display:none}.radar-sweep{transform:rotate(35deg);opacity:.4}.radar-blip{opacity:.55}}
+@media(max-width:480px){.radar-plane{width:255px}.scene .lower{font-size:7px;right:15px;top:12px;bottom:auto}.agent-label{font-size:8px}}

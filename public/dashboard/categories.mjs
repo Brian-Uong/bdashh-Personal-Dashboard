@@ -1,0 +1,11 @@
+export const categoryDefinitions=[
+{id:'finance',label:'Finance',pattern:/\b(finance|financial|banking|bank|accounting|investment|investing|wealth|fintech|portfolio|credit|lending|etfs?)\b/i,icon:'<path d="m3 8 9-5 9 5M4 9h16M5 20h14M3 22h18M7 10v8m5-8v8m5-8v8"/>'},
+{id:'ai',label:'AI',pattern:/\b(ai|genai|artificial intelligence|machine learning|generative|claude|llms?|bedrock)\b/i,icon:'<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/><path d="m20 3 .8 2.2L23 6l-2.2.8L20 9l-.8-2.2L17 6l2.2-.8Z"/>'},
+{id:'tech',label:'Tech',pattern:/\b(tech|technology|cloud|cybersecurity|cyber|quantum|software|hardware|computing|engineering|govcloud)\b/i,icon:'<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4"/>'},
+{id:'tutorial',label:'Tutorial',pattern:/\b(workshop|tutorial|class|course|training|academy)\b/i,icon:'<path d="M12 6C9 3 5 3 2 4v15c4-1 7-1 10 2m0-15c3-3 7-3 10-2v15c-4-1-7-1-10 2Zm0 0v15M5 8h4m-4 4h4m6-4h4m-4 4h4"/>'},
+{id:'networking',label:'Networking',pattern:/\b(networking|meetup|mixer|social|network|meet and greet)\b/i,icon:'<circle cx="12" cy="5" r="3"/><circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><path d="m10.5 8-4 7m7-7 4 7M8 18h8"/>'},
+{id:'marketing',label:'Marketing',pattern:/\b(marketing|customer acquisition|communications|advertising|brand|brands|sales|growth)\b/i,icon:'<path d="m3 10 16-6v16L3 14Zm4 5 2 7h4l-2-6M22 9v6"/>'},
+{id:'panel',label:'Panel / Talk',pattern:/\b(panel|talk|speaker|conference|seminar|townhall|information session|demonstration|discussion)\b/i,icon:'<rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2m-7 9v3m-4 0h8"/>'}
+];
+export function eventCategories(cells){const source=[cells?.[0],cells?.[4],cells?.[5]].map(v=>v==null?'':String(v)).join(' ');return categoryDefinitions.filter(c=>c.pattern.test(source))}
+export function categoryBadges(cells){const categories=eventCategories(cells);return categories.length?'<div class="category-badges" aria-label="Event categories">'+categories.map(c=>`<span class="category-badge category-${c.id}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${c.icon}</svg><span>${c.label}</span></span>`).join('')+'</div>':''}

@@ -1,0 +1,7 @@
+import {validCoordinates} from './map-data.mjs';
+export const DEFAULT_HOME={address:"Regional default · Irvine City Hall (public point)",coordinates:[-117.825,33.6846],precision:"Public demo reference point — not your home. Set a travel origin if you wish."};
+export function distanceMetres(a,b){if(!validCoordinates(a)||!validCoordinates(b))return null;const rad=n=>n*Math.PI/180,[lng1,lat1]=a.map(rad),[lng2,lat2]=b.map(rad),h=Math.sin((lat2-lat1)/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin((lng2-lng1)/2)**2;return 6371008.8*2*Math.atan2(Math.sqrt(h),Math.sqrt(Math.max(0,1-h)));}
+export const formatDistance=m=>`${(m/1000).toFixed(1)} km / ${(m/1609.344).toFixed(1)} mi`;
+export function formatDrive(route){const minutes=Math.max(1,Math.ceil(route.duration/60)),duration=minutes>=60?`${Math.floor(minutes/60)} hr${minutes%60?' '+minutes%60+' min':''}`:`${minutes} min`;return `${duration} · ${formatDistance(route.distance)}`;}
+export const routeKey=(a,b)=>[...a,...b].map(n=>Number(n).toFixed(6)).join(',');
+export function parseRoute(data){const route=data?.routes?.[0];if(data?.code!=='Ok'||!route||!Number.isFinite(route.distance)||route.distance<0||!Number.isFinite(route.duration)||route.duration<0)return null;const g=route.geometry;return {distance:route.distance,duration:route.duration,geometry:g?.type==='LineString'&&g.coordinates?.length>=2&&g.coordinates.every(c=>validCoordinates(c))?g:null};}

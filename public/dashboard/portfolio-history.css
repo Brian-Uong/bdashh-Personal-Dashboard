@@ -1,0 +1,50 @@
+.nd-flow .portfolio-history { min-width:0; margin:30px 0; padding:26px; border:1px solid var(--nd-line); border-radius:24px 32px 24px 24px; background:radial-gradient(ellipse at 10% 0,#63364b22,transparent 60%),#101425; }
+.nd-flow .history-heading { display:flex; justify-content:space-between; gap:18px; align-items:start; }
+.nd-flow .history-heading h3 { font-size:26px; margin:10px 0; }
+.nd-flow .history-heading p { color:var(--nd-muted); font-size:13px; line-height:1.6; margin:0; }
+.nd-flow .history-badge { color:var(--nd-cyan); border:1px solid var(--nd-line); border-radius:20px; padding:8px 12px; white-space:nowrap; font-size:11px; }
+.nd-flow .history-controls { display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; margin:24px 0; }
+.nd-flow .history-modes,.nd-flow .history-ranges { display:flex; flex-wrap:wrap; gap:4px; padding:4px; background:#1b1930; border:1px solid var(--nd-line); border-radius:14px; }
+.nd-flow .history-controls button { min-height:40px; padding:8px 12px; border:0; border-radius:10px; background:transparent; color:var(--nd-muted); font-size:12px; }
+.nd-flow .history-controls button[aria-pressed=true] { background:#68e8ff22; color:var(--nd-cyan); }
+.nd-flow .history-stats { display:grid; grid-template-columns:1.2fr 1.2fr .7fr; gap:16px; margin:20px 0; }
+.nd-flow .history-stats > div { display:grid; align-content:start; gap:9px; min-width:0; }
+.nd-flow .history-stats span { color:var(--nd-muted); font-size:11px; }
+.nd-flow .history-stats strong { font-size:23px; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+.nd-flow .history-status { color:var(--nd-muted); font-size:12px; line-height:1.6; min-height:20px; }
+.nd-flow .history-plot-wrap { position:relative; min-width:0; }
+.nd-flow .history-plot { width:100%; height:340px; }
+.nd-flow .history-empty { position:absolute; inset:25px 65px 45px 20px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:#101425ed; border:1px dashed var(--nd-line); border-radius:16px; padding:20px; }
+.nd-flow .history-empty[hidden] { display:none; }
+.nd-flow .history-empty strong { font-size:20px; }
+.nd-flow .history-empty p { max-width:500px; color:var(--nd-muted); font-size:13px; line-height:1.7; margin:8px 0; }
+.nd-flow .history-legend { display:flex; align-items:center; flex-wrap:wrap; gap:15px; margin:16px 0; font-size:12px; color:var(--nd-muted); }
+.nd-flow .history-legend b { font-weight:400; }
+.nd-flow .history-legend i { display:inline-block; height:2px; width:16px; background:var(--nd-cyan); margin-right:7px; vertical-align:middle; }
+.nd-flow .history-legend .cost { background:#ff82d7; }
+.nd-flow .history-legend label { display:flex; align-items:center; gap:6px; }
+.nd-flow .history-legend label[hidden] { display:none; }
+.nd-flow .history-legend input { width:15px; height:15px; accent-color:var(--nd-cyan); }
+.nd-flow .history-legend button { margin-left:auto; padding:8px 12px; font-size:11px; }
+.nd-flow .history-inspector { display:block; color:var(--nd-muted); font-size:11px; }
+.nd-flow .history-inspector input { display:block; padding:0; width:100%; height:28px; border:0; background:transparent; accent-color:var(--nd-cyan); }
+.nd-flow .history-readout { display:block; color:var(--nd-text); font-size:12px; line-height:1.8; min-height:44px; margin:8px 0 18px; }
+.nd-flow .history-method,.nd-flow .history-credit { color:var(--nd-muted); font-size:11px; line-height:1.8; }
+.nd-flow .history-credit a { color:var(--nd-cyan); }
+.nd-flow .history-records { font-size:12px; color:var(--nd-muted); margin:20px 0; }
+.nd-flow .history-records summary { cursor:pointer; padding:8px 0; }
+.nd-flow .history-table { max-height:350px; overflow:auto; margin:8px 0; }
+.nd-flow .history-table table { width:100%; font-size:12px; border-collapse:collapse; }
+.nd-flow .history-table th,.nd-flow .history-table td { padding:12px; white-space:nowrap; text-align:left; border-bottom:1px solid var(--nd-line); }
+@media(max-width:650px){
+ .nd-flow .portfolio-history { padding:18px; margin:24px 0; }
+ .nd-flow .history-heading { flex-direction:column; }
+ .nd-flow .history-controls { gap:12px; }
+ .nd-flow .history-ranges { width:100%; justify-content:space-between; }
+ .nd-flow .history-ranges button { padding:8px; }
+ .nd-flow .history-stats { grid-template-columns:1fr 1fr; }
+ .nd-flow .history-stats > div:last-child { grid-column:1/-1; display:flex; align-items:center; gap:12px; }
+ .nd-flow .history-stats strong { font-size:21px; }
+ .nd-flow .history-empty { inset:10px 10px 45px; padding:15px; }
+ .nd-flow .history-empty strong { font-size:18px; }
+}

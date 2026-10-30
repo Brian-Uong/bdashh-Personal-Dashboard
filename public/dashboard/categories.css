@@ -1,0 +1,10 @@
+.category-badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.category-badge{display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:6px 10px;border:1px solid #dbb75b55;border-radius:4px;background:#dbb75b0d;color:#ead59a;font:600 12px/1.4 Arial,Helvetica,sans-serif;white-space:nowrap}
+.category-badge svg{width:19px;height:19px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.category-ai,.category-tech,.category-networking{color:#b1d7f4;background:#64a9db0c;border-color:#64a9db55}
+.category-marketing,.category-panel{color:#d2c6e1;background:#b3a0ce0c;border-color:#b3a0ce55}
+.event-card>.category-badges{margin-top:0}.event-card h3{margin-top:9px}.event-filters label[for="categoryFilter"]{min-width:155px}.event-filters #categoryFilter{min-width:155px}
+.calendar .cal-category-icons{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}.cal-category-icons svg{width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:560px){.category-badges{gap:6px}.category-badge{padding:6px 8px;font-size:12px;min-height:34px}.category-badge svg{width:18px;height:18px}}
+
+.event-intelligence{border-top:1px solid #36516a;padding-top:14px;margin:14px 0;text-align:left;font:14px/1.6 Arial,Helvetica,sans-serif;white-space:normal}.event-intelligence strong{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#acd4f2}.event-intelligence p{margin:5px 0 12px;color:#dce5ef}.event-intelligence .event-benefit strong{color:#e5c77a}.event-benefit{border-left:2px solid #dbb75b;padding-left:12px}.event-intelligence-missing p{font-size:12px;color:#aebfce}.event-card{align-self:start}

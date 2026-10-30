@@ -1,0 +1,309 @@
+{
+  "Networking Tracker": [
+    [
+      "Networking Tracker"
+    ],
+    [
+      "Template · keep header row positions"
+    ],
+    [],
+    [
+      "Date",
+      "Source / Event",
+      "Contact",
+      "Role",
+      "Organization",
+      "Status",
+      "Outreach Sent",
+      "Follow-Up Sent",
+      "Info Interview Scheduled",
+      "Notes",
+      "Relationship Next Steps",
+      "Added by",
+      "Connection priority",
+      "Why connect / fit assessment",
+      "Suggested connection message",
+      "Follow-up draft — after acceptance",
+      "Follow-up personalisation / sources",
+      "LinkedIn URL",
+      "Career / education overlap",
+      "Public activity / date / source",
+      "Profile sources / checked",
+      "Research limitations",
+      "Employer sponsorship evidence",
+      "Location / evidence",
+      "Last verified",
+      "Follow-up draft status",
+      "Outreach review status",
+      "Latitude",
+      "Longitude",
+      "Office address"
+    ],
+    [
+      "DEMO_TODAY",
+      "Fictional meetup",
+      "Alex Example",
+      "Product analyst (fictional)",
+      "Example Studio — DEMO",
+      "To contact",
+      "No",
+      "No",
+      "No",
+      "Fictional demonstration record. No real person or employer.",
+      "Replace with your own authorised records.",
+      "Manual",
+      "High",
+      "Illustrates how contacts link to map dossiers.",
+      "Sample draft only — edit before use.",
+      "Sample follow-up only.",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      33.6834,
+      -117.8261,
+      "Public demo point near Irvine Civic Center — not an office"
+    ]
+  ],
+  "Application Tracker": [
+    [
+      "Application Tracker"
+    ],
+    [
+      "Template · keep header row positions"
+    ],
+    [],
+    [
+      "Date",
+      "Source",
+      "Company",
+      "Role",
+      "Location",
+      "Job Link",
+      "Contact",
+      "Deadline",
+      "Status",
+      "Notes",
+      "Next Step",
+      "Outcome"
+    ]
+  ],
+  "Interview Practice Tracker": [
+    [
+      "Interview Practice Tracker"
+    ],
+    [
+      "Template · keep header row positions"
+    ],
+    [],
+    [
+      "Date",
+      "Session",
+      "Format",
+      "Partner",
+      "Topic",
+      "Minutes",
+      "Feedback",
+      "Next Step"
+    ]
+  ],
+  "Monthly Check-In": [
+    [
+      "Monthly Check-In"
+    ],
+    [
+      "Template · keep header row positions"
+    ],
+    [],
+    [],
+    [],
+    [
+      "Month",
+      "Goal",
+      "Progress",
+      "Contacts",
+      "Applications",
+      "Practice",
+      "Notes",
+      "Events",
+      "Outreach",
+      "Follow-Ups",
+      "Next Steps"
+    ]
+  ],
+  "Potential Events": [
+    [
+      "Potential Events"
+    ],
+    [
+      "Template · keep header row positions"
+    ],
+    [],
+    [
+      "Event",
+      "Date",
+      "Time",
+      "Location",
+      "Organiser",
+      "Category",
+      "Registration Link",
+      "Free",
+      "Cost",
+      "Audience",
+      "Status",
+      "Registration Notes",
+      "Preparation",
+      "Contact",
+      "Source Notes",
+      "Follow-Up",
+      "Objective",
+      "Notes",
+      "Outcome",
+      "Deadline",
+      "Event Type",
+      "Target Company",
+      "Industry",
+      "Format",
+      "Capacity",
+      "Eligibility",
+      "Beginner Friendly",
+      "Checked",
+      "Event Summary",
+      "How it helps you",
+      "Latitude",
+      "Longitude"
+    ],
+    [
+      "Demo networking workshop",
+      "DEMO_PLUS_7",
+      "10:00",
+      "Public demo point · Irvine Civic Center, CA",
+      "Fictional organiser",
+      "Networking",
+      "",
+      "Yes",
+      "",
+      "",
+      "Demo — not a real event",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "No",
+      "",
+      "",
+      "",
+      "",
+      "Yes",
+      "",
+      "Fictional event for exploring the map and dossier controls.",
+      "Practice using the dashboard; no registration exists.",
+      33.6846,
+      -117.825
+    ],
+    [
+      "Demo design discussion",
+      "DEMO_PLUS_14",
+      "10:00",
+      "Public demo point · Riverside City Hall, CA",
+      "Fictional organiser",
+      "Networking",
+      "",
+      "Yes",
+      "",
+      "",
+      "Demo — not a real event",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "No",
+      "",
+      "",
+      "",
+      "",
+      "Yes",
+      "",
+      "Fictional event for exploring the map and dossier controls.",
+      "Practice using the dashboard; no registration exists.",
+      33.9822,
+      -117.3727
+    ]
+  ],
+  "Start Here": [
+    [
+      "Your objectives"
+    ],
+    [
+      "Use this workbook only for your own authorised data."
+    ],
+    [
+      "Keep tab names and header positions unchanged until you adapt the code."
+    ]
+  ],
+  "Dashboard": [
+    [
+      "Metric",
+      "Target label",
+      "Actual",
+      "Target"
+    ],
+    [
+      "",
+      "New Contacts",
+      "",
+      5
+    ],
+    [
+      "",
+      "Personalized Outreaches",
+      "",
+      5
+    ],
+    [
+      "",
+      "Follow-Ups Sent",
+      "",
+      3
+    ],
+    [
+      "",
+      "Info Interviews Scheduled",
+      "",
+      2
+    ]
+  ],
+  "Rubric Reference": [
+    [
+      "Category",
+      "Guidance"
+    ],
+    [
+      "Preparation",
+      "Define a useful objective before attending."
+    ],
+    [
+      "Follow-up",
+      "Record next steps and obtain consent before contacting people."
+    ]
+  ]
+}
