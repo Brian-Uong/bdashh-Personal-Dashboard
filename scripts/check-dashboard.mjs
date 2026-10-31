@@ -16,4 +16,4 @@ const html=await readFile(path.join(root,'public/dashboard/index.html'),'utf8');
 for(const match of html.matchAll(/(?:src|href)="([^"#]+\.(?:css|js|mjs))"/g))if(!match[1].includes('://'))await access(path.join(root,'public/dashboard',match[1]));
 console.log('Browser syntax, module imports, local assets and domain portability passed.');
 const tests=(await readdir(path.join(root,'tests'))).filter(f=>f.endsWith('.test.mjs')).map(f=>path.join(root,'tests',f));
-const run=spawnSync(process.execPath,['--test','--test-isolation=none',...tests],{stdio:'inherit'});process.exit(run.status??1);
+const run=spawnSync(process.execPath,['--test',...tests],{stdio:'inherit'});process.exit(run.status??1);

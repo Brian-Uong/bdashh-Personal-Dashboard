@@ -2,8 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {stripTypeScriptTypes} from 'node:module';
-import {grantVerifiedOwner} from '../lib/dashboard-access.mjs';
-const verifiedRequest=(...args)=>{const request=new Request(...args);grantVerifiedOwner(request);return request;};
 
 let reads=0,writes=0;
 const objects=new Map();
@@ -55,10 +53,10 @@ test('every saved-data writer rejects anonymous and other signed-in visitors bef
  }
  assert.equal(reads,0);assert.equal(writes,0);
 });
-test('verified gateway owner can save a briefing through the storage handler',async()=>{
+test('owner and unattended service can save a briefing, while public reads remain available',async()=>{
  const api=await route('sync');
  for(const identity of [{'oai-authenticated-user-id':'owner','oai-authenticated-user-email':'owner@example.test'},{'X-Dashboard-Service-Authorization':'Bearer test-service-token'}]){
-  const response=await api.POST(verifiedRequest('https://dash.example/api/sync',{method:'POST',headers:{...identity,'Content-Type':'application/json'},body:JSON.stringify({briefing:{asOf:'2026-10-28T14:00:00Z',text:'Fixture briefing'}})}));
+  const response=await api.POST(new Request('https://dash.example/api/sync',{method:'POST',headers:{...identity,'Content-Type':'application/json'},body:JSON.stringify({briefing:{asOf:'2026-10-28T14:00:00Z',text:'Fixture briefing'}})}));
   assert.equal(response.status,200);assert.equal((await response.json()).briefing.text,'Fixture briefing');
  }
  assert.equal((await (await api.GET()).json()).briefing.text,'Fixture briefing');
@@ -66,8 +64,8 @@ test('verified gateway owner can save a briefing through the storage handler',as
 });
 test('malformed updates and stale whole-workbook saves are rejected without writes',async()=>{
  const api=await route('sync'),headers={'X-Dashboard-Service-Authorization':'Bearer test-service-token','Content-Type':'application/json'},count=writes;
- for(const body of ['null','[]'])assert.equal((await api.POST(verifiedRequest('https://dash.example/api/sync',{method:'POST',headers,body}))).status,400);
- const state=objects.get('dashboard.json');const response=await api.POST(verifiedRequest('https://dash.example/api/sync',{method:'POST',headers,body:JSON.stringify({sheets:state.sheets,baseUpdatedAt:'2000-01-01T00:00:00Z'})}));
+ for(const body of ['null','[]'])assert.equal((await api.POST(new Request('https://dash.example/api/sync',{method:'POST',headers,body}))).status,400);
+ const state=objects.get('dashboard.json');const response=await api.POST(new Request('https://dash.example/api/sync',{method:'POST',headers,body:JSON.stringify({sheets:state.sheets,baseUpdatedAt:'2000-01-01T00:00:00Z'})}));
  assert.equal(response.status,409);assert.equal(writes,count);
 });
 test('nearby café search validates coordinates and reports upstream failures without inventing results',async()=>{

@@ -1,17 +1,67 @@
-# BDashh publication rules
+# Brian's Dash maintenance rules
 
-- BDashh at bdashh.com is Brian's personal standalone dashboard. The separate pdashboards business and original ChatGPT Site are not deployment targets for this repository.
-- Read docs/RELEASE-WORKFLOW.md before source synchronization or publication. GitHub is the shared handoff: site-source holds the original Site source; main holds the independently hosted application. Confirm the actual branch state rather than assuming a mirror exists.
-- Brian authorized updating bdashh.com to the latest published dashboard on 30 October 2026 (America/Los_Angeles), superseding the earlier version 57 hold. The identified target is Site version 66, commit b87d388a6078de03894f849bb4a00897bcbe5c41. Production is still version 57 until the pending release actually succeeds. Do not deploy an older checkout as the latest version.
-- After each completed dashboard update in its cloud development chat, export and synchronize the exact published source to the private GitHub site-source branch and verify all file hashes. Preserve its Site version and commit in source-release.json. This source synchronization is now a standing user preference. It does not automatically publish bdashh.com.
-- Every owner-requested bdashh.com release must also synchronize the matching standalone source to Brian-Uong/bdashh-private and verify the GitHub commit. Record the source version, GitHub source commit, asset release and Cloudflare deployment together. Complete both services before reporting the release as done. Do not enable continuous deployment of every edit unless Brian asks.
-- Use npm run release:check and npm run release:prepare after actual source reconciliation. Never set provenance/verification fields just to pass a check. Prepared packets are not proof of publication. Upload and checksum changed immutable assets before deploying their Worker.
-- Preserve website access choices from private R2 site-settings.json across releases. Public viewing was explicitly authorized for testing; only verified owner requests may write data or invoke paid AI. Cloudflare Access protects /owner, preview stays private, and alternate Workers URLs remain disabled.
-- Preserve the authoritative OpenAI and daily-research choices in site-settings.json. Last verified state is AI off and daily research off. The passive cron must do no paid work while disabled. Never reactivate AI or daily research as a side effect of a source update.
-- Keep credentials server-side. Preserve existing secret bindings; do not export keys or log provider credentials. Never commit environment files, live settings, exported dashboard data, local migration snapshots, dependencies or build output.
-- Preserve user data, IDs, fractional holdings and conditional writes. Preview and production use separate data buckets. Back up data before a required schema migration. Source synchronization alone does not authorize replacing live data with development data or fixtures.
-- Keep the original ChatGPT Site's data, sharing and schedules unchanged as a side effect of standalone publication. Routine feature development in that Site follows its own explicit user requests.
-- Run checks appropriate to changed code and record actual results and limits in VERIFICATION.md and migration-status.json. Do not claim unperformed browser, authenticated-save, provider or deployment checks.
-- Version 66 source was retrieved from Brian's release ZIP and reconciled on 31 October 2026. See migration-status.json for actual publication and source-branch status; do not assume a prepared package has deployed.
-- After each development version, use release:package to preserve the complete standalone source, exact Site snapshot, assets, Worker and hashes. Keep deployment separate from development packaging.
-- This release is prepared in bdashh-release-v66. The older bdashh-standalone directory contains separate uncommitted release-tool changes; do not overwrite them.
+Apply these rules to every future dashboard change, including before a .com move.
+
+## Brian's development workflow (October 30, 2026)
+
+- Develop and test all future updates here as local previews.
+- Do not push to GitHub, merge with the online dashboard, save/publish a new hosted
+  version, deploy, or change live data unless Brian explicitly requests that action.
+- GitHub access and production hosting are not prerequisites for preview development.
+- Keep the latest working source and a clearly labeled preview available for review.
+  Fictional preview data must never appear as a live recommendation.
+
+- Courtside sports betting was scrapped on October 30, 2026. Do not restore or
+  continue that feature unless Brian asks for it again.
+
+## Two-host workflow
+
+- The ChatGPT-hosted Site is Brian’s development dashboard here. His October 30
+  correction authorizes this Site publication only; do not deploy bdashh.com.
+- /owner/settings on this Site shows disabled previews. The complete functional
+  controls/backend live in /workspace/sites/bdashh-workspace and the private
+  Brian-Uong/bdashh-private repository. Use that complete tree for .com releases.
+- Preserve its Cloudflare owner JWT authentication, private router, OpenAI and daily
+  switches, and site-settings.json when merging shared UI changes. Never replace it
+  with this Sites-only checkout. Compare current online source before releases.
+
+## Maintenance
+
+- Keep the existing Site project ID and public audience unless Brian requests a change.
+- Read `docs/DOMAIN-MIGRATION.md` before changing hosting, authentication, storage,
+  scheduled writers, browser storage keys, or URL construction.
+- Prefer attaching a custom domain to this same Site over migrating its backend.
+  Do not register a domain, modify DNS, or switch hosts without Brian specifying it.
+- Use same-origin `/api/...` URLs via `public/dashboard/api-client.mjs`. Keep
+  navigational and asset paths relative; never hardcode the current Site hostname
+  into browser code. Third-party provider links remain explicit HTTPS URLs.
+- Preserve Sites authentication. Public reads do not permit writes. Every writer
+  must enforce owner/service authorization server-side before accessing storage.
+  Do not treat identity headers as trusted on a different hosting platform.
+- Keep secrets server-side, out of source, prompts, logs, exports and browser code.
+- Keep provider calls bounded; respect cooldowns, prevent duplicate refreshes,
+  retain valid saved results on failure, and label cached/partial/source failures.
+  Never silently retry a non-idempotent save or fabricate prices or research.
+- Preserve fractional holdings, average cost, record IDs, saved notes and optimistic
+  concurrency. Imported local drafts must not be overwritten by background polling.
+- Keep daily tasks compatible with public and private audiences. Routine data updates
+  do not republish or change sharing. Keep the approved canonical updater destination
+  until a new destination and credential flow have been explicitly verified.
+- Preserve browser-storage keys or provide a migration. Extend the migration backup
+  whitelist when introducing persistent user preferences; never export credentials.
+- Run `npm run check` and a production build. For affected provider features,
+  perform one live smoke check and report limits. Use supported browser tooling for
+  desktop/mobile UI checks when available; do not claim unperformed verification.
+- Update the audit/migration notes when hosting assumptions or tool behavior changes.
+  Keep personal backups, secrets, and production data out of the repository.
+
+## Required release package after every version update
+
+Brian requested clean packaging after every version update on October 30, 2026.
+After publishing here and verifying it, update the complete canonical workspace and
+run its `npm run release:package -- --site-version <number> --site-commit <full SHA>`.
+Keep the versioned full-source ZIP, built Worker/assets, checksum manifest, checks
+and release instructions together. The Sites-only source is never a .com package.
+Preserve concurrent Site edits and production controls. Packaging is authorized;
+GitHub pushes, bdashh.com deployments and settings changes still require their
+applicable explicit authorization. Consult the latest request before publishing.

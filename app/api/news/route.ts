@@ -1,11 +1,10 @@
-import {runtimeEnv} from '../../../lib/site-settings.mjs';
 import {env} from 'cloudflare:workers';
 import {requireDashboardWrite} from '../../../lib/dashboard-access.mjs';
 import {readNews,saveNews} from '../../../lib/news.mjs';
 export const dynamic='force-dynamic';
 const json=(value:unknown,status=200)=>Response.json(value,{status,headers:{'Cache-Control':'private, no-store'}});
 const errorResponse=(error:any)=>json({error:error.status?error.message:'News could not be loaded or saved. Your previous news is retained.'},error.status||503);
-export async function GET(){try{const current=await runtimeEnv(env);return json({...await readNews(env.BUCKET),schedule:{enabled:current.ENABLE_DAILY_NEWS==='true',time:'07:00',timezone:'America/Los_Angeles'}});}catch(error){return errorResponse(error);}}
+export async function GET(){try{return json(await readNews(env.BUCKET));}catch(error){return errorResponse(error);}}
 export async function POST(request:Request){
  const denied=requireDashboardWrite(request,env);if(denied)return denied;
  if(!request.headers.get('content-type')?.startsWith('application/json'))return json({error:'JSON required'},415);

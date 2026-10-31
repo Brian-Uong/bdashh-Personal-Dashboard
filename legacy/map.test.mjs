@@ -1,0 +1,8 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import * as geo from './dist/map-data.mjs';
+const sheets={'Networking Tracker':[[],[],[],['','','Contact','Role','Organization'],['','','A Example','HR','Example Studio, Inc.'],['','','B Example','Marketing','Example Studio']]};
+test('company aliases join contacts without asserting a workplace',()=>{const list=geo.buildLocations(sheets);assert.equal(list.length,1);assert.equal(list[0].contacts.length,2);assert.match(list[0].locationNote,/not confirmed/i);assert.equal(list[0].coordinates,null);});
+test('unknown events remain unlocated rather than guessing a city centre',()=>{const list=geo.buildLocations({'Potential Events':[[],[],[],[],['Demo workshop','','','Unknown venue'],[]]});assert.equal(list.length,1);assert.equal(list[0].coordinates,null);});
+test('coordinate edits accept zero and reject invalid geographic values',()=>{assert.deepEqual(geo.validCoordinates([0,0]),[0,0]);for(const value of [[181,33],['',33],[null,33],[-117,91]])assert.equal(geo.validCoordinates(value),null);});
+test('saved locations apply only to existing records and ignore corrupt coordinates',()=>{const list=geo.buildLocations(sheets,{'company:examplestudio':{coordinates:[-.1,51.5],address:'User-selected office',source:'https://example.org'}});assert.deepEqual(list[0].coordinates,[-.1,51.5]);assert.equal(list[0].address,'User-selected office');const invalid=geo.buildLocations(sheets,{'company:examplestudio':{coordinates:[400,0]}});assert.equal(invalid[0].coordinates,null);assert.deepEqual(geo.buildLocations({}, {'company:examplestudio':{coordinates:[-.1,51.5]}}),[]);});
