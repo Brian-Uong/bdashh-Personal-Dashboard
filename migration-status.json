@@ -351,5 +351,14 @@
     "owner_authenticated_save_retested": false,
     "verification_file": "docs/release-v66-verification.json",
     "verified_at": "2026-10-31T07:35:34.301478+00:00"
+  },
+  "controls_theme_fix": {
+    "state": "prepared",
+    "authorized": true,
+    "authorization": "Owner requested updating the live Website controls to the new UI and theme.",
+    "reason": "Standalone controls omitted the nd-flow and website-controls-page classes and the shared theme stylesheet. The existing stylesheet could not match.",
+    "settings_logic_changed": false,
+    "shared_assets_changed": false,
+    "previous_deployment_id": "13167f26-009b-469f-934b-3b91c7da8e98"
   }
 }
