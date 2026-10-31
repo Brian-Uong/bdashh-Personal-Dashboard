@@ -27,3 +27,9 @@ body:not([data-owner="true"]) :is([data-owner-control], [data-add-stock], [data-
  .nd-flow .section-actions-buttons { width:100%; }
  .nd-flow .section-actions-buttons .button { flex:1; }
 }
+
+/* Shared destination: functional owner controls on bdashh.com; inert previews on Sites. */
+.nd-flow .workspace-controls-link {display:flex;align-items:center;gap:9px;padding:12px 14px;margin:12px 0 0;border:1px solid rgba(177,137,226,.3);border-radius:14px;color:#d6cced;background:rgba(29,21,49,.7);font-size:12px;text-decoration:none;}
+.nd-flow .workspace-controls-link:hover {border-color:#75e2ee;color:#75e2ee;}
+.nd-flow .workspace-controls-link:focus-visible {outline:2px solid #75e2ee;outline-offset:3px;}
+@media(max-width:850px){.nd-flow .workspace-controls-link {display:inline-flex;margin-top:14px;padding:9px 12px;}}

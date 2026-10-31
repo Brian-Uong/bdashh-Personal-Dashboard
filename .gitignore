@@ -12,3 +12,6 @@ coverage/
 site-settings.json
 *.pem
 *.key
+
+WORKSPACE-CONTROLS-PREVIEW.html
+/node_modules

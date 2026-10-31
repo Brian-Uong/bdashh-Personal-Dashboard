@@ -3,7 +3,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 
 export const sourceRoots=new Set(['app','components','db','docs','drizzle','examples','hooks','legacy','lib','public','scripts','tests','vendor','worker']);
-const rootFiles=new Set(['AGENTS.md','README.md','VERIFICATION.md','THIRD-PARTY-NOTICES.md','LICENSE','NOTICE','package.json','package-lock.json','pnpm-lock.yaml','pnpm-workspace.yaml','tsconfig.json','tsconfig.build.json','vite.config.ts','vite.config.mjs','next.config.ts','next.config.mjs','next-env.d.ts','eslint.config.mjs','eslint.config.js','postcss.config.mjs','postcss.config.js','tailwind.config.ts','tailwind.config.js','components.json','drizzle.config.ts','cloudflare-env.d.ts','migration-status.json','wrangler.json','wrangler.jsonc','wrangler.redirect.json','.gitignore','.gitattributes','.openai/hosting.json']);
+const rootFiles=new Set(['AGENTS.md','README.md','VERIFICATION.md','THIRD-PARTY-NOTICES.md','LICENSE','NOTICE','package.json','package-lock.json','pnpm-lock.yaml','pnpm-workspace.yaml','tsconfig.json','tsconfig.build.json','vite.config.ts','vite.config.mjs','next.config.ts','next.config.mjs','next-env.d.ts','eslint.config.mjs','eslint.config.js','postcss.config.mjs','postcss.config.js','tailwind.config.ts','tailwind.config.js','components.json','drizzle.config.ts','cloudflare-env.d.ts','migration-status.json','workspace-status.json','wrangler.json','wrangler.jsonc','wrangler.redirect.json','.gitignore','.gitattributes','.openai/hosting.json']);
 const forbiddenParts=/^(?:node_modules|private-data|coverage|dist|build(?:-.*)?|\.git|\.wrangler|\.sites-runtime|\.next|migration-audit)$/;
 export function sourcePathAllowed(name){
   if(typeof name!=='string'||name.includes('\\')||name.startsWith('/')||name.includes('\0'))return false;
@@ -112,3 +112,4 @@ export async function writePacket(directory,name,value){
   for(let start=0;start<serialized.length;start+=48000){const chunk=`${name}-${String(chunks.length).padStart(3,'0')}.jsonpart`;await writeFile(path.join(directory,chunk),serialized.slice(start,start+48000),'ascii');chunks.push(chunk);}
   return {file:name+'.json',sha256:hash(Buffer.from(serialized)),chunks};
 }
+

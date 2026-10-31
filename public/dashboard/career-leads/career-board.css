@@ -137,3 +137,5 @@ button {cursor:pointer}
 .bdc-refresh-status{margin:0 0 20px;padding:16px 20px;border:1px solid #4c4765;border-radius:12px;color:#d7deef;background:#15152b}.bdc-refresh-status p{margin:0 0 8px;line-height:1.55}.bdc-refresh-status small{color:#aaaec7;line-height:1.5}.bdc-refresh-status details{margin-top:10px}.bdc-refresh-status summary{cursor:pointer;color:#7ee6ea}.bdc-refresh-status li{margin:8px 0;line-height:1.5}
 
 :host(:not([data-owner])) :is(.bdc-file-tools,.bdc-star,.bdc-stage-label){display:none!important}
+
+.bdc-ai-status{border:1px solid #9e8bd744;border-radius:16px;padding:14px;margin:10px 0 14px;background:#17152b99}.bdc-ai-status strong{color:#bde7ff}.bdc-ai-status p{font-size:12px;line-height:1.5;color:#c5c0d9}.bdc-ai-status details{margin-bottom:8px}.bdc-muted:disabled{opacity:.55;cursor:wait}

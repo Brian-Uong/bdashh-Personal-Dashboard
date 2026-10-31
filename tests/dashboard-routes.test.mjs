@@ -19,7 +19,21 @@ async function route(name){
  code=stripTypeScriptTypes(code,{mode:'strip'});
  return import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
 }
-const paths=['sync','records','holdings','quotes/refresh','portfolio/history','discovery','discovery/refresh','research'];
+const paths=['news','sync','records','holdings','quotes/refresh','portfolio/history','discovery','discovery/refresh','research'];
+test('retired sports requests return gone without network or storage access',async()=>{
+ const api=await route('sports/nba'),previous=globalThis.fetch,beforeReads=reads,beforeWrites=writes;
+ let providerCalls=0;
+ globalThis.fetch=async()=>{providerCalls++;throw Error('A retired feature must not call providers');};
+ try{
+  for(const method of ['GET','POST']){
+   for(const headers of [{},{'X-Dashboard-Service-Authorization':'Bearer test-service-token'}]){
+    const response=await api[method](new Request('https://dash.example/api/sports/nba',{method,headers}));
+    assert.equal(response.status,410);assert.equal((await response.json()).code,'SPORTS_BETTING_REMOVED');
+   }
+  }
+  assert.equal(providerCalls,0);assert.equal(reads,beforeReads);assert.equal(writes,beforeWrites);
+ }finally{globalThis.fetch=previous;}
+});
 test('retired FC market requests return gone without network or storage access',async()=>{
  const api=await route('fc-market'),previous=globalThis.fetch,beforeReads=reads,beforeWrites=writes;
  globalThis.fetch=async()=>{throw Error('A retired feature must not call providers');};

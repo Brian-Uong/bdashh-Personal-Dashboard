@@ -5,3 +5,4 @@ try{
   const source=assertReleaseReady(status);
   console.log(`Release source verified: v${source.version}, ${source.commit}.`);
 }catch(error){console.error(error.message);process.exitCode=1;}
+

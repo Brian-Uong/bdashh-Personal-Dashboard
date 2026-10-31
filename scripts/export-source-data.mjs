@@ -3,7 +3,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 const origin='https://brians-dash-uong.astralduck36.chatgpt.site';
 const output=new URL('../private-data/',import.meta.url);await mkdir(output,{recursive:true});
-const files=[['dashboard.json','sync'],['discovery.json','discovery'],['research.json','research'],['portfolio-history-v1.json','portfolio/history']];
+const files=[['dashboard.json','sync'],['discovery.json','discovery'],['research.json','research'],['news.json','news'],['portfolio-history-v1.json','portfolio/history']];
 const manifest={source:origin,exportedAt:new Date().toISOString(),files:[]};
 for(const [name,route] of files){
   const response=await fetch(origin+'/api/'+route,{redirect:'error',signal:AbortSignal.timeout(30000)});

@@ -49,7 +49,7 @@ test('missing or corrupt settings fail closed; malformed patches and missing cap
 test('AI off prevents manual and scheduled provider calls, including with a stale enabled environment',async()=>{
   const env=await setup();let calls=0;const hooks={fetcher:async()=>{calls++;throw Error('must not call provider');},researcher:async()=>{calls++;throw Error('must not research');}};
   const stale={...env,OPENAI_MODEL:'gpt-5-mini',SITE_AI_ENABLED:'true',ENABLE_DAILY_BRIEFING:'true',ENABLE_DAILY_CAREER:'true'};
-  for(const kind of ['briefing','career'])await assert.rejects(runResearch(stale,kind,hooks),/turned off/);
+  for(const kind of ['briefing','career','news'])await assert.rejects(runResearch(stale,kind,hooks),/turned off/);
   await assert.rejects(requestResearch(stale,'briefing',{},hooks),/turned off/);
   await runSchedule(stale,Date.parse('2026-10-30T14:00:00Z'),{runner:async()=>calls++,beforeBriefing:async()=>calls++});
   assert.equal(calls,0);assert.equal([...env.BUCKET.data.keys()].some(k=>k.startsWith('ai-runs/')),false);
@@ -60,6 +60,6 @@ test('enabled manual AI reaches only the injected provider and daily research ob
   assert.equal(calls,1);
   await runSchedule(env,Date.parse('2026-10-30T14:00:00Z'),{runner:async()=>calls++,beforeBriefing:async()=>calls++});assert.equal(calls,1);
   await siteSettingsRoute(env).POST(request({revision:2,dailyResearchEnabled:true}));
-  const kinds=[];await runSchedule(env,Date.parse('2026-10-30T14:00:00Z'),{runner:async(_env,kind)=>kinds.push(kind)});assert.deepEqual(kinds,['briefing','career']);
+  const kinds=[];await runSchedule(env,Date.parse('2026-10-30T14:00:00Z'),{runner:async(_env,kind)=>kinds.push(kind)});assert.deepEqual(kinds,['briefing','career','news']);
   await siteSettingsRoute(env).POST(request({revision:3,dailyResearchEnabled:false}));await assert.rejects(runResearch(env,'briefing',{mode:'scheduled'}),/Daily research is turned off/);
 });

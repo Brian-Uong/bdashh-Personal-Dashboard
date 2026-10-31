@@ -10,12 +10,16 @@
     "test": "node --test --test-isolation=none tests/*.test.mjs",
     "check": "node scripts/check-dashboard.mjs && node scripts/preflight.mjs",
     "build": "node scripts/prepare-assets.mjs && wrangler deploy --dry-run --outdir build",
-    "dev": "wrangler dev",
+    "dev": "node scripts/workspace-server.mjs",
     "deploy": "node scripts/release-check.mjs && node scripts/preflight.mjs --production && wrangler deploy",
     "deploy:preview": "node scripts/release-check.mjs && node scripts/preflight.mjs --production --preview && wrangler deploy --env preview",
+    "dev:worker": "wrangler dev",
+    "preview:controls": "node scripts/build-controls-preview.mjs",
+    "compare:online": "node scripts/compare-online-source.mjs",
     "source:export": "node scripts/export-source-snapshot.mjs",
     "release:check": "node scripts/release-check.mjs",
-    "release:prepare": "node scripts/prepare-release.mjs"
+    "release:prepare": "node scripts/prepare-release.mjs",
+    "release:package": "node scripts/prepare-release.mjs --development"
   },
   "devDependencies": {
     "wrangler": "4.92.0"

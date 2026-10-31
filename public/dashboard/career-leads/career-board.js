@@ -8,7 +8,6 @@ import {openResearchPreferences} from '../research-preferences.mjs';
  */
 const BASE = new URL('.', import.meta.url);
 const CSS_URL = new URL('./career-board.css', BASE).href;
-const DATA_URL = new URL('./leads.json', BASE).href;
 const STATE_KEY = 'brians-dash-career-board-v1';
 const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const safeUrl = value => { try { const u=new URL(String(value)); return ['http:','https:'].includes(u.protocol) ? u.href : ''; } catch { return ''; } };
@@ -31,7 +30,7 @@ class BriansCareerBoard extends HTMLElement {
     this.shadowRoot.addEventListener('input',e=>this.handleInput(e));
     this.shadowRoot.addEventListener('keydown',e=>{if(e.target.getAttribute('role')!=='tab'||!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const value=e.key==='Home'?'jobs':e.key==='End'?'recruiters':this.tab==='jobs'?'recruiters':'jobs';this.shadowRoot.querySelector(`[data-action=tab][data-value=${value}]`).click();});
   }
-  connectedCallback() {this.toggleAttribute('data-owner',canEdit);if(!this.initialized){this.initialized=true;this.render();this.load();}this.poll=setInterval(()=>{if(this.isConnected&&this.sourceMode==='curated'&&this.backgroundReady())this.load(true);},60000);}
+  connectedCallback() {this.toggleAttribute('data-owner',canEdit);if(!this.initialized){this.initialized=true;this.render();this.load();this.loadResearch();}this.poll=setInterval(()=>{if(this.isConnected&&this.sourceMode==='curated'&&this.backgroundReady())this.load(true);},60000);}
   disconnectedCallback(){clearInterval(this.poll);}
   backgroundReady(ignoreFetch=false){return canRefreshInBackground({hidden:document.hidden,scrollY:window.scrollY,busy:this.refreshing||(!ignoreFetch&&this.fetching),editing:!!this.shadowRoot.activeElement?.matches('input,textarea,select,[contenteditable="true"]')||!!document.querySelector('dialog[open]'),expanded:!!this.shadowRoot.querySelector('details[open]')});}
   async load(background=false) {
@@ -41,12 +40,11 @@ class BriansCareerBoard extends HTMLElement {
       const res=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(20000)});
       if(!res.ok) throw new Error('HTTP '+res.status);
       let data=await res.json();
-      if(!data.jobs.length&&!data.recruiters.length){const fallback=await fetch(DATA_URL,{signal:AbortSignal.timeout(20000)});if(!fallback.ok)throw Error('Lead list unavailable');data={...await fallback.json(),lastRefresh:data.lastRefresh};}
       if(background&&(!this.isConnected||this.sourceMode!=='curated'||!this.backgroundReady(true)))return;
       this.setLeads(data,'curated');
     }catch(e){
       if(background)return;
-      this.error='Could not load the curated leads file. Use Import JSON, or host these files through your existing site/server.';
+      this.error='Saved leads could not load. Check your connection and reload; no placeholder results have been substituted.';
       this.loading=false;this.render();
     }finally{this.fetching=false;}
   }
@@ -112,10 +110,10 @@ class BriansCareerBoard extends HTMLElement {
     const focus=this.tab==='jobs'?'jobs':'recruiters';
     const markup=`<link rel="stylesheet" href="${esc(CSS_URL)}" />
       <section class="bdc-wrap" aria-label="Brian's Jobs and Networking Hub">
-        <div class="bdc-halo"></div><header class="bdc-head"><div><div class="bdc-overline">BRIAN'S DASH <span>/</span> NEON DISTRICT <span>/</span> CAREER NETWORK</div><h2>Opportunities in motion<span class="bdc-period">.</span></h2><p>Your saved jobs and recruiters, with live source checks when you refresh.</p></div><div class="bdc-pulse"><span class="bdc-pulse-dot"></span> CAREER HUB</div></header>
+        <div class="bdc-halo"></div><header class="bdc-head"><div><div class="bdc-overline">BRIAN'S DASH <span>/</span> NEON DISTRICT <span>/</span> CAREER NETWORK</div><h2>Opportunities in motion<span class="bdc-period">.</span></h2><p>Fresh opportunities for Orange County and Inland Empire, with source checks and separate AI research status.</p></div><div class="bdc-pulse"><span class="bdc-pulse-dot"></span> CAREER HUB</div></header>
         <div class="bdc-pulse-row"><div><strong>${jobs}</strong><span>JOB LEADS</span></div><div><strong>${people}</strong><span>RECRUITER PROFILES</span></div><div><strong>${saved}</strong><span>BOOKMARKED</span></div><div class="bdc-last"><span>LAST RESEARCH UPDATE</span><strong>${esc(fmtDate(this.data.lastCurated)||'Imported leads')}</strong></div></div>
         <div class="bdc-banner">Refresh jobs & recruiters checks supported public employer feeds and a recruiter directory using your role and location preferences. New matches are saved here. No API key is needed.</div>
-        <div class="bdc-toolbar"><div class="bdc-tabs" role="tablist" aria-label="Lead type"><button type="button" data-action="tab" data-value="jobs" role="tab" aria-selected="${this.tab==='jobs'}" class="${this.tab==='jobs'?'selected':''}">Jobs <span>${jobs}</span></button><button type="button" data-action="tab" data-value="recruiters" role="tab" aria-selected="${this.tab==='recruiters'}" class="${this.tab==='recruiters'?'selected':''}">Recruiters <span>${people}</span></button></div><div class="bdc-file-tools"><button type="button" class="bdc-muted" data-action="refresh">${this.refreshing?'Checking sources…':'↻ Refresh jobs & recruiters'}</button><button type="button" class="bdc-muted" data-action="discover">Search preferences</button><label class="bdc-import">Import leads JSON<input class="bdc-file" data-action="import" type="file" accept=".json,application/json" /></label><button type="button" class="bdc-muted" data-action="export">Export saved leads ↓</button></div></div>
+        <div class="bdc-toolbar"><div class="bdc-tabs" role="tablist" aria-label="Lead type"><button type="button" data-action="tab" data-value="jobs" role="tab" aria-selected="${this.tab==='jobs'}" class="${this.tab==='jobs'?'selected':''}">Jobs <span>${jobs}</span></button><button type="button" data-action="tab" data-value="recruiters" role="tab" aria-selected="${this.tab==='recruiters'}" class="${this.tab==='recruiters'?'selected':''}">Recruiters <span>${people}</span></button></div><div class="bdc-file-tools"><button type="button" class="bdc-muted" data-action="refresh">${this.refreshing?'Checking sources…':'↻ Check live job sources'}</button><button type="button" class="bdc-muted" data-action="discover">Search preferences</button><label class="bdc-import">Import leads JSON<input class="bdc-file" data-action="import" type="file" accept=".json,application/json" /></label><button type="button" class="bdc-muted" data-action="export">Export saved leads ↓</button></div></div>
         ${this.refreshStatus()}<div class="bdc-filter-row"><label class="bdc-search-wrap"><span class="sr-only">Search ${focus}</span><span aria-hidden="true">⌕</span><input class="bdc-search" type="search" data-action="search" value="${esc(this.term)}" placeholder="Search ${focus}, companies, locations, skills..." autocomplete="off" /></label><label><span class="sr-only">Region</span><select data-action="region"><option value="">All locations</option>${regions.map(x=>`<option value="${esc(x)}" ${this.region===x?'selected':''}>${esc(x)}</option>`).join('')}</select></label><label><span class="sr-only">Company</span><select data-action="company"><option value="">All companies</option>${companies.map(x=>`<option value="${esc(x)}" ${this.company===x?'selected':''}>${esc(x)}</option>`).join('')}</select></label><label><span class="sr-only">Sort</span><select data-action="sort"><option value="recommended" ${this.sort==='recommended'?'selected':''}>${this.tab==='jobs'?'Best resume fit':'Name A-Z'}</option><option value="newest" ${this.sort==='newest'?'selected':''}>Newest dated</option><option value="company" ${this.sort==='company'?'selected':''}>Company A-Z</option></select></label><label class="bdc-bookmark-toggle"><input type="checkbox" data-action="saved" ${this.filterSaved?'checked':''}/> Saved only</label></div>
         <div class="bdc-results" role="tabpanel" id="lead-results" aria-label="${focus}">${this.loading?'<div class="bdc-empty">Loading curated leads…</div>':this.error?`<div class="bdc-empty">${esc(this.error)}</div>`:`<div class="bdc-listmeta" role="status">Showing <strong>${list.length}</strong> ${focus} · ${this.sourceMode==='curated'?'Saved research results':'Imported from local file'} · No automated account access</div><div class="bdc-list">${list.length?list.map(x=>this.tab==='jobs'?this.renderJob(x):this.renderPerson(x)).join(''):'<div class="bdc-empty">No matching leads. Try clearing filters.</div>'}</div>`}</div>
         <footer class="bdc-foot"><span>Local bookmarks and statuses stay in this browser. Export a backup if you change devices.</span><span>PUBLIC SOURCES · REVIEW BEFORE OUTREACH</span></footer>
@@ -145,7 +143,7 @@ class BriansCareerBoard extends HTMLElement {
         tab.querySelector('span').textContent=tab.dataset.value==='jobs'?jobs:people;
       }
       const refresh=this.shadowRoot.querySelector('[data-action=refresh]');
-      refresh.disabled=this.refreshing;refresh.textContent=this.refreshing?'Checking sources…':'↻ Refresh jobs & recruiters';
+      refresh.disabled=this.refreshing;refresh.textContent=this.refreshing?'Checking sources…':'↻ Check live job sources';
     }
     for(const tab of this.shadowRoot.querySelectorAll('[role=tab]')){
       tab.tabIndex=tab.dataset.value===this.tab?0:-1;
@@ -155,7 +153,20 @@ class BriansCareerBoard extends HTMLElement {
   refreshStatus(){
     const r=this.data.lastRefresh;
     const label=this.refreshing?'Checking current employer feeds and recruiter directory…':this.refreshMessage||(!r?'Ready to check current sources.':r.status==='disabled'?'Job and people searches are disabled in your preferences.':r.status==='failed'?'Source check failed. Your previous leads are retained.':`${r.status==='partial'?'Partial refresh':'Refresh complete'}: ${r.jobsAdded} new jobs, ${r.recruitersAdded} new recruiters. ${r.jobsChecked} job matches and ${r.recruitersChecked} recruiters checked.`);
-    return `<div class="bdc-refresh-status"><p role="status" aria-live="polite">${esc(label)}</p>${r?`<small>Last attempt: ${esc(new Date(r.at).toLocaleString('en-US',{timeZone:'America/Los_Angeles'}))} PT</small><details><summary>Sources checked</summary><ul>${r.sources.map(s=>`<li><strong>${esc(s.name)}</strong>: ${esc(s.status)} · ${s.scanned} entries scanned · ${s.matches} matches${s.error?' · '+esc(s.error):''}${s.note?' · '+esc(s.note):''}</li>`).join('')}</ul></details>`:'<small>Coverage: Fender, Anduril Industries, Brighton Jones, and Burtch Works. Role/location matching does not verify every qualification. National recruiter locations and vacancy ownership may be unconfirmed.</small>'}</div>`;
+    const ai=this.aiStatus,run=this.researchInfo?.lastRun;
+    const aiText=ai?(ai.dailyCareer?'Morning AI research · 7 AM Pacific':ai.configured?'AI web research available on demand':'On-demand AI is not enabled'):'AI search status unavailable';
+    const runText=run?`${run.status} · ${new Date(run.finishedAt).toLocaleString('en-US',{timeZone:'America/Los_Angeles'})} PT · ${run.counts.jobs} jobs, ${run.counts.people} people, ${run.counts.events} events`:'No AI run recorded yet.';
+    return `<div class="bdc-refresh-status"><div class="bdc-ai-status"><strong>${esc(aiText)}</strong><p>${esc(runText)}</p>${ai?.onDemandReason?`<p>${esc(ai.onDemandReason)}</p>`:''}${run?`<details><summary>AI findings and limits</summary><p>${esc(run.summary)}</p>${run.issues.map(x=>`<p>${esc(x)}</p>`).join('')}</details>`:''}${canEdit&&ai?.configured?`<button type="button" class="bdc-muted" data-action="ai-search" ${this.aiBusy?'disabled':''}>${this.aiBusy?'Researching…':'Run AI web search'}</button>`:''}<p>${esc(this.aiMessage||'Live source checks below use public employer feeds. AI research also evaluates your background, availability and industries.')}</p></div><p role="status" aria-live="polite">${esc(label)}</p>${r?`<small>Last attempt: ${esc(new Date(r.at).toLocaleString('en-US',{timeZone:'America/Los_Angeles'}))} PT</small><details><summary>Sources checked</summary><ul>${r.sources.map(s=>`<li><strong>${esc(s.name)}</strong>: ${esc(s.status)} · ${s.scanned} entries scanned · ${s.matches} matches${s.error?' · '+esc(s.error):''}${s.note?' · '+esc(s.note):''}</li>`).join('')}</ul></details>`:'<small>Coverage: Fender, Anduril Industries, Esri, Brighton Jones, and Burtch Works. Role/location matching does not verify every qualification. National recruiter locations and vacancy ownership may be unconfirmed.</small>'}</div>`;
+  }
+  async loadResearch(){
+    try{const results=await Promise.all(['/api/research','/api/ai/status'].map(async path=>{const r=await apiFetch(path);if(!r.ok)throw Error();return r.json();}));this.researchInfo=results[0];this.aiStatus=results[1];if(this.isConnected)this.render();}catch{this.aiMessage='AI status could not be verified. Live source checks remain available.';if(this.isConnected)this.render();}
+  }
+  async runAI(){
+    if(!canEdit||this.aiBusy||!this.aiStatus?.configured)return;
+    this.aiBusy=true;this.aiMessage='Searching current web sources using your saved preferences…';this.render();
+    try{const r=await apiFetch('/api/ai/career',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',timeoutMs:200000});const d=await r.json();if(!r.ok)throw Error(d.error||'AI research could not finish.');this.aiMessage='Research saved. Updated jobs and people are shown below; events are in Local events.';await this.load();await this.loadResearch();}
+    catch(e){this.aiMessage=e.message;}
+    finally{this.aiBusy=false;this.render();}
   }
   async refreshSources(){
     if(this.refreshing)return;this.refreshing=true;this.refreshMessage='';this.render();
@@ -179,6 +190,7 @@ class BriansCareerBoard extends HTMLElement {
   }
   async handleClick(e){const btn=e.target.closest('[data-action]');if(!btn)return;
     const action=btn.dataset.action,id=btn.dataset.id;if(!canEdit&&['refresh','discover','star','export','import','stage'].includes(action))return;
+    if(action==='ai-search'){await this.runAI();return;}
     if(action==='refresh'){await this.refreshSources();return;}
     if(action==='discover'){openResearchPreferences();return;}
     if(action==='tab'){

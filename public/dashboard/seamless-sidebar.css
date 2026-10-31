@@ -1,0 +1,210 @@
+/* Navigation layout only. Keep Neon District's existing palette and motion. */
+.nd-flow.seamless-nav {
+  --sidebar-width: 248px;
+  --sidebar-paint: linear-gradient(165deg, #21152e, #0b1022 80%);
+}
+.nd-flow.seamless-nav .sidebar {
+  width: var(--sidebar-width);
+  padding: 0;
+  background: var(--sidebar-paint);
+  border: 0;
+  box-shadow: none;
+  isolation: isolate;
+}
+.nd-flow.seamless-nav .shell { margin-left: var(--sidebar-width); }
+.nd-flow.seamless-nav .sidebar > * { position: relative; z-index: 1; }
+.nd-flow.seamless-nav .sidebar .brand {
+  flex: 0 0 auto;
+  min-height: 88px;
+  margin: 0;
+  padding: 24px 26px;
+  gap: 10px;
+  color: var(--nd-text);
+  font: 600 19px/1.3 Arial, Helvetica, sans-serif;
+  letter-spacing: -.45px;
+  text-shadow: none;
+}
+.nd-flow.seamless-nav .brand-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--nd-magenta);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--nd-magenta) 35%, transparent);
+  flex: 0 0 auto;
+}
+.nd-flow.seamless-nav .sidebar #nav {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  gap: 6px;
+  min-height: 0;
+  margin: 10px 0 0;
+  padding: 8px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--nd-line) transparent;
+}
+.nd-flow.seamless-nav #nav .nav-item {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 26px;
+  gap: 13px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--nd-muted);
+  font: 400 13px/1.5 Arial, Helvetica, sans-serif;
+  box-shadow: none;
+  transform: none;
+  transition: color .18s ease, background-color .18s ease;
+}
+.nd-flow.seamless-nav #nav .nav-item .nav-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 22px;
+  width: 22px;
+  font-size: 19px;
+  line-height: 1;
+  color: inherit;
+}
+.nd-flow.seamless-nav #nav .nav-item:hover {
+  color: var(--nd-text);
+  background: color-mix(in srgb, var(--nd-cyan) 4%, transparent);
+  box-shadow: none;
+}
+.nd-flow.seamless-nav #nav .nav-item.active {
+  color: var(--nd-text);
+  background: color-mix(in srgb, var(--nd-magenta) 9%, transparent);
+  font-weight: 600;
+  box-shadow: inset 3px 0 var(--nd-cyan);
+}
+.nd-flow.seamless-nav #nav .nav-item.active .nav-icon { color: var(--nd-cyan); }
+.nd-flow.seamless-nav #nav .nav-item:focus-visible { outline-offset: -5px; border-radius: 10px; }
+.nd-flow.seamless-nav .sidebar .workspace-controls-link {
+  flex: 0 0 auto;
+  min-height: 44px;
+  margin: 22px 18px 0;
+  padding: 12px 10px;
+  gap: 13px;
+  background: none;
+  border: 0;
+  border-radius: 10px;
+  color: var(--nd-muted);
+  font-size: 12px;
+}
+.nd-flow.seamless-nav .workspace-controls-link > span { width: 20px; text-align: center; }
+.nd-flow.seamless-nav .sidebar .workspace-controls-link:hover { color: var(--nd-cyan); background: #68e8ff08; }
+.nd-flow.seamless-nav .sidebar .side-bottom {
+  flex: 0 0 auto;
+  margin: auto 26px 0;
+  padding: 24px 0 22px;
+  font-size: 10px;
+  line-height: 1.8;
+  border: 0;
+}
+.nd-flow.seamless-nav .side-bottom p { margin: 5px 0 0; font-size: 11px; }
+.nd-flow.seamless-nav .side-bottom > a { margin-top: 10px; font-size: 11px; }
+.nd-flow.seamless-nav .sidebar .nav-current-mark { display: none; }
+
+/* The selected row is a real opening onto the existing page background.
+   Two curved sidebar surfaces move around it; the page palette is untouched. */
+@media (min-width: 851px) {
+  .nd-flow.seamless-nav .sidebar[data-seam-ready] { background: none; }
+  .nd-flow.seamless-nav .sidebar[data-seam-ready]::before,
+  .nd-flow.seamless-nav .sidebar[data-seam-ready]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: var(--sidebar-paint);
+    background-size: var(--sidebar-width) 100dvh;
+    background-repeat: no-repeat;
+    border-right: 1px solid var(--nd-line);
+  }
+  .nd-flow.seamless-nav .sidebar[data-seam-ready]::before {
+    top: 0;
+    height: var(--seam-top);
+    border-bottom-right-radius: 24px;
+  }
+  .nd-flow.seamless-nav .sidebar[data-seam-ready]::after {
+    top: calc(var(--seam-top) + var(--seam-height));
+    bottom: 0;
+    border-top-right-radius: 24px;
+    background-position: 0 calc(0px - var(--seam-top) - var(--seam-height));
+  }
+  .nd-flow.seamless-nav .sidebar[data-seam-ready] #nav .nav-item.active { background: none; box-shadow: none; }
+  .nd-flow.seamless-nav .sidebar[data-seam-ready] .nav-current-mark {
+    display: block;
+    position: absolute;
+    top: calc(var(--seam-top) + (var(--seam-height) - 24px) / 2);
+    left: 10px;
+    width: 3px;
+    height: 24px;
+    border-radius: 4px;
+    background: var(--nd-cyan);
+    box-shadow: 0 0 12px #68e8ff38;
+    pointer-events: none;
+  }
+  .nd-flow.seamless-nav .sidebar[data-seam-visible='false'] .nav-current-mark { visibility: hidden; }
+  .nd-flow.seamless-nav .sidebar[data-seam-visible='false']::before,
+  .nd-flow.seamless-nav .sidebar[data-seam-visible='false']::after { border-radius: 0; }
+  .nd-flow.seamless-nav .sidebar[data-seam-motion]::before { transition: height .28s cubic-bezier(.22,.7,.2,1); }
+  .nd-flow.seamless-nav .sidebar[data-seam-motion]::after { transition: top .28s cubic-bezier(.22,.7,.2,1), background-position .28s cubic-bezier(.22,.7,.2,1); }
+  .nd-flow.seamless-nav .sidebar[data-seam-motion] .nav-current-mark { transition: top .28s cubic-bezier(.22,.7,.2,1); }
+}
+@media (min-width: 851px) and (max-height: 650px) {
+  .nd-flow.seamless-nav .sidebar .brand { min-height: 68px; padding-block: 18px; }
+  .nd-flow.seamless-nav .sidebar #nav { margin-top: 0; gap: 3px; }
+  .nd-flow.seamless-nav .sidebar .workspace-controls-link { margin-top: 10px; }
+  .nd-flow.seamless-nav .sidebar .side-bottom { padding-block: 12px; }
+}
+@media (max-width: 850px) {
+  .nd-flow.seamless-nav .sidebar {
+    position: relative;
+    width: auto;
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto;
+    background: var(--sidebar-paint);
+    border-bottom: 1px solid var(--nd-line);
+  }
+  .nd-flow.seamless-nav .shell { margin-left: 0; }
+  .nd-flow.seamless-nav .sidebar .brand { min-height: 64px; padding: 18px 20px; font-size: 18px; }
+  .nd-flow.seamless-nav .sidebar .workspace-controls-link {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    margin: 0 12px 0 0;
+    padding: 10px 8px;
+    font-size: 11px;
+    gap: 6px;
+  }
+  .nd-flow.seamless-nav .sidebar #nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    flex-direction: row;
+    margin: 0;
+    gap: 0;
+    padding: 0 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .nd-flow.seamless-nav #nav .nav-item { width: auto; padding: 12px 14px; gap: 9px; min-height: 48px; white-space: nowrap; }
+  .nd-flow.seamless-nav #nav .nav-item.active { background: none; box-shadow: inset 0 -2px var(--nd-cyan); }
+  .nd-flow.seamless-nav .sidebar .side-bottom { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nd-flow.seamless-nav .sidebar *, .nd-flow.seamless-nav .sidebar::before, .nd-flow.seamless-nav .sidebar::after { transition: none !important; }
+}
+.nd-flow.seamless-nav:is(.no-motion,.nd-no-motion) .sidebar *,
+.nd-flow.seamless-nav:is(.no-motion,.nd-no-motion) .sidebar::before,
+.nd-flow.seamless-nav:is(.no-motion,.nd-no-motion) .sidebar::after { transition: none !important; }
+@media (forced-colors: active) {
+  .nd-flow.seamless-nav #nav .nav-item.active { outline: 2px solid Highlight; outline-offset: -5px; }
+  .nd-flow.seamless-nav .sidebar[data-seam-ready]::before,
+  .nd-flow.seamless-nav .sidebar[data-seam-ready]::after { background: Canvas; border-color: CanvasText; }
+}

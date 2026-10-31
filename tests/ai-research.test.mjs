@@ -65,7 +65,7 @@ test('concurrent attempts do not issue duplicate paid requests',async()=>{
   await assert.rejects(()=>runResearch(env,'briefing',{researcher}),/already running/);finish(result);await a;assert.equal(calls,1);
 });
 test('career source filtering and disabled categories are enforced',()=>{
-  const candidate={value:{jobs:[{title:'Analyst',company:'Example',url}],recruiters:[{name:'Person',company:'Example',url:'https://invented.test'}],events:[]},sources:result.sources};
+  const candidate={value:{jobs:[{title:'Analyst',company:'Example',city:'Irvine, CA',url}],recruiters:[{name:'Person',company:'Example',url:'https://invented.test'}],events:[]},sources:result.sources};
   const normalized=normalizeResearch('career',candidate,{preferences:DEFAULT_RESEARCH_PREFERENCES},Date.now());
   assert.equal(normalized.jobs.length,1);assert.equal(normalized.recruiters.length,0);
   assert.equal(normalizeResearch('career',candidate,{preferences:{...DEFAULT_RESEARCH_PREFERENCES,jobsEnabled:false}},Date.now()).jobs.length,0);
@@ -73,6 +73,17 @@ test('career source filtering and disabled categories are enforced',()=>{
 test('Pacific dates handle both standard and daylight time',()=>{
   assert.equal(pacificDate(Date.parse('2026-11-02T07:30:00Z')),'2026-11-01');
   assert.equal(pacificDate(Date.parse('2026-07-02T06:30:00Z')),'2026-07-01');
+});
+test('career AI rejects expired, senior and nonlocal jobs and verifies local event dates',()=>{
+ const today=Date.parse('2026-10-31T03:00:00Z'),items=[
+  {title:'Business Analyst',company:'Example',city:'Redlands, CA',url:'https://example.test/jobs/1'},
+  {title:'Senior Business Analyst',company:'Example',city:'Irvine, CA',url:'https://example.test/jobs/2'},
+  {title:'Business Analyst',company:'Example',city:'Orange County, VA',url:'https://example.test/jobs/3'},
+  {title:'Business Analyst',company:'Example',city:'Irvine, CA',deadline:'2026-10-01',url:'https://example.test/jobs/4'}
+ ];
+ const events=[{name:'Local workshop',date:'2026-11-05',location:'Corona, CA',organizer:'Example',url:'https://example.test/events/1'},{name:'Past workshop',date:'2026-10-01',location:'Corona, CA',organizer:'Example',url:'https://example.test/events/2'}];
+ const r=normalizeResearch('career',{value:{jobs:items,events},sources:[...items,...events].map(({url})=>({url,title:'Example'}))},{preferences:DEFAULT_RESEARCH_PREFERENCES},today);
+ assert.deepEqual(r.jobs.map(x=>x.url),['https://example.test/jobs/1']);assert.equal(r.jobs[0].region,'Inland Empire');assert.equal(r.events.length,1);assert.equal(r.events[0].time,'Time unconfirmed');
 });
 test('schedule runs at 7 AM Pacific across daylight saving and obeys disabled flags',async()=>{
   const env={ENABLE_DAILY_BRIEFING:'true',ENABLE_DAILY_CAREER:'true'},calls=[];
@@ -90,10 +101,50 @@ test('scheduled retries do not pay for the same task twice on one day',async()=>
 });
 test('career persistence merges leads and adds events without erasing workbook records',async()=>{
   const env=await setup();env.AI_MAX_DAILY_RUNS='3';
-  const future='2099-01-01';
-  const career={value:{jobs:[{title:'Analyst',company:'Example',url}],recruiters:[],events:[{name:'Meetup',date:future,url}]},sources:result.sources};
+  const future=pacificDate(Date.now()+7*86400000);
+  const career={value:{jobs:[{title:'Analyst',company:'Example',city:'Irvine, CA',url}],recruiters:[],events:[{name:'Meetup',date:future,location:'Irvine, CA',organizer:'Example',url}]},sources:result.sources};
   for(let i=0;i<2;i++)await runResearch(env,'career',{researcher:async()=>career});
   assert.equal((await(await env.BUCKET.get('discovery.json')).json()).jobs.length,1);
   const dashboard=await(await env.BUCKET.get('dashboard.json')).json();assert.equal(dashboard.holdings[0].ticker,'KO');
   assert.equal(dashboard.sheets['Potential Events'].length,5);
+});
+
+test('news runner researches current saved topics and saves only verified source URLs',async()=>{
+ const env=await setup();const {saveNews,readNews}=await import('../lib/news.mjs');
+ await saveNews(env.BUCKET,{action:'preferences',baseTopicsVersion:0,topics:['F1','Lakers']});
+ const data={value:{results:[{topicId:'f1',status:'ready',items:[{headline:'Fixture update',summary:'Verified fixture source.',source:'Fixture publisher',url,publishedAt:null},{headline:'Unverified',summary:'Ignore',source:'Fixture',url:'https://example.test/not-cited'}]}]},sources:[{url,title:'Fixture publisher'}]};
+ await runResearch(env,'news',{researcher:async(_env,kind,context)=>{assert.equal(kind,'news');assert.deepEqual(context.topics.map(t=>t.label),['F1','Lakers']);return data;}});
+ const saved=await readNews(env.BUCKET);assert.equal(saved.briefings.f1.items.length,1);assert.equal(saved.briefings['custom-lakers'].status,'failed');
+ assert.equal((await(await env.BUCKET.get('dashboard.json')).json()).briefing.text,'old');
+});
+test('news runner never restores a removed topic or spends on an empty selection',async()=>{
+ const env=await setup();const {saveNews,readNews}=await import('../lib/news.mjs');
+ await assert.rejects(()=>runResearch(env,'news',{researcher:async()=>{await saveNews(env.BUCKET,{action:'preferences',baseTopicsVersion:0,topics:[]});return {value:{results:[]},sources:[{url,title:'Fixture'}]};}}),/Topics changed/);
+ let calls=0;assert.equal((await runResearch(env,'news',{researcher:async()=>{calls++;}})).status,'skipped');assert.equal(calls,0);assert.deepEqual((await readNews(env.BUCKET)).topics,[]);
+});
+test('news research preserves five or more verified articles per topic',()=>{
+ for(const count of [4,5,10]){
+  const items=Array.from({length:count},(_,i)=>({headline:`News ${i}`,summary:`Verified update ${i}.`,source:'Publisher',url:`https://example.test/news/${i}`,publishedAt:'2026-10-30'}));
+  const result={value:{results:[{topicId:'nba',status:'ready',items}]},sources:items.map(({url})=>({url,title:'Publisher'}))};
+  const [normalized]=normalizeResearch('news',result,{topics:[{id:'nba',label:'NBA'}]},Date.parse('2026-10-31T03:00:00Z'));
+  assert.equal(normalized.items.length,count);
+  assert.equal(normalized.status,count>=5?'ready':'partial');
+ }
+});
+test('news scheduling remains at 7 AM Pacific across daylight saving changes',async()=>{
+ const calls=[],env={ENABLE_DAILY_NEWS:'true'};const runner=async(_env,kind)=>calls.push(kind);
+ await runSchedule(env,Date.parse('2026-10-31T14:00:00Z'),{runner});
+ await runSchedule(env,Date.parse('2026-11-01T14:00:00Z'),{runner});
+ await runSchedule(env,Date.parse('2026-11-01T15:00:00Z'),{runner});
+ assert.deepEqual(calls,['news','news']);
+});
+
+test('career research failures report failure without replacing saved leads',async()=>{
+ const env=await setup();
+ const leads={jobs:[{id:'keep',url:'https://example.test/job'}],recruiters:[]};
+ await env.BUCKET.put('discovery.json',JSON.stringify(leads));
+ await assert.rejects(()=>runResearch(env,'career',{researcher:async()=>{throw Error('provider unavailable');}}));
+ assert.deepEqual(await(await env.BUCKET.get('discovery.json')).json(),leads);
+ const report=(await(await env.BUCKET.get('research.json')).json()).lastRun;
+ assert.equal(report.status,'failed');assert.deepEqual(report.counts,{jobs:0,people:0,events:0});
 });

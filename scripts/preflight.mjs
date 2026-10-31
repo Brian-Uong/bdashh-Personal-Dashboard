@@ -10,6 +10,8 @@ if(!config.r2_buckets?.some(b=>b.binding==='ASSET_BUCKET'&&b.bucket_name==='bdas
 if(config.workers_dev!==false||config.preview_urls!==false)errors.push('Public alternate URLs must stay disabled.');
 if(config.vars?.APP_HOSTNAME!=='bdashh.com')errors.push('This project is exclusively for bdashh.com.');
 if(process.argv.includes('--production')){
+  const workspace=JSON.parse(await readFile(new URL('../workspace-status.json',import.meta.url),'utf8'));
+  if(workspace.publishAuthorized!==true)errors.push('This is the development workspace. Publishing requires Brian’s explicit release request and a fresh source comparison.');
   if(selected.vars?.PUBLIC_READ_ONLY==='true'&&(preview||status.public_access?.authorized!==true))errors.push('Public viewing requires explicit owner authorization and is disabled on preview.');
   if(!preview&&status.ai_activation?.state==='paused_by_owner'&&selected.vars?.OPENAI_MODEL)errors.push('Paid AI must stay paused until the owner requests reactivation.');
   for(const key of ['DASHBOARD_OWNER_EMAIL','ACCESS_TEAM_DOMAIN','ACCESS_AUD'])if(!selected.vars?.[key])errors.push('Configure '+key+'.');

@@ -74,3 +74,4 @@ test('source export requires exact published commit, clean tracked source and co
   assert.notEqual(run('0'.repeat(40)).status,0);
   await put(repo,'public/dashboard/index.html','unsaved change');assert.notEqual(run().status,0);
 });
+

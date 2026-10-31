@@ -1,7 +1,7 @@
 export const BROWSER_KEYS=Object.freeze([
  'brians-dash-career-board-v1','brians-dash-home-v1',
  'brians-dash-map-locations-v1','brians-dash-skipped-events-v1',
- 'brians-dash-motion','brians-dash-radio-v1','brians-dash-fc-trading-v1'
+ 'brians-dash-motion','brians-dash-radio-v1','brians-dash-fc-trading-v1','brians-dash-sports-v1'
 ]);
 export function collectBrowserPreferences(storage){
  const values={};

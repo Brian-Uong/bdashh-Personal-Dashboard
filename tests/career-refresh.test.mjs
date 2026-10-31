@@ -4,6 +4,8 @@ import {jobMatches,parseRecruiters,mergeLeads,mergeRefresh,collectCareer,CAREER_
 import {DEFAULT_RESEARCH_PREFERENCES as prefs} from '../lib/research.mjs';
 test('role/location preferences reject unrelated and senior roles, and respect remote choice',()=>{
  assert.ok(jobMatches('Finance Data Analyst Intern','Costa Mesa, CA',prefs));
+ assert.ok(jobMatches('Business Analyst','Redlands, CA',prefs));
+ assert.ok(!jobMatches('Business Analyst','Orange County, VA',prefs));
  assert.ok(jobMatches('Analyst — August 2027','Newport Beach, CA',prefs));
  assert.ok(!jobMatches('Senior Financial Analyst','Irvine, CA',prefs));
  assert.ok(!jobMatches('Data Engineer','Irvine, CA',prefs));
@@ -28,7 +30,7 @@ test('refresh preserves IDs and researched notes; people sharing a directory rem
 });
 test('source failure retains saved rows, timestamp and clearly records failure',async()=>{
  const result=await collectCareer(prefs,async()=>new Response('Unavailable',{status:503}));
- assert.equal(result.sources.length,4);assert.ok(result.sources.every(x=>x.status==='failed'));
+ assert.equal(result.sources.length,CAREER_SOURCES.length);assert.ok(result.sources.every(x=>x.status==='failed'));
  const old={jobs:[{id:'x',url:'https://example.com',title:'Analyst',feedKey:'fender'}],recruiters:[],lastCurated:'2026-10-27'};
  const next=mergeRefresh(old,result);assert.equal(next.lastRefresh.status,'failed');assert.equal(next.lastCurated,'2026-10-27');assert.equal(next.jobs[0].verificationState,undefined);
  const refreshed=mergeRefresh(old,{jobs:[],recruiters:[],checked:'2026-10-28',catalogs:[{key:'fender',urls:[]}],sources:[{key:'fender',status:'success'}]});assert.equal(refreshed.jobs[0].verificationState,'not_listed');assert.equal(old.jobs[0].verificationState,undefined);

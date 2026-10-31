@@ -1,3 +1,5 @@
+import * as events from '../app/api/events/route.ts';
+import * as news from '../app/api/news/route.ts';
 import * as access from '../app/api/access/route.ts';
 import * as sync from '../app/api/sync/route.ts';
 import * as records from '../app/api/records/route.ts';
@@ -10,6 +12,7 @@ import * as history from '../app/api/portfolio/history/route.ts';
 import * as stocks from '../app/api/stocks/detail/route.ts';
 import * as places from '../app/api/places/search/route.ts';
 import * as nearby from '../app/api/places/nearby/route.ts';
+import * as retiredSports from '../app/api/sports/nba/route.ts';
 import * as retiredMarket from '../app/api/fc-market/route.ts';
 import {servePrivate} from '../lib/private-router.mjs';
 import {runResearch,runSchedule} from '../lib/ai-research.mjs';
@@ -18,18 +21,18 @@ import {serveR2Asset} from '../lib/private-assets.mjs';
 import {runStartupCheck} from '../lib/startup-check.mjs';
 import {runtimeEnv,siteSettingsRoute} from '../lib/site-settings.mjs';
 import {protectResponse} from '../lib/private-access.mjs';
-const existing={'/api/access':access,'/api/sync':sync,'/api/records':records,'/api/holdings':holdings,'/api/discovery':discovery,'/api/discovery/refresh':careerRefresh,'/api/research':research,'/api/quotes/refresh':quotes,'/api/portfolio/history':history,'/api/stocks/detail':stocks,'/api/places/search':places,'/api/places/nearby':nearby,'/api/fc-market':retiredMarket};
+const existing={'/api/events':events,'/api/news':news,'/api/access':access,'/api/sync':sync,'/api/records':records,'/api/holdings':holdings,'/api/discovery':discovery,'/api/discovery/refresh':careerRefresh,'/api/research':research,'/api/quotes/refresh':quotes,'/api/portfolio/history':history,'/api/stocks/detail':stocks,'/api/places/search':places,'/api/places/nearby':nearby,'/api/fc-market':retiredMarket,'/api/sports/nba':retiredSports};
 export default {
   async fetch(request,env){
     if(new URL(request.url).hostname!==env.APP_HOSTNAME)return protectResponse(new Response('Unknown host',{status:403}));
     try{env=await runtimeEnv(env);}catch{return protectResponse(new Response('Website settings are temporarily unavailable. Please retry.',{status:503}));}
     const routes={...existing};
     if(env.OWNER_CONTROLS_ENABLED==='true')routes['/api/site-settings']=siteSettingsRoute(env);
-    for(const kind of ['briefing','career'])routes['/api/ai/'+kind]={async POST(){
+    for(const kind of ['briefing','career','news'])routes['/api/ai/'+kind]={async POST(){
       try{return Response.json(await runResearch(env,kind));}
       catch(e){return Response.json({error:e.message},{status:/limit|already/.test(e.message)?429:/configured|turned off/.test(e.message)?503:502});}
     }};
-    routes['/api/ai/status']={async GET(){return Response.json({configured:!!env.OPENAI_API_KEY&&!!env.OPENAI_MODEL,dailyBriefing:env.ENABLE_DAILY_BRIEFING==='true',dailyCareer:env.ENABLE_DAILY_CAREER==='true'});}};
+    routes['/api/ai/status']={async GET(){return Response.json({configured:!!env.OPENAI_API_KEY&&!!env.OPENAI_MODEL,dailyBriefing:env.ENABLE_DAILY_BRIEFING==='true',dailyCareer:env.ENABLE_DAILY_CAREER==='true',dailyNews:env.ENABLE_DAILY_NEWS==='true'});}};
     return servePrivate(request,env,{routes,assets:{fetch:request=>serveR2Asset(request,env.ASSET_BUCKET)}});
   },
   scheduled(controller,env,ctx){ctx.waitUntil((async()=>{

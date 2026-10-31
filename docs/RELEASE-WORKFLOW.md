@@ -7,7 +7,7 @@ Brian wants routine updates to be easy to publish, with the exact released sourc
 - `site-source`: the latest source from the Brian's Dash development Site, with its exact Site version and source commit recorded in `source-release.json`. Populate and verify it from the cloud development checkout after each published dashboard update. This branch is a source handoff; it does not deploy bdashh.com.
 - `main`: the independently hosted application, including Cloudflare owner authentication, private R2 storage, server-side AI and persistent website controls. Every bdashh.com release must have matching source here.
 
-**Bootstrap status:** the `site-source` branch has not yet been populated. Version 65 is published on the development Site, but its source remains in that Site's cloud repository. This local Windows session cannot resolve the Site Git host. Conversation-history access supplies context, not that remote filesystem. Do the first source handoff from the existing cloud development chat where the files are already available; do not ask Brian to shuttle ZIPs between chats.
+**Version 66 handoff:** the complete release ZIP is available locally and has passed all payload checksums. The initial site-source mirror is being published with this release; consult migration-status.json for its verified commit. Future source mirrors use the same connected GitHub tools. A source mirror does not publish bdashh.com.
 
 Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uong/bdashh-private`. Keep the separate pdashboards business project out of this workflow.
 
@@ -18,7 +18,7 @@ Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uo
 3. Run against the clean source checkout that was just published:
 
    ```sh
-   node /absolute/helpers/export-source-snapshot.mjs --source /absolute/site-checkout --version 65 --commit fe20b5651a2e1b60136346a2c63b19ccfb19cf7f --output /absolute/source-handoff
+   node /absolute/helpers/export-source-snapshot.mjs --source /absolute/site-checkout --version 66 --commit b87d388a6078de03894f849bb4a00897bcbe5c41 --output /absolute/source-handoff
    ```
 
    Replace version and commit with the current Sites result. The command checks the Site identity, exact Git commit and clean tracked files; excludes saved data, environment files, dependencies and build output; checks common credential patterns; and writes an ASCII JSON packet with hashes. It does not upload or publish. Review the export; a pattern scan is not a guarantee that arbitrary sensitive content is absent.
@@ -51,3 +51,7 @@ Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uo
 6. Save the actual Site source version, GitHub source commit, asset release, Worker version/deployment, checks and limitations to `migration-status.json` and `VERIFICATION.md`, then sync those records to GitHub. Verify the final head and source hashes. Mark the requested release completed only after both services are verified.
 
 This workflow uses existing connected tools. It does not need a new public deployment endpoint, an API key in browser code, automatic deployment of every edit, or API spending while the master AI control is off. The scripts prepare releases; they are not an installed unattended cross-chat automation.
+
+## Clean package after each development version
+
+Run `npm run release:package -- --site-version NUMBER --site-commit FULL_SHA --site-snapshot PATH` from the complete standalone development tree. This builds and validates a ZIP containing standalone and Site sources, immutable assets, compiled Worker, packets and checksums without publishing. Use `--wrangler PATH` when the pinned local dependency is external. On Windows the ZIP helper accepts `CODEX_PRIMARY_RUNTIME_PYTHON`. Production publication uses the normal release:prepare guard and current explicit owner request.

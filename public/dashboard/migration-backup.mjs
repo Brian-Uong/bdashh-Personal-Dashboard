@@ -6,7 +6,7 @@ const backupButton=document.getElementById('migrationBackupBtn');
 backupButton.addEventListener('click',async()=>{
  try{
   requireOwner();backupButton.disabled=true;status('Preparing your saved data and browser preferences…');
-  const paths={dashboard:'/api/sync',discovery:'/api/discovery',research:'/api/research',portfolioHistory:'/api/portfolio/history'};
+  const paths={dashboard:'/api/sync',discovery:'/api/discovery',research:'/api/research',portfolioHistory:'/api/portfolio/history',news:'/api/news'};
   const data=Object.fromEntries(await Promise.all(Object.entries(paths).map(async([key,path])=>{
    const response=await apiFetch(path);const value=await response.json();if(!response.ok)throw Error(value.error||`Could not back up ${key}.`);return [key,value];
   })));

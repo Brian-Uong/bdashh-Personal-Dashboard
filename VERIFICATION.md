@@ -1,3 +1,17 @@
+# Version 66 release validation
+
+2026-10-31T07:22:58.708914+00:00
+
+- Release ZIP: all 572 payload checksums match; Site v66 commit verified through Sites.
+- Current private GitHub main: 02b4e39f2cb8d48cc437f1c14981faca6d6880d4; all 160 blobs verified before reconciliation.
+- Live Worker remains c1b7e138-7e85-4ffe-ac26-1814bb597401 before publication.
+- 135 tests passed; browser portability checks passed. New tests cover news, local events, career filtering, owner-only writes and disabled AI.
+- Owner settings revision 1: public read-only true, AI false, daily research false. No paid calls or data migrations performed.
+- Production upload, asset readback, browser smoke checks and final source synchronization are pending.
+- Authenticated owner settings-save and live paid providers have not been retested.
+
+## Earlier validation history
+
 # BDashh deployment verification - 30 October 2026
 
 ## Live release

@@ -21,3 +21,4 @@ const source={projectId:hosting.project_id,version,commit:head,gitTree:git(['rev
 const output=path.resolve(options['--output']??path.join(root,'build-source-handoff',head));
 const packet=await writePacket(output,'source-snapshot',{format:'bdashh-source-snapshot',schemaVersion:1,source,files});
 console.log(JSON.stringify({source,files:files.length,output,packet,githubBranch:'site-source',uploaded:false}));
+

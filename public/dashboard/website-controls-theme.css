@@ -1,0 +1,58 @@
+/* Website controls use the same Neon District tokens as the dashboard.
+   Presentation only; the host continues to own settings and authorization. */
+.website-controls-page { margin: 0; min-height: 100dvh; font: 14px/1.6 Arial, Helvetica, sans-serif; }
+.website-controls-page * { box-sizing: border-box; }
+.website-controls-page main { max-width: 820px; margin: auto; padding: 32px 26px 56px; }
+.website-controls-page a { color: var(--nd-cyan); text-decoration: none; text-underline-offset: 4px; }
+.website-controls-page a:hover { text-decoration: underline; }
+.website-controls-page .top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; min-height: 52px; padding-bottom: 22px; border-bottom: 1px solid var(--nd-line); }
+.website-controls-page .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 600; letter-spacing: -.45px; color: var(--nd-text); }
+.website-controls-page .brand::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--nd-magenta); box-shadow: 0 0 12px #ff64d059; }
+.website-controls-page .badge { color: var(--nd-cyan); background: #68e8ff0a; border: 1px solid #68e8ff40; border-radius: 99px; padding: 6px 11px; font-size: 10px; letter-spacing: .1em; }
+.website-controls-page .eyebrow { color: var(--nd-magenta); font-size: 11px; letter-spacing: .12em; margin: 34px 0 10px; }
+.website-controls-page h1 { color: var(--nd-text); font-size: clamp(30px, 5vw, 42px); font-weight: 600; line-height: 1.2; letter-spacing: -1px; margin: 0 0 14px; }
+.website-controls-page h1 > span { color: var(--nd-magenta); }
+.website-controls-page p { color: var(--nd-muted); line-height: 1.65; margin: 0; }
+.website-controls-page .intro { max-width: 590px; margin-bottom: 28px; }
+.website-controls-page .card { padding: 25px; margin-top: 18px; color: var(--nd-text); border: 1px solid var(--nd-line); border-radius: var(--nd-radius); background-color: var(--nd-surface); background-image: radial-gradient(ellipse at 0% 0%, #ff64d01a, transparent 60%), linear-gradient(130deg, #ffffff0b, #ffffff03); box-shadow: 0 16px 42px #0204113d, inset 0 1px #ffffff10; }
+.website-controls-page .row { display: flex; align-items: center; justify-content: space-between; gap: 26px; }
+.website-controls-page .row > div { min-width: 0; }
+.website-controls-page h2 { color: var(--nd-text); font-size: 18px; line-height: 1.4; letter-spacing: -.3px; font-weight: 600; margin: 0 0 8px; }
+.website-controls-page .value { display: block; color: var(--nd-cyan); font-size: 12px; font-weight: 400; margin-top: 14px; }
+.website-controls-page .switch { position: relative; display: inline-flex; align-items: center; flex: 0 0 58px; width: 58px; height: 44px; }
+.website-controls-page .switch input { position: absolute; inset: 0; opacity: 0; margin: 0; width: 100%; height: 100%; cursor: pointer; }
+.website-controls-page .track { width: 58px; height: 32px; border: 1px solid var(--nd-line); border-radius: 99px; background: #302745; pointer-events: none; transition: background .2s ease, border-color .2s ease; }
+.website-controls-page .track::after { content: ''; display: block; width: 24px; height: 24px; border-radius: 50%; background: var(--nd-muted); position: absolute; top: 10px; left: 4px; transition: transform .2s ease; }
+.website-controls-page .switch input:checked + .track { background: var(--nd-cyan); border-color: var(--nd-cyan); box-shadow: 0 0 18px #68e8ff24; }
+.website-controls-page .switch input:checked + .track::after { transform: translateX(26px); background: var(--nd-navy); }
+.website-controls-page .switch input:focus-visible + .track { outline: 2px solid var(--nd-cyan); outline-offset: 4px; }
+.website-controls-page .switch input:disabled + .track { opacity: .6; }
+.website-controls-page .switch input:disabled { cursor: not-allowed; }
+.website-controls-page .daily { border-top: 1px solid var(--nd-line); margin-top: 24px; padding-top: 22px; }
+.website-controls-page .daily label { display: flex; align-items: flex-start; gap: 12px; line-height: 1.6; color: var(--nd-text); }
+.website-controls-page .daily input { accent-color: var(--nd-cyan); width: 18px; height: 18px; margin: 3px 0 0; flex: 0 0 auto; }
+.website-controls-page .hint { color: var(--nd-muted); font-size: 12px; margin-top: 12px; }
+.website-controls-page .hint:empty { display: none; }
+.website-controls-page .status { color: var(--nd-muted); margin: 24px 0; padding-left: 14px; border-left: 2px solid #ff64d059; font-size: 12px; line-height: 1.7; }
+.website-controls-page .error { color: #ff91bd; }
+.website-controls-page .footer { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 14px; font-size: 12px; color: var(--nd-muted); border-top: 1px solid var(--nd-line); padding-top: 22px; margin-top: 22px; }
+.website-controls-page .footer > a { display: inline-flex; align-items: center; min-height: 44px; }
+.website-controls-page .reload { font: inherit; background: var(--nd-surface); border: 1px solid var(--nd-line); border-radius: 14px 19px 14px 19px; color: var(--nd-text); min-height: 44px; padding: 10px 16px; cursor: pointer; }
+.website-controls-page :is(button, a):focus-visible { outline: 2px solid var(--nd-cyan); outline-offset: 4px; }
+.website-controls-page [hidden] { display: none !important; }
+@media (max-width: 480px) {
+  .website-controls-page main { padding: 22px 18px 36px; }
+  .website-controls-page .card { padding: 21px 18px; }
+  .website-controls-page .row { gap: 16px; }
+  .website-controls-page .eyebrow { margin-top: 26px; }
+  .website-controls-page .footer { align-items: flex-start; flex-direction: column; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .website-controls-page *, .website-controls-page *::after { transition: none !important; }
+}
+@media (forced-colors: active) {
+  .website-controls-page .track { background: Canvas; border-color: CanvasText; }
+  .website-controls-page .track::after { background: CanvasText; }
+  .website-controls-page .switch input:checked + .track { background: Highlight; }
+  .website-controls-page .card { border-color: CanvasText; }
+}
