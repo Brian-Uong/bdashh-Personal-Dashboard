@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "mode": "approved-release",
-  "publishAuthorized": true,
-  "githubPushAuthorized": true,
+  "mode": "deployed-source",
+  "publishAuthorized": false,
+  "githubPushAuthorized": false,
   "baseline": "docs/online-source-baseline.json",
   "githubRepository": "Brian-Uong/bdashh-private",
   "githubBranch": "main",
@@ -54,5 +54,9 @@
     "publishesWebsite": false
   },
   "releaseAuthorization": "Owner requested latest bdashh.com update with matching GitHub; checked upload and supplied v66 release package on 31 October 2026.",
-  "freshComparisonAt": "2026-10-31T07:22:58.708914+00:00"
+  "freshComparisonAt": "2026-10-31T07:22:58.708914+00:00",
+  "lastCompletedRelease": 66,
+  "lastDeploymentId": "13167f26-009b-469f-934b-3b91c7da8e98",
+  "lastReleaseAt": "2026-10-31T07:35:34.301478+00:00",
+  "nextReleaseRequiresOwnerRequest": true
 }

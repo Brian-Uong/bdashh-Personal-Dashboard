@@ -7,7 +7,7 @@ Brian wants routine updates to be easy to publish, with the exact released sourc
 - `site-source`: the latest source from the Brian's Dash development Site, with its exact Site version and source commit recorded in `source-release.json`. Populate and verify it from the cloud development checkout after each published dashboard update. This branch is a source handoff; it does not deploy bdashh.com.
 - `main`: the independently hosted application, including Cloudflare owner authentication, private R2 storage, server-side AI and persistent website controls. Every bdashh.com release must have matching source here.
 
-**Version 66 handoff:** the complete release ZIP is available locally and has passed all payload checksums. The initial site-source mirror is being published with this release; consult migration-status.json for its verified commit. Future source mirrors use the same connected GitHub tools. A source mirror does not publish bdashh.com.
+**Version 66 handoff:** the complete release ZIP is available locally and has passed all payload checksums. The site-source branch now contains the verified v66 snapshot at 9f2ea5f097cd57ec6dfa5d5398e24c1a0f80a8df. The standalone source was deployed from 81a586e3151abf6cf36bdf60e46bbd105996fd42; consult migration-status.json for the deployment. Future source mirrors use the same connected GitHub tools. A source mirror does not publish bdashh.com.
 
 Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uong/bdashh-private`. Keep the separate pdashboards business project out of this workflow.
 

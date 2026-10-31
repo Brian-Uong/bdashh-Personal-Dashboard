@@ -7,7 +7,12 @@
 - Live Worker remains c1b7e138-7e85-4ffe-ac26-1814bb597401 before publication.
 - 135 tests passed; browser portability checks passed. New tests cover news, local events, career filtering, owner-only writes and disabled AI.
 - Owner settings revision 1: public read-only true, AI false, daily research false. No paid calls or data migrations performed.
-- Production upload, asset readback, browser smoke checks and final source synchronization are pending.
+- Production deployed 13167f26-009b-469f-934b-3b91c7da8e98 / Worker aeadc586-0069-4128-ab3c-e26f52c092f7. Downloaded Worker SHA-256 matches the exact compiled build.
+- All 94 immutable R2 assets matched size/ETag readback; 93 unmodified live assets also matched SHA-256 in a real browser. The index is intentionally transformed by the owner-link gateway and was verified through the rendered DOM.
+- Desktop 1440px and mobile 390px: News navigation/view present, no horizontal overflow, owner editing disabled for visitors. Public APIs returned 200; settings GET and news/records/settings/AI POST returned 401.
+- All four existing dashboard stores and site-settings.json remained unchanged by hash; bindings including the API-key binding are preserved, alternate Worker URLs disabled, AI/daily research off.
+- GitHub standalone source: 81a586e3151abf6cf36bdf60e46bbd105996fd42 (190 files); original Site mirror: 9f2ea5f097cd57ec6dfa5d5398e24c1a0f80a8df (281 files). Final release records are committed afterward.
+- See docs/release-v66-verification.json for exact check results.
 - Authenticated owner settings-save and live paid providers have not been retested.
 
 ## Earlier validation history
