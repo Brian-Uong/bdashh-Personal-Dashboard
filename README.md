@@ -47,6 +47,10 @@ Brian's standing instruction is to synchronize and verify the matching source in
 4. For changed static files, upload and verify the immutable R2 asset release before deploying the Worker that references it.
 5. Preserve production data, secrets and current website controls; record the actual release and verification.
 
+The repeatable workflow is in [docs/RELEASE-WORKFLOW.md](docs/RELEASE-WORKFLOW.md). `npm run source:export -- --source PATH --version NUMBER --commit FULL_SHA` prepares a checked source handoff from the cloud development checkout. `npm run release:check` prevents releasing an older or unreconciled checkout. `npm run release:prepare` runs checks and a dry-run build, then prepares checksummed GitHub, asset and Worker packets for publication with the existing connected tools. Preparation does not publish.
+
+The first `site-source` handoff still needs to run in the cloud development chat that has version 65's files. Once populated, that private branch gives other chats a source copy they can read with GitHub without downloading from the Site Git host. This is a documented workflow with tested tools, not an installed unattended cross-chat automation.
+
 The original ChatGPT Site and its schedules remain independent. This repository contains the standalone application, not later original-Site versions. Courtside is excluded; retired FC functionality stays retired.
 
 ## Local checks and build

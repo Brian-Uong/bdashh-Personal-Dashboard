@@ -115,3 +115,11 @@ Cloudflare reports no production build triggers. R2 settings readback remains re
 At 2026-10-30T18:44:45.025Z, remote main points to import commit db262ec1987d09533c8eb0b4182667364e7c9f49, tree ef9d5d0e31beca776b7a568e1c708f191fd05848. GitHub readback confirms the repository remains private. All 154 remote file blob hashes and sizes match the local upload manifest, with no missing or extra files and no truncated tree response. The initial README commit is preserved as the import's parent. This verification record is a subsequent documentation-only commit.
 
 The private-repository access blocker is resolved. GitHub is now the stored source for the standalone v57 website and authorized owner controls. Future website publication still requires Brian's request. No deployment trigger, API setting, live dashboard data or original Site was changed during this work.
+
+## Shared source handoff and repeatable release preparation
+
+Added source snapshot export, release provenance checks, checksum-based GitHub deltas, and release packet preparation. Native connected GitHub/Cloudflare tools perform publication after preparation; the scripts do not create an unattended cross-chat automation. The first site-source mirror remains unpopulated and version 65 is still pending source retrieval from its cloud development checkout.
+
+All 107 automated tests passed. Tests include a real local Git source export, wrong-commit/dirty-checkout rejection, sensitive-file exclusion, exact UTF-8 and binary round trips, credential-pattern rejection without logging values, changed-file comparisons and stale source/asset rejection. Release-check correctly rejects the real v65 request against the current v57 standalone source before building or publishing.
+
+A separate fixture copied from the verified v57 standalone source exercised the full preparation path with Wrangler 4.92.0. It produced GitHub, assets, Worker and release-plan packets, verified 83 assets under release 671c30ec3423cb541805ecf8, and reproduced Worker SHA256 35c5cd87d7a4f8df66f87b8edb8f7af2978bc0c46316296bc4bd61589457e177. Only the isolated fixture's provenance was set to v57 for this test; production and the real pending v65 request were unchanged. No remote deployment, saved-data change or paid AI call occurred.

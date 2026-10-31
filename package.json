@@ -11,8 +11,11 @@
     "check": "node scripts/check-dashboard.mjs && node scripts/preflight.mjs",
     "build": "node scripts/prepare-assets.mjs && wrangler deploy --dry-run --outdir build",
     "dev": "wrangler dev",
-    "deploy": "node scripts/preflight.mjs --production && wrangler deploy",
-    "deploy:preview": "node scripts/preflight.mjs --production --preview && wrangler deploy --env preview"
+    "deploy": "node scripts/release-check.mjs && node scripts/preflight.mjs --production && wrangler deploy",
+    "deploy:preview": "node scripts/release-check.mjs && node scripts/preflight.mjs --production --preview && wrangler deploy --env preview",
+    "source:export": "node scripts/export-source-snapshot.mjs",
+    "release:check": "node scripts/release-check.mjs",
+    "release:prepare": "node scripts/prepare-release.mjs"
   },
   "devDependencies": {
     "wrangler": "4.92.0"

@@ -172,7 +172,10 @@
     "authorization": "Lets just get it uploaded to the website and we can deal with the API credits afterward. And stay on the version 57, if I want the website to be updated with different versions in the future I will say so",
     "sync_github_on_every_publication": true,
     "github_repository": "Brian-Uong/bdashh-private",
-    "github_sync_authorization": "Lets update the website with the latest version, and everytime I do so update the github as well. Thanks"
+    "github_sync_authorization": "Lets update the website with the latest version, and everytime I do so update the github as well. Thanks",
+    "mirror_published_site_source_after_updates": true,
+    "source_mirror_branch": "site-source",
+    "workflow_document": "docs/RELEASE-WORKFLOW.md"
   },
   "ai_activation_deferred_by_owner": true,
   "worker_version_id": "c1b7e138-7e85-4ffe-ac26-1814bb597401",
@@ -297,6 +300,26 @@
       "aiEnabled": false,
       "dailyResearchEnabled": false
     },
-    "next_step": "Retrieve the exact v65 source in a network-capable authorized workspace, or import a source export supplied by Brian. Adapt and validate standalone routes, preserve live settings/data/secrets, publish to Cloudflare and synchronize the matching source to GitHub."
+    "next_step": "In the existing cloud UI/UX development chat, read docs/RELEASE-WORKFLOW.md from private GitHub, export the exact v65 source to site-source, then reconcile, validate and publish the standalone release and synchronize main. No user ZIP transfer is required when that source checkout is available."
+  },
+  "release_workflow": {
+    "state": "tools_verified_initial_source_handoff_pending",
+    "source_export_command": "npm run source:export -- --source PATH --version NUMBER --commit FULL_SHA",
+    "release_check_command": "npm run release:check",
+    "release_prepare_command": "npm run release:prepare",
+    "source_branch": "site-source",
+    "source_branch_populated": false,
+    "standalone_branch": "main",
+    "original_site_project": "appgprj_6ae23020eb70819199a6dbf59b793ff9",
+    "source_cloud_conversation": "6ae42165-a6a8-83e8-9398-2f7c571f99aa",
+    "automated_tests_passed": 107,
+    "source_export_integration_tested": true,
+    "complete_package_integration_tested_on_version": 57,
+    "prepared_worker_matches_deployed_v57": true,
+    "prepared_assets_verified": 83,
+    "old_version_release_guard_verified": true,
+    "unattended_cross_chat_automation_installed": false,
+    "production_changed": false,
+    "verified_at": "2026-10-31T06:50:19.268232+00:00"
   }
 }

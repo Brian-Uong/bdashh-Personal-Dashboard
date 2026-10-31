@@ -1,0 +1,31 @@
+import {readFile,mkdir} from 'node:fs/promises';
+import {spawnSync} from 'node:child_process';
+import {createRequire} from 'node:module';
+import {pathToFileURL} from 'node:url';
+import path from 'node:path';
+import {assertReleaseReady,collectSource,verifyAssets,writePacket,hash} from './release-files.mjs';
+const root=path.resolve(import.meta.dirname,'..');
+const status=JSON.parse(await readFile(path.join(root,'migration-status.json'),'utf8'));
+const source=assertReleaseReady(status); // Stop before any build or output for stale code.
+const args=process.argv.slice(2);
+if(args.length&&!(args.length===2&&args[0]==='--wrangler'))throw Error('Only --wrangler PATH is supported. Publishing is handled by the connected release workflow.');
+const require=createRequire(import.meta.url);
+const wrangler=args[1]??require.resolve('wrangler/bin/wrangler.js');
+const output=path.join(root,'build-release',`v${source.version}-${source.commit.slice(0,12)}`);
+function run(file,args=[]){const r=spawnSync(process.execPath,[file,...args],{cwd:root,stdio:'inherit',env:{...process.env,WRANGLER_SEND_METRICS:'false'}});if(r.status!==0)throw Error('Release preparation failed; no publication was performed.');}
+run(path.join(root,'scripts/check-dashboard.mjs'));
+run(path.join(root,'scripts/preflight.mjs'));
+run(path.join(root,'scripts/prepare-assets.mjs'));
+await mkdir(output,{recursive:true});
+run(wrangler,['deploy','--dry-run','--outdir',path.join(output,'worker')]);
+const manifest=(await import(pathToFileURL(path.join(root,'worker/assets-manifest.mjs')).href+'?release='+Date.now())).default;
+const assets=await verifyAssets(root,manifest);
+const files=await collectSource(root);
+const worker=await readFile(path.join(output,'worker/index.js'));
+const config=JSON.parse(await readFile(path.join(root,'wrangler.json'),'utf8'));
+const sourcePacket=await writePacket(output,'github-source',{format:'bdashh-standalone-source',schemaVersion:1,source,files});
+const assetPacket=await writePacket(output,'assets',{release:manifest.release,files:assets});
+const workerPacket=await writePacket(output,'worker',{entryPoint:'index.js',encoding:'base64',content:worker.toString('base64'),size:worker.length,sha256:hash(worker)});
+const plan={format:'bdashh-release-plan',schemaVersion:1,state:'prepared_not_published',source,repository:'Brian-Uong/bdashh-private',branch:'main',worker:config.name,accountId:config.account_id,assetBucket:'bdashh-private-assets',dataBucket:'bdashh-private-data',assetRelease:manifest.release,files:files.length,assets:assets.length,packets:{source:sourcePacket,assets:assetPacket,worker:workerPacket},preserve:{secretBindings:true,siteSettings:true,savedData:true},verificationRequired:['private GitHub repository and current branch head','remote source file hashes','immutable asset sizes and hashes','current owner settings unchanged','Worker deployment readback','anonymous and owner-route smoke checks'],published:false};
+await writePacket(output,'release-plan',plan);
+console.log(JSON.stringify({output,plan:'release-plan.json',version:source.version,assetRelease:manifest.release,files:files.length,assets:assets.length,published:false}));
