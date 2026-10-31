@@ -39,6 +39,8 @@ Repository: **https://github.com/Brian-Uong/bdashh-private**. GitHub app install
 
 **Saving code to GitHub does not publish the website.** No deployment workflow is included, and production has no Cloudflare build trigger connected to this repository. Keep releases manual unless Brian explicitly requests otherwise.
 
+Brian's standing instruction is to synchronize and verify the matching source in this private repository whenever he requests a website publication. His latest request authorizes upgrading to published Site version 65; that release is pending retrieval of its source. The currently deployed baseline above remains in effect until deployment succeeds.
+
 1. Make and test changes in a branch or working copy.
 2. Save reviewed source to this private repository.
 3. Publish to bdashh.com only after Brian explicitly requests the release.

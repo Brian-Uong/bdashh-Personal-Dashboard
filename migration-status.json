@@ -169,7 +169,10 @@
     "approved_source_version": 57,
     "approved_source_commit": "d824a7d2e6477d005b0d3912c363828f1da34aa4",
     "updates_require_explicit_owner_request": true,
-    "authorization": "Lets just get it uploaded to the website and we can deal with the API credits afterward. And stay on the version 57, if I want the website to be updated with different versions in the future I will say so"
+    "authorization": "Lets just get it uploaded to the website and we can deal with the API credits afterward. And stay on the version 57, if I want the website to be updated with different versions in the future I will say so",
+    "sync_github_on_every_publication": true,
+    "github_repository": "Brian-Uong/bdashh-private",
+    "github_sync_authorization": "Lets update the website with the latest version, and everytime I do so update the github as well. Thanks"
   },
   "ai_activation_deferred_by_owner": true,
   "worker_version_id": "c1b7e138-7e85-4ffe-ac26-1814bb597401",
@@ -271,5 +274,29 @@
     "production_settings_revision_at_check": 1,
     "tests_passed_before_import": 100,
     "dry_run_matches_deployed_worker": true
+  },
+  "requested_release": {
+    "source_version": 65,
+    "source_commit": "fe20b5651a2e1b60136346a2c63b19ccfb19cf7f",
+    "source_site_project": "appgprj_6ae23020eb70819199a6dbf59b793ff9",
+    "source_version_id": "appgprj_6ae23020eb70819199a6dbf59b793ff9~appgver_76e3bbfc08a88191be65f1fa165fbec4",
+    "source_deployment_verified": "appgdep_6ae58a8922848191870df31f831d81eb",
+    "authorized": true,
+    "authorization": "Lets update the website with the latest version, and everytime I do so update the github as well. Thanks",
+    "state": "blocked_source_retrieval",
+    "checked_at": "2026-10-31T06:36:02.793743+00:00",
+    "blocker": "Local source helper failed to resolve git.chatgpt-team.site. Independent HTTPS probe also returned No such host is known. Saved Sites archive could not be materialized: file ownership verification returned 404.",
+    "source_retrieved": false,
+    "standalone_adaptation_completed": false,
+    "deployed": false,
+    "github_sync_required": true,
+    "current_standalone_source_version": 57,
+    "live_settings_preserved": {
+      "revision": 1,
+      "publicReadOnly": true,
+      "aiEnabled": false,
+      "dailyResearchEnabled": false
+    },
+    "next_step": "Retrieve the exact v65 source in a network-capable authorized workspace, or import a source export supplied by Brian. Adapt and validate standalone routes, preserve live settings/data/secrets, publish to Cloudflare and synchronize the matching source to GitHub."
   }
 }
