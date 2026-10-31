@@ -62,7 +62,7 @@
   "insecure_public_urls_enabled": false,
   "reconciled_source_commit": "b87d388a6078de03894f849bb4a00897bcbe5c41",
   "worker_deployed": true,
-  "worker_deployment_id": "13167f26-009b-469f-934b-3b91c7da8e98",
+  "worker_deployment_id": "8ac32346-a287-427b-8987-d7d2c34c3665",
   "main_domain_cutover_approved": true,
   "main_domain_cutover_blocker": null,
   "preview": {
@@ -121,8 +121,8 @@
     "ai_redirect_credential_protection_passed": true,
     "provider_error_redaction_passed": true,
     "billing_failure_preserves_saved_data_verified_live": true,
-    "worker_bundle_bytes": 188716,
-    "worker_bundle_sha256": "edb38b8b8428ac4e089a43332b86691641b2f8b20fecfce05e838b1e2927c8b0",
+    "worker_bundle_bytes": 185924,
+    "worker_bundle_sha256": "8641e84275c94ee4bb7eaa9ec983f7df2856c6b833b18c54467d62d830d78a0c",
     "unattended_cron_invocation_verified": true,
     "successful_unattended_research_verified": true,
     "main_preflight_passed": true,
@@ -183,7 +183,7 @@
     "workflow_document": "docs/RELEASE-WORKFLOW.md"
   },
   "ai_activation_deferred_by_owner": true,
-  "worker_version_id": "aeadc586-0069-4128-ab3c-e26f52c092f7",
+  "worker_version_id": "a266cd01-22a4-42f9-98f8-a855a07052bc",
   "production_worker": "bdashh-live",
   "production_url": "https://bdashh.com/dashboard/",
   "deferred_features": [
@@ -273,16 +273,16 @@
     "write_access_verified": true,
     "import_commit": "db262ec1987d09533c8eb0b4182667364e7c9f49",
     "import_tree": "ef9d5d0e31beca776b7a568e1c708f191fd05848",
-    "source_files_verified": 190,
+    "source_files_verified": 191,
     "source_verification_method": "Recursive Git tree blob hashes and sizes match every allowlisted local source file.",
-    "source_verified_at": "2026-10-31T07:35:34.301478+00:00",
+    "source_verified_at": "2026-10-31T07:43:59.970Z",
     "source_version": 66,
     "includes_owner_controls": true,
     "private_data_and_credentials_excluded": true,
     "production_settings_revision_at_check": 1,
     "tests_passed_before_import": 100,
     "dry_run_matches_deployed_worker": true,
-    "source_commit": "81a586e3151abf6cf36bdf60e46bbd105996fd42",
+    "source_commit": "fecc2efe93b6ac4e4221a21a89913ffa2ee91614",
     "source_branch": "site-source",
     "site_source_commit": "9f2ea5f097cd57ec6dfa5d5398e24c1a0f80a8df",
     "site_source_files_verified": 281
@@ -353,12 +353,22 @@
     "verified_at": "2026-10-31T07:35:34.301478+00:00"
   },
   "controls_theme_fix": {
-    "state": "prepared",
+    "state": "deployed_verified",
     "authorized": true,
     "authorization": "Owner requested updating the live Website controls to the new UI and theme.",
     "reason": "Standalone controls omitted the nd-flow and website-controls-page classes and the shared theme stylesheet. The existing stylesheet could not match.",
     "settings_logic_changed": false,
     "shared_assets_changed": false,
-    "previous_deployment_id": "13167f26-009b-469f-934b-3b91c7da8e98"
+    "previous_deployment_id": "13167f26-009b-469f-934b-3b91c7da8e98",
+    "deployment_id": "8ac32346-a287-427b-8987-d7d2c34c3665",
+    "worker_version_id": "a266cd01-22a4-42f9-98f8-a855a07052bc",
+    "github_source_commit": "fecc2efe93b6ac4e4221a21a89913ffa2ee91614",
+    "worker_sha256": "8641e84275c94ee4bb7eaa9ec983f7df2856c6b833b18c54467d62d830d78a0c",
+    "tests_passed": 135,
+    "desktop_mobile_render_verified": true,
+    "settings_unchanged": true,
+    "bindings_unchanged": true,
+    "verification_file": "docs/controls-theme-verification.json",
+    "verified_at": "2026-10-31T07:43:59.970Z"
   }
 }

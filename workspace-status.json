@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "mode": "deployed-source",
-  "publishAuthorized": true,
-  "githubPushAuthorized": true,
+  "publishAuthorized": false,
+  "githubPushAuthorized": false,
   "baseline": "docs/online-source-baseline.json",
   "githubRepository": "Brian-Uong/bdashh-private",
   "githubBranch": "main",
@@ -56,8 +56,8 @@
   "releaseAuthorization": "Owner requested updating the live Website controls to the new UI and theme.",
   "freshComparisonAt": "2026-10-31T07:22:58.708914+00:00",
   "lastCompletedRelease": 66,
-  "lastDeploymentId": "13167f26-009b-469f-934b-3b91c7da8e98",
-  "lastReleaseAt": "2026-10-31T07:35:34.301478+00:00",
+  "lastDeploymentId": "8ac32346-a287-427b-8987-d7d2c34c3665",
+  "lastReleaseAt": "2026-10-31T07:43:59.970Z",
   "nextReleaseRequiresOwnerRequest": true,
   "releaseScope": "v66 controls theme hotfix; no settings, auth, data or shared asset changes"
 }

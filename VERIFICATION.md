@@ -1,3 +1,15 @@
+# Live Website controls theme correction
+
+2026-10-31T07:43:59.970Z
+
+The standalone owner page now loads both existing theme stylesheets and supplies their nd-flow / website-controls-page classes. Removed legacy inline green/gold styles, matched the Brian's Dash branding and removed the stale v57 footer. Settings client logic is byte-for-byte unchanged. No public assets changed.
+
+- 135 tests and production preflight passed; Worker built and downloaded code checksum verified.
+- Desktop 1440px and mobile 390px fixtures rendered the exact production controls with navy/plum surfaces, cyan switches and rounded cards; screenshots inspected, no horizontal overflow. Fixture settings are read-only in memory.
+- Live deployment 8ac32346-a287-427b-8987-d7d2c34c3665; source fecc2efe93b6ac4e4221a21a89913ffa2ee91614.
+- Private settings revision 1 and all bindings preserved; public view stays on, AI and daily research stay off. No live authenticated settings-save or paid-provider test was performed.
+- Details: docs/controls-theme-verification.json.
+
 # Version 66 release validation
 
 2026-10-31T07:22:58.708914+00:00
