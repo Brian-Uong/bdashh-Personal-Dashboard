@@ -65,7 +65,7 @@ test('concurrent attempts do not issue duplicate paid requests',async()=>{
   await assert.rejects(()=>runResearch(env,'briefing',{researcher}),/already running/);finish(result);await a;assert.equal(calls,1);
 });
 test('career source filtering and disabled categories are enforced',()=>{
-  const candidate={value:{jobs:[{title:'Analyst',company:'Example',city:'Irvine, CA',url}],recruiters:[{name:'Person',company:'Example',url:'https://invented.test'}],events:[]},sources:result.sources};
+  const candidate={value:{summary:'Verified career search.',jobs:[{title:'Analyst',company:'Example',city:'Irvine, CA',url}],recruiters:[{name:'Person',company:'Example',url:'https://invented.test'}],events:[]},sources:result.sources};
   const normalized=normalizeResearch('career',candidate,{preferences:DEFAULT_RESEARCH_PREFERENCES},Date.now());
   assert.equal(normalized.jobs.length,1);assert.equal(normalized.recruiters.length,0);
   assert.equal(normalizeResearch('career',candidate,{preferences:{...DEFAULT_RESEARCH_PREFERENCES,jobsEnabled:false}},Date.now()).jobs.length,0);
@@ -82,7 +82,7 @@ test('career AI rejects expired, senior and nonlocal jobs and verifies local eve
   {title:'Business Analyst',company:'Example',city:'Irvine, CA',deadline:'2026-10-01',url:'https://example.test/jobs/4'}
  ];
  const events=[{name:'Local workshop',date:'2026-11-05',location:'Corona, CA',organizer:'Example',url:'https://example.test/events/1'},{name:'Past workshop',date:'2026-10-01',location:'Corona, CA',organizer:'Example',url:'https://example.test/events/2'}];
- const r=normalizeResearch('career',{value:{jobs:items,events},sources:[...items,...events].map(({url})=>({url,title:'Example'}))},{preferences:DEFAULT_RESEARCH_PREFERENCES},today);
+ const r=normalizeResearch('career',{value:{summary:'Verified career search.',jobs:items,recruiters:[],events},sources:[...items,...events].map(({url})=>({url,title:'Example'}))},{preferences:DEFAULT_RESEARCH_PREFERENCES},today);
  assert.deepEqual(r.jobs.map(x=>x.url),['https://example.test/jobs/1']);assert.equal(r.jobs[0].region,'Inland Empire');assert.equal(r.events.length,1);assert.equal(r.events[0].time,'Time unconfirmed');
 });
 test('schedule runs at 7 AM Pacific across daylight saving and obeys disabled flags',async()=>{
@@ -102,7 +102,7 @@ test('scheduled retries do not pay for the same task twice on one day',async()=>
 test('career persistence merges leads and adds events without erasing workbook records',async()=>{
   const env=await setup();env.AI_MAX_DAILY_RUNS='3';
   const future=pacificDate(Date.now()+7*86400000);
-  const career={value:{jobs:[{title:'Analyst',company:'Example',city:'Irvine, CA',url}],recruiters:[],events:[{name:'Meetup',date:future,location:'Irvine, CA',organizer:'Example',url}]},sources:result.sources};
+  const career={value:{summary:'Verified career search.',jobs:[{title:'Analyst',company:'Example',city:'Irvine, CA',url}],recruiters:[],events:[{name:'Meetup',date:future,location:'Irvine, CA',organizer:'Example',url}]},sources:result.sources};
   for(let i=0;i<2;i++)await runResearch(env,'career',{researcher:async()=>career});
   assert.equal((await(await env.BUCKET.get('discovery.json')).json()).jobs.length,1);
   const dashboard=await(await env.BUCKET.get('dashboard.json')).json();assert.equal(dashboard.holdings[0].ticker,'KO');
@@ -147,4 +147,26 @@ test('career research failures report failure without replacing saved leads',asy
  assert.deepEqual(await(await env.BUCKET.get('discovery.json')).json(),leads);
  const report=(await(await env.BUCKET.get('research.json')).json()).lastRun;
  assert.equal(report.status,'failed');assert.deepEqual(report.counts,{jobs:0,people:0,events:0});
+});
+
+test('malformed career output is a failure, not a successful empty search',async()=>{
+ const env=await setup();
+ await assert.rejects(()=>runResearch(env,'career',{researcher:async()=>({value:{},sources:result.sources})}),/incomplete career/i);
+ assert.equal((await(await env.BUCKET.get('research.json')).json()).lastRun.status,'failed');
+ assert.equal(await env.BUCKET.get('discovery.json'),null);
+});
+
+test('news with no completed topics reports failure and preserves existing articles',async()=>{
+ const env=await setup();
+ await assert.rejects(()=>runResearch(env,'news',{researcher:async()=>({value:{results:[]},sources:result.sources})}),/no news topic/i);
+ const {readNews}=await import('../lib/news.mjs');
+ const saved=await readNews(env.BUCKET);
+ assert.ok(saved.topics.every(t=>saved.briefings[t.id].status==='failed'));
+});
+
+test('mixed news coverage reports partial instead of complete success',async()=>{
+ const env=await setup();
+ const outcome=await runResearch(env,'news',{researcher:async()=>({value:{results:[{topicId:'nba',status:'ready',items:[{headline:'Verified story',summary:'Sourced summary.',source:'Example',url}]}]},sources:result.sources})});
+ assert.equal(outcome.status,'partial');
+ assert.equal(outcome.counts.failed,2);assert.equal(outcome.counts.partial,1);
 });

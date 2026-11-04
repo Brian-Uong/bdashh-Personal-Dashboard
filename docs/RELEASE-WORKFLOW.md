@@ -7,7 +7,7 @@ Brian wants routine updates to be easy to publish, with the exact released sourc
 - `site-source`: the latest source from the Brian's Dash development Site, with its exact Site version and source commit recorded in `source-release.json`. Populate and verify it from the cloud development checkout after each published dashboard update. This branch is a source handoff; it does not deploy bdashh.com.
 - `main`: the independently hosted application, including Cloudflare owner authentication, private R2 storage, server-side AI and persistent website controls. Every bdashh.com release must have matching source here.
 
-**Version 66 handoff:** the complete release ZIP is available locally and has passed all payload checksums. The site-source branch now contains the verified v66 snapshot at 9f2ea5f097cd57ec6dfa5d5398e24c1a0f80a8df. The standalone source was deployed from 81a586e3151abf6cf36bdf60e46bbd105996fd42; consult migration-status.json for the deployment. Future source mirrors use the same connected GitHub tools. A source mirror does not publish bdashh.com.
+**Version 73 handoff:** the exact release package and all 603 payload checksums were verified. Its standalone source has been reconciled against the current GitHub main, retaining the live controls-theme fix and release history. Consult migration-status.json and VERIFICATION.md for publication state and verified commits. The two branches are synchronized during this authorized release.
 
 Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uong/bdashh-private`. Keep the separate pdashboards business project out of this workflow.
 
@@ -18,7 +18,7 @@ Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uo
 3. Run against the clean source checkout that was just published:
 
    ```sh
-   node /absolute/helpers/export-source-snapshot.mjs --source /absolute/site-checkout --version 66 --commit b87d388a6078de03894f849bb4a00897bcbe5c41 --output /absolute/source-handoff
+   node /absolute/helpers/export-source-snapshot.mjs --source /absolute/site-checkout --version 73 --commit 7c0ac4e8d71082ed4af24325b68353b1385cd9a3 --output /absolute/source-handoff
    ```
 
    Replace version and commit with the current Sites result. The command checks the Site identity, exact Git commit and clean tracked files; excludes saved data, environment files, dependencies and build output; checks common credential patterns; and writes an ASCII JSON packet with hashes. It does not upload or publish. Review the export; a pattern scan is not a guarantee that arbitrary sensitive content is absent.

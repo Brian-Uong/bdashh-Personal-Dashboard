@@ -1,0 +1,46 @@
+{
+  "version": 72,
+  "commit": "08686f08bf60415899fb30535302122c5e9ac339",
+  "checkedAt": "2026-11-03T16:54:45.950Z",
+  "verifiedOrigin": "https://brians-dash-uong.uongb03.chatgpt.site",
+  "refresh": {
+    "status": "ready",
+    "added": 23,
+    "checked": 5,
+    "message": "23 new articles loaded."
+  },
+  "revision": 14,
+  "topics": [
+    {
+      "topic": "NBA",
+      "status": "ready",
+      "articles": 6
+    },
+    {
+      "topic": "F1",
+      "status": "ready",
+      "articles": 10
+    },
+    {
+      "topic": "Premier League",
+      "status": "empty",
+      "articles": 5
+    },
+    {
+      "topic": "NFL",
+      "status": "ready",
+      "articles": 10
+    },
+    {
+      "topic": "BTS",
+      "status": "ready",
+      "articles": 10
+    }
+  ],
+  "paidAIConfigured": false,
+  "holdingsAndDashboardUnchanged": true,
+  "repeat": {
+    "status": "cached",
+    "message": "These topics were checked within the last five minutes. You’re viewing the latest saved articles."
+  }
+}

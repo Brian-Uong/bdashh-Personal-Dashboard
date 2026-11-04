@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-31T08:18:40.381Z",
+  "stock": [
+    {
+      "range": "1d",
+      "source": "Nasdaq",
+      "samples": 960,
+      "asOf": "2026-10-30T19:59:00.000Z"
+    },
+    {
+      "range": "1mo",
+      "source": "Nasdaq",
+      "samples": 22,
+      "asOf": "2026-10-30"
+    }
+  ],
+  "events": {
+    "matches": 16,
+    "sources": [
+      {
+        "name": "Corona Chamber",
+        "url": "https://coronachamberofcommerce.growthzoneapp.com/events/Search",
+        "status": "success",
+        "scanned": 6,
+        "matches": 6,
+        "note": "Using the organizer’s public GrowthZone calendar. 0 outside the date/location criteria; 0 detail pages unavailable. Up to 6 listings checked."
+      },
+      {
+        "name": "Corona community calendar",
+        "url": "https://coronachamberofcommerce.growthzoneapp.com/community-events/Search",
+        "status": "success",
+        "scanned": 6,
+        "matches": 5,
+        "note": "Using the organizer’s public GrowthZone calendar. 1 outside the date/location criteria; 0 detail pages unavailable. Up to 6 listings checked."
+      },
+      {
+        "name": "UC Riverside events",
+        "url": "https://events.ucr.edu/",
+        "status": "success",
+        "scanned": 200,
+        "matches": 8,
+        "note": "Up to 200 calendar entries checked; up to 8 verified local events saved. Entries without a published local venue are omitted. Check each event’s audience restrictions."
+      }
+    ]
+  },
+  "calls": 18,
+  "mode": "read-only local provider check; primary Corona 403 forced to exercise official alternate"
+}

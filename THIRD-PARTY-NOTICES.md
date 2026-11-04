@@ -1,9 +1,9 @@
 # Third-party notices
 
-This package includes MapLibre GL JS and Leaflet distributions and their original notices in `dist/vendor/`. Retain those notices when redistributing. Runtime dependencies and data services have separate licences and terms; this source export does not transfer a subscription or data licence.
+This package includes MapLibre GL JS and Leaflet distributions and their original notices in `public/dashboard/vendor/`. Retain those notices when redistributing. Runtime dependencies and data services have separate licences and terms; this source export does not transfer a subscription or data licence.
 
-- MapLibre GL JS: https://maplibre.org/ ; bundled BSD-style licence in `dist/vendor/maplibre-LICENSE.txt`.
-- Leaflet: https://leafletjs.com/ ; bundled BSD 2-Clause notice in `dist/vendor/leaflet-LICENSE.txt`.
+- MapLibre GL JS: https://maplibre.org/ ; bundled BSD-style licence in `public/dashboard/vendor/maplibre-LICENSE.txt`.
+- Leaflet: https://leafletjs.com/ ; bundled BSD 2-Clause notice in `public/dashboard/vendor/leaflet-LICENSE.txt`.
 - SheetJS: https://github.com/SheetJS/sheetjs ; runtime CDN package retains its own licence. No library binary is included in this export.
 - CesiumJS: https://github.com/CesiumGS/cesium ; Apache-2.0 library loaded at runtime. Cesium ion and Google imagery have separate service terms.
 - OpenFreeMap: https://openfreemap.org/ ; map data attribution includes OpenStreetMap contributors. Preserve attribution in the map.

@@ -75,3 +75,5 @@ The former tab and standalone page return to the overview; `/api/fc-market` retu
 inactive and need not be migrated. The legacy `brians-dash-fc-trading-v1` browser key
 stays on the backup allowlist so existing backups remain compatible. Source history
 retains the experiment, but future changes must not re-enable it without Brian's request.
+
+October 31 refinement: develop and verify the ChatGPT-hosted dashboard here. bdashh.com’s API is intentionally paused. Hosted on-demand routes use this Site’s own secure key/model; no credential is copied from the separate host. Shared refresh and provider fallbacks are mirrored into the complete portable source.

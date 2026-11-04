@@ -1,0 +1,194 @@
+{
+  "at": "2026-10-31T08:29:16.957664+00:00",
+  "version": 68,
+  "commit": "3b05567063ee585aa8f45d922a4c9be28b5e2257",
+  "checks": [
+    {
+      "path": "/dashboard/",
+      "method": "GET",
+      "authorized": false,
+      "http": 200
+    },
+    {
+      "path": "/dashboard/independent-ai.mjs",
+      "method": "GET",
+      "authorized": false,
+      "http": 200
+    },
+    {
+      "path": "/api/access",
+      "method": "GET",
+      "authorized": false,
+      "http": 200,
+      "canEdit": false
+    },
+    {
+      "path": "/api/sync",
+      "method": "GET",
+      "authorized": false,
+      "http": 200
+    },
+    {
+      "path": "/api/discovery",
+      "method": "GET",
+      "authorized": false,
+      "http": 200
+    },
+    {
+      "path": "/api/research",
+      "method": "GET",
+      "authorized": false,
+      "http": 200
+    },
+    {
+      "path": "/api/news",
+      "method": "GET",
+      "authorized": false,
+      "http": 200
+    },
+    {
+      "path": "/api/events",
+      "method": "GET",
+      "authorized": false,
+      "http": 200
+    },
+    {
+      "path": "/api/portfolio/history",
+      "method": "GET",
+      "authorized": false,
+      "http": 200
+    },
+    {
+      "path": "/api/ai/status",
+      "method": "GET",
+      "authorized": false,
+      "http": 200,
+      "configured": false,
+      "dailyCareer": true,
+      "dailyNews": true,
+      "maxDailyAttemptsPerTask": 3,
+      "onDemandReason": "On-demand AI needs a secure OpenAI connection on this dashboard. Morning ChatGPT research and direct source searches remain available."
+    },
+    {
+      "path": "/api/stocks/detail?ticker=GOOGL&range=1mo",
+      "method": "GET",
+      "authorized": false,
+      "http": 200,
+      "source": "Nasdaq",
+      "asOf": "2026-10-30",
+      "cached": false,
+      "stale": false,
+      "error": null,
+      "samples": 22
+    },
+    {
+      "path": "/api/stocks/detail?ticker=GOOGL&range=1d",
+      "method": "GET",
+      "authorized": false,
+      "http": 200,
+      "source": "Nasdaq",
+      "asOf": "2026-10-30T23:59:00.000Z",
+      "cached": false,
+      "stale": false,
+      "error": null,
+      "samples": 960
+    },
+    {
+      "path": "/api/fc-market",
+      "method": "GET",
+      "authorized": false,
+      "http": 410
+    },
+    {
+      "path": "/api/sports/nba",
+      "method": "GET",
+      "authorized": false,
+      "http": 410
+    },
+    {
+      "path": "/api/ai/briefing",
+      "method": "POST",
+      "authorized": false,
+      "http": 403,
+      "error": "This dashboard is read-only for visitors. Sign in as the owner to make changes.",
+      "code": "DASHBOARD_OWNER_REQUIRED",
+      "status": null
+    },
+    {
+      "path": "/api/ai/career",
+      "method": "POST",
+      "authorized": false,
+      "http": 403,
+      "error": "This dashboard is read-only for visitors. Sign in as the owner to make changes.",
+      "code": "DASHBOARD_OWNER_REQUIRED",
+      "status": null
+    },
+    {
+      "path": "/api/ai/news",
+      "method": "POST",
+      "authorized": false,
+      "http": 403,
+      "error": "This dashboard is read-only for visitors. Sign in as the owner to make changes.",
+      "code": "DASHBOARD_OWNER_REQUIRED",
+      "status": null
+    },
+    {
+      "path": "/api/ai/news",
+      "method": "POST",
+      "authorized": true,
+      "http": 503,
+      "error": "On-demand AI is not connected on this dashboard yet. Saved research and direct source searches remain available.",
+      "code": "AI_NOT_CONFIGURED",
+      "status": null
+    },
+    {
+      "path": "/api/events",
+      "method": "POST",
+      "authorized": true,
+      "http": 200,
+      "result": {
+        "at": "2026-10-31T08:29:12.260Z",
+        "mode": "sources",
+        "status": "partial",
+        "added": 8,
+        "matched": 16,
+        "query": "",
+        "region": "Inland Empire",
+        "sources": [
+          {
+            "name": "Corona Chamber",
+            "url": "https://member.mychamber.org/events",
+            "status": "failed",
+            "scanned": 0,
+            "matches": 0,
+            "note": "Source returned HTTP 403. Existing events retained."
+          },
+          {
+            "name": "Corona community calendar",
+            "url": "https://member.mychamber.org/community-events",
+            "status": "failed",
+            "scanned": 0,
+            "matches": 0,
+            "note": "Source returned HTTP 403. Existing events retained."
+          },
+          {
+            "name": "UC Riverside events",
+            "url": "https://events.ucr.edu/",
+            "status": "success",
+            "scanned": 200,
+            "matches": 8,
+            "note": "Up to 200 calendar entries checked; up to 8 verified local events saved. Entries without a published local venue are omitted. Check each event\u2019s audience restrictions."
+          },
+          {
+            "name": "City of Corona",
+            "url": "https://community.coronaca.gov/coronaca_main/calendar",
+            "status": "success",
+            "scanned": 19,
+            "matches": 8,
+            "note": "Up to 50 public calendar entries checked; up to 8 local events saved. Missing times and fees remain unconfirmed."
+          }
+        ]
+      }
+    }
+  ]
+}

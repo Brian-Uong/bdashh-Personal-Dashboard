@@ -14,9 +14,11 @@ export async function POST(req:Request){
  const lease=await b.put('career-refresh-lock.json',JSON.stringify({until:Date.now()+60000}),{onlyIf:lock?{etagMatches:lock.etag}:{etagDoesNotMatch:'*'}});
  if(!lease)return json({error:'A refresh is already running.'},429);
  try{
-  const o=await b.get('research.json'),preferences=researchState(o?await o.json():{}).preferences;
-  const result=await collectCareer(preferences);
+  const o=await b.get('research.json'),research=researchState(o?await o.json():{});
+  const result=await collectCareer(research.preferences);
   for(let attempt=0;attempt<3;attempt++){
+   const latest=await b.get('research.json');
+   if(researchState(latest?await latest.json():{}).revision!==research.revision)return json({error:'Search preferences changed during refresh. Reload saved leads before searching again.'},409);
    const previous=await b.get('discovery.json');const state=previous?await previous.json():{jobs:[],recruiters:[]};const next=mergeRefresh(state,result);
    const saved=await b.put('discovery.json',JSON.stringify(next),{onlyIf:previous?{etagMatches:previous.etag}:{etagDoesNotMatch:'*'}});
    if(saved)return json(next,next.lastRefresh.status==='failed'?502:200);
