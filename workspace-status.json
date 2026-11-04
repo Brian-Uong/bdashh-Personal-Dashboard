@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "mode": "approved-release",
-  "publishAuthorized": true,
-  "githubPushAuthorized": true,
+  "mode": "deployed-source",
+  "publishAuthorized": false,
+  "githubPushAuthorized": false,
   "baseline": "docs/online-source-baseline.json",
   "githubRepository": "Brian-Uong/bdashh-private",
   "githubBranch": "main",
@@ -67,5 +67,9 @@
   },
   "freshComparisonAt": "2026-11-04T20:49:34.243967+00:00",
   "releaseAuthorization": "Owner requested latest website update, synchronized GitHub and a resume-ready README on November 4, 2026.",
-  "releaseScope": "v73 feature release, retain controls-theme fix, synchronize both GitHub branches and rewrite README"
+  "releaseScope": "v73 feature release, retain controls-theme fix, synchronize both GitHub branches and rewrite README",
+  "lastCompletedRelease": 73,
+  "lastDeploymentId": "124db0d7-edb6-4b2c-9c96-f847fcd44dd8",
+  "lastReleaseAt": "2026-11-04T21:00:55.720Z",
+  "nextReleaseRequiresOwnerRequest": true
 }

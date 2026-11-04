@@ -1,3 +1,7 @@
+# Standalone publication status — November 4, 2026
+
+Version 73 is now deployed to bdashh.com with public-feed news refresh and the existing owner authorization. Live settings remain AI off and daily research off. The preserved production data has no saved news.json yet; reads return the default topic state until the owner saves or refreshes it. This release did not copy development Site articles or alter that Site’s morning automation. Entries below are dated development history, not current deployment restrictions.
+
 # News tab
 
 The shared dashboard has a searchable topic picker (including custom subjects), a

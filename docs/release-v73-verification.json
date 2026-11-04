@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-04T21:00:55.720Z",
+  "sourceVersion": 73,
+  "sourceCommit": "7c0ac4e8d71082ed4af24325b68353b1385cd9a3",
+  "githubSourceCommit": "158ea83ef3c5d07cda7e8c05b141d8cd45292caa",
+  "githubSiteSourceCommit": "439dcf34faa0118f00f5e209eeb26b182bb97502",
+  "sourceFilesVerified": 204,
+  "siteSourceFilesVerified": 300,
+  "tests": {
+    "passed": 163,
+    "failed": 0,
+    "workerdNewsFallbackPassed": true,
+    "workerDryRunPassed": true,
+    "productionPreflightPassed": true
+  },
+  "assets": {
+    "release": "4032b8bb6eca7c2f99c69f96",
+    "uploadedVerified": 94,
+    "liveSha256Verified": 93,
+    "liveMismatch": [],
+    "indexVerifiedViaDOM": true
+  },
+  "deployment": {
+    "id": "124db0d7-edb6-4b2c-9c96-f847fcd44dd8",
+    "source": "api",
+    "strategy": "percentage",
+    "author_email": "uongb03@gmail.com",
+    "annotations": {
+      "workers/message": "Brian\u2019s Dash v73; GitHub 158ea83ef3c5; preser...",
+      "workers/triggered_by": "upload"
+    },
+    "versions": [
+      {
+        "version_id": "becf695c-3f6a-4a16-b1bf-84a0725c2a5c",
+        "percentage": 100
+      }
+    ],
+    "created_on": "2026-11-04T20:58:21.48929Z"
+  },
+  "production": {
+    "checkedAt": "2026-11-04T20:58:50.576Z",
+    "workerSha256": "c026bebd580b033d50c3d90eeab564008b9f32339349072943f93322f92371c7",
+    "workerMatches": true,
+    "bindingsUnchanged": true,
+    "settings": {
+      "schemaVersion": 1,
+      "revision": 1,
+      "publicReadOnly": true,
+      "aiEnabled": false,
+      "dailyResearchEnabled": false,
+      "updatedAt": "2026-10-30T18:06:06.018Z"
+    },
+    "dataChanged": [],
+    "dataObjectsVerified": 8,
+    "controlsThemePresent": true,
+    "alternateURLs": {
+      "enabled": false,
+      "previews_enabled": false
+    },
+    "schedules": {
+      "schedules": [
+        {
+          "cron": "0 14,15 * * *",
+          "created_on": "2026-10-30T18:06:30.537083Z",
+          "modified_on": "2026-10-30T18:06:30.537083Z"
+        }
+      ]
+    }
+  },
+  "browser": {
+    "desktop": {
+      "title": "Brian\u2019s Dash \u00b7 Personal Command Centre",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "bodyClass": "nd-flow seamless-nav has-district-radio",
+      "links": [
+        "/owner/settings",
+        "/owner",
+        "/owner/settings"
+      ],
+      "reads": {
+        "/api/access": {
+          "status": 200,
+          "value": {
+            "canEdit": false,
+            "canManageWorkbook": false
+          }
+        },
+        "/api/sync": {
+          "status": 200
+        },
+        "/api/news": {
+          "status": 200,
+          "topics": 3,
+          "revision": 0
+        },
+        "/api/ai/status": {
+          "status": 200,
+          "value": {
+            "configured": false,
+            "dailyBriefing": false,
+            "dailyCareer": false,
+            "dailyNews": false
+          }
+        }
+      },
+      "writes": {
+        "/api/site-settings": 401,
+        "/api/news": 401,
+        "/api/records": 401,
+        "/api/ai/briefing": 401,
+        "/api/ai/news": 401
+      },
+      "settingsReadStatus": 401,
+      "newsHeading": true
+    },
+    "mobile": {
+      "width": 390,
+      "scrollWidth": 390,
+      "newsHeading": true,
+      "bodyClass": "nd-flow seamless-nav has-district-radio news-active"
+    },
+    "controlsThemePreserved": true,
+    "ownerSignIn": {
+      "accessSignIn": true,
+      "emailChallenge": true,
+      "controlsExposed": false,
+      "title": "Sign in \u30fb Cloudflare Access"
+    }
+  },
+  "limitations": [
+    "No live authenticated owner save was performed.",
+    "No paid OpenAI calls or live provider refreshes were run.",
+    "Live dashboard data was preserved; development Site saved data was not copied."
+  ],
+  "paidOpenAICalls": 0,
+  "finalRepositoryFiles": 205
+}

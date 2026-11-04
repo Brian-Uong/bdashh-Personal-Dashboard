@@ -1,3 +1,25 @@
+# Version 73 standalone release — November 4, 2026
+
+Published the exact v73 dashboard features to bdashh.com, retaining the live Website controls theme. The original development Site and schedules were not changed.
+
+- 163 automated tests passed, zero failed; browser syntax/import checks and production preflight passed.
+- Wrangler 4.92.0 compiled the Worker successfully. Actual workerd testing verified public-news fallback, persistent readback, cooldown behavior, and the supported redirect policy.
+- Verified all 94 immutable assets before deployment. The live browser fetched and SHA-256 verified all 93 unchanged-response assets; the gateway-transformed index was verified through rendered DOM.
+- Desktop (1440px) and mobile (390px) News pages rendered without horizontal overflow. The updated controls markup and its shared theme remain in the deployed Worker.
+- The live owner-controls URL reaches the Cloudflare Access email sign-in page; controls are not exposed to anonymous visitors.
+- Public reads returned 200. Anonymous settings, news, records and AI writes returned 401; settings reads also returned 401. AI status reports every research mode disabled.
+- Worker readback matches the compiled SHA-256. All bindings, the passive cron, disabled alternate URLs, and the eight pre-existing live data objects are preserved. API settings remain public viewing on, AI off, daily research off, revision 1.
+- Backups are retained in the private production bucket under `backups/release-v73-20261104/`; the previous Worker and deployment metadata are retained for recovery.
+- GitHub source and Site mirror hashes were verified before moving either branch. The README now explains the project, architecture, setup, release process, limitations and resume-ready highlights.
+
+No authenticated owner save, paid OpenAI request, or live provider refresh was performed. Development Site records were not substituted for the live website data. Browser/API checks do not guarantee future third-party availability.
+
+See [machine-readable evidence](docs/release-v73-verification.json) and [release status](migration-status.json) for exact commits, deployment IDs and hashes.
+
+---
+
+## Historical verification
+
 # Live Website controls theme correction
 
 2026-10-31T07:43:59.970Z

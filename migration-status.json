@@ -4,7 +4,7 @@
   "latest_observed_site_version": 73,
   "latest_observed_commit": "7c0ac4e8d71082ed4af24325b68353b1385cd9a3",
   "source_reconciled": true,
-  "source_reconciliation_note": "Verified v66 package, 572 payload hashes, exact saved Sites commit, 160-file current private GitHub snapshot and unchanged live v57 Worker. Reconciled release-tool/documentation changes; preserved standalone auth/settings/storage. No data migration required.",
+  "source_reconciliation_note": "Verified v73 package and all 603 payload checksums against saved Sites commit 7c0ac4e8d71082ed4af24325b68353b1385cd9a3. Verified all 192 upstream files at main 2da39cc58462d8ca853c48260016ab1df4a79c9e and the previous deployed Worker. Reviewed runtime changes; retained standalone owner controls theme, auth, settings, scheduler, bindings and portable release helper. No saved-data migration.",
   "data_migrated": true,
   "hosting_configured": true,
   "live_ai_verified": true,
@@ -57,7 +57,7 @@
     "holdings": 11,
     "portfolioHistoryPoints": 10
   },
-  "asset_release": "b0d373b7bee5f5cd7bb7a167",
+  "asset_release": "4032b8bb6eca7c2f99c69f96",
   "asset_count": 94,
   "insecure_public_urls_enabled": false,
   "reconciled_source_commit": "7c0ac4e8d71082ed4af24325b68353b1385cd9a3",
@@ -110,7 +110,7 @@
   "infra_checked_at": "2026-10-30T08:48:51.591Z",
   "infra_note": "bdashh.com routes to bdashh-live; www routes through bdashh-www; isolated preview routes to bdashh-preview. All alternate public Workers URLs remain disabled.",
   "verification": {
-    "automated_tests_passed": 135,
+    "automated_tests_passed": 163,
     "automated_tests_failed": 0,
     "asset_checksums_verified": 94,
     "preview_preflight_passed": true,
@@ -121,8 +121,8 @@
     "ai_redirect_credential_protection_passed": true,
     "provider_error_redaction_passed": true,
     "billing_failure_preserves_saved_data_verified_live": true,
-    "worker_bundle_bytes": 185924,
-    "worker_bundle_sha256": "8641e84275c94ee4bb7eaa9ec983f7df2856c6b833b18c54467d62d830d78a0c",
+    "worker_bundle_bytes": 208092,
+    "worker_bundle_sha256": "c026bebd580b033d50c3d90eeab564008b9f32339349072943f93322f92371c7",
     "unattended_cron_invocation_verified": true,
     "successful_unattended_research_verified": true,
     "main_preflight_passed": true,
@@ -147,7 +147,7 @@
         "finishedAt": "2026-10-30T14:03:35.146Z"
       }
     },
-    "last_local_validation_at": "2026-10-30T15:33:41.399Z",
+    "last_local_validation_at": "2026-11-04T21:00:55.720Z",
     "production_write_protection_verified": true,
     "production_public_read_only_verified": true,
     "production_owner_cookie_login_retested": false,
@@ -156,7 +156,8 @@
     "mobile_viewport_verified": 390,
     "live_asset_sha256_verified": 93,
     "live_index_verified_via_dom": true,
-    "live_ai_status_off_verified": true
+    "live_ai_status_off_verified": true,
+    "owner_sign_in_gate_verified_this_release": true
   },
   "scheduling_blocker": {
     "required_subdomain": "bdashh-private-d09ad5.workers.dev",
@@ -183,7 +184,7 @@
     "workflow_document": "docs/RELEASE-WORKFLOW.md"
   },
   "ai_activation_deferred_by_owner": true,
-  "worker_version_id": "a266cd01-22a4-42f9-98f8-a855a07052bc",
+  "worker_version_id": "becf695c-3f6a-4a16-b1bf-84a0725c2a5c",
   "production_worker": "bdashh-live",
   "production_url": "https://bdashh.com/dashboard/",
   "deferred_features": [
@@ -211,7 +212,7 @@
   "public_access": {
     "authorized": true,
     "authorization": "Can you make my website public. I know this is for testing so its ok to make it public",
-    "scope": "Actual saved v57 dashboard; public reads, verified-owner writes, paid AI remains paused",
+    "scope": "Actual saved dashboard; public reads, verified-owner writes, paid AI remains paused.",
     "status": "live",
     "owner_login_path": "/owner",
     "enabled_at": "2026-10-30T17:34:39Z",
@@ -239,7 +240,7 @@
       "dailyResearchEnabled": false
     },
     "settingsKey": "site-settings.json",
-    "keepsApprovedDashboardVersion": 66,
+    "keepsApprovedDashboardVersion": 73,
     "url": "https://bdashh.com/owner/settings",
     "deployed_at": "2026-10-30T18:06:29.286741Z",
     "settings_authoritative": true,
@@ -273,19 +274,20 @@
     "write_access_verified": true,
     "import_commit": "db262ec1987d09533c8eb0b4182667364e7c9f49",
     "import_tree": "ef9d5d0e31beca776b7a568e1c708f191fd05848",
-    "source_files_verified": 191,
+    "source_files_verified": 205,
     "source_verification_method": "Recursive Git tree blob hashes and sizes match every allowlisted local source file.",
-    "source_verified_at": "2026-10-31T07:43:59.970Z",
-    "source_version": 66,
+    "source_verified_at": "2026-11-04T21:00:55.720Z",
+    "source_version": 73,
     "includes_owner_controls": true,
     "private_data_and_credentials_excluded": true,
     "production_settings_revision_at_check": 1,
     "tests_passed_before_import": 100,
     "dry_run_matches_deployed_worker": true,
-    "source_commit": "fecc2efe93b6ac4e4221a21a89913ffa2ee91614",
+    "source_commit": "158ea83ef3c5d07cda7e8c05b141d8cd45292caa",
     "source_branch": "site-source",
-    "site_source_commit": "9f2ea5f097cd57ec6dfa5d5398e24c1a0f80a8df",
-    "site_source_files_verified": 281
+    "site_source_commit": "439dcf34faa0118f00f5e209eeb26b182bb97502",
+    "site_source_files_verified": 300,
+    "release_source_files_verified": 204
   },
   "requested_release": {
     "source_version": 73,
@@ -295,16 +297,29 @@
     "source_deployment_verified": "appgdep_6aea123de5b48191a3932a6a4d5514d2",
     "authorized": true,
     "authorization": "Owner requested latest website update, synchronized GitHub and a resume-ready README on November 4, 2026.",
-    "state": "reconciled_preparing",
+    "state": "deployed_verified",
     "checked_at": "2026-11-04T20:49:34.243967+00:00",
     "source_retrieved": true,
     "standalone_adaptation_completed": true,
-    "deployed": false,
+    "deployed": true,
     "github_sync_required": true,
-    "current_standalone_source_version": 66,
+    "current_standalone_source_version": 73,
     "package_sha256": "0b7b0630e3dfd56dd80b647141d27ac977cef2acde32edf8c82529d9f3718f9b",
     "upstream_github_commit": "2da39cc58462d8ca853c48260016ab1df4a79c9e",
-    "reconciliation": "Reviewed v73 runtime diffs; retained upstream owner-controls theme, preview markup, portable ZIP helper, production history and release workflow. Auth, scheduler, R2 bindings and secrets are unchanged."
+    "reconciliation": "Reviewed v73 runtime diffs; retained upstream owner-controls theme, preview markup, portable ZIP helper, production history and release workflow. Auth, scheduler, R2 bindings and secrets are unchanged.",
+    "github_source_commit": "158ea83ef3c5d07cda7e8c05b141d8cd45292caa",
+    "github_site_source_commit": "439dcf34faa0118f00f5e209eeb26b182bb97502",
+    "completed_at": "2026-11-04T21:00:55.720Z",
+    "blocker": null,
+    "next_step": null,
+    "live_settings_preserved": {
+      "schemaVersion": 1,
+      "revision": 1,
+      "publicReadOnly": true,
+      "aiEnabled": false,
+      "dailyResearchEnabled": false,
+      "updatedAt": "2026-10-30T18:06:06.018Z"
+    }
   },
   "release_workflow": {
     "state": "source_handoff_and_publication_verified",
@@ -316,7 +331,7 @@
     "standalone_branch": "main",
     "original_site_project": "appgprj_6ae23020eb70819199a6dbf59b793ff9",
     "source_cloud_conversation": "6ae42165-a6a8-83e8-9398-2f7c571f99aa",
-    "automated_tests_passed": 135,
+    "automated_tests_passed": 163,
     "source_export_integration_tested": true,
     "complete_package_integration_tested_on_version": 57,
     "prepared_worker_matches_deployed_v57": true,
@@ -324,8 +339,8 @@
     "old_version_release_guard_verified": true,
     "unattended_cross_chat_automation_installed": false,
     "production_changed": true,
-    "verified_at": "2026-10-31T07:35:34.301478+00:00",
-    "source_branch_commit": "9f2ea5f097cd57ec6dfa5d5398e24c1a0f80a8df"
+    "verified_at": "2026-11-04T21:00:55.720Z",
+    "source_branch_commit": "439dcf34faa0118f00f5e209eeb26b182bb97502"
   },
   "version_66_release": {
     "source_commit": "b87d388a6078de03894f849bb4a00897bcbe5c41",
@@ -360,5 +375,22 @@
     "bindings_unchanged": true,
     "verification_file": "docs/controls-theme-verification.json",
     "verified_at": "2026-10-31T07:43:59.970Z"
+  },
+  "deployment_id": "124db0d7-edb6-4b2c-9c96-f847fcd44dd8",
+  "version_73_release": {
+    "source_commit": "7c0ac4e8d71082ed4af24325b68353b1385cd9a3",
+    "github_source_commit": "158ea83ef3c5d07cda7e8c05b141d8cd45292caa",
+    "site_source_commit": "439dcf34faa0118f00f5e209eeb26b182bb97502",
+    "deployment_id": "124db0d7-edb6-4b2c-9c96-f847fcd44dd8",
+    "worker_version_id": "becf695c-3f6a-4a16-b1bf-84a0725c2a5c",
+    "worker_sha256": "c026bebd580b033d50c3d90eeab564008b9f32339349072943f93322f92371c7",
+    "asset_release": "4032b8bb6eca7c2f99c69f96",
+    "settings_preserved": true,
+    "data_preserved": true,
+    "bindings_preserved": true,
+    "paid_calls": 0,
+    "owner_authenticated_save_retested": false,
+    "verification_file": "docs/release-v73-verification.json",
+    "verified_at": "2026-11-04T21:00:55.720Z"
   }
 }
