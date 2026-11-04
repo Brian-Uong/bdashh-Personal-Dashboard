@@ -14,6 +14,12 @@ Apply these rules to every future dashboard change, including before a .com move
 - Courtside sports betting was scrapped on October 30, 2026. Do not restore or
   continue that feature unless Brian asks for it again.
 
+## Development focus (October 31, 2026)
+
+- Focus checks and fixes on the ChatGPT-hosted dashboard here.
+- bdashh.com has its API intentionally turned off while incomplete; this is not a defect.
+- Keep changes portable, but do not activate its API, change its settings, push to GitHub, or deploy there as part of development here.
+
 ## Two-host workflow
 
 - The ChatGPT-hosted Site is Brian’s development dashboard here. His October 30
@@ -65,3 +71,10 @@ and release instructions together. The Sites-only source is never a .com package
 Preserve concurrent Site edits and production controls. Packaging is authorized;
 GitHub pushes, bdashh.com deployments and settings changes still require their
 applicable explicit authorization. Consult the latest request before publishing.
+
+## Hosted API cost preference (November 3, 2026)
+
+Brian requires no paid API use on the ChatGPT-hosted dashboard here. Do not create
+or configure an OpenAI key or enable paid calls here based only on a ChatGPT
+subscription. A later request must explicitly acknowledge separate API billing.
+Public-feed news refresh is independent of paid AI. Preserve the 7 AM ChatGPT task.

@@ -32,7 +32,7 @@ class BriansCareerBoard extends HTMLElement {
   }
   connectedCallback() {this.toggleAttribute('data-owner',canEdit);if(!this.initialized){this.initialized=true;this.render();this.load();this.loadResearch();}this.poll=setInterval(()=>{if(this.isConnected&&this.sourceMode==='curated'&&this.backgroundReady())this.load(true);},60000);}
   disconnectedCallback(){clearInterval(this.poll);}
-  backgroundReady(ignoreFetch=false){return canRefreshInBackground({hidden:document.hidden,scrollY:window.scrollY,busy:this.refreshing||(!ignoreFetch&&this.fetching),editing:!!this.shadowRoot.activeElement?.matches('input,textarea,select,[contenteditable="true"]')||!!document.querySelector('dialog[open]'),expanded:!!this.shadowRoot.querySelector('details[open]')});}
+  backgroundReady(ignoreFetch=false){return canRefreshInBackground({hidden:document.hidden||!!this.closest('[hidden]'),scrollY:window.scrollY,busy:this.refreshing||this.aiBusy||(!ignoreFetch&&this.fetching),editing:!!this.shadowRoot.activeElement?.matches('input,textarea,select,a,button,[contenteditable="true"]')||!!document.querySelector('dialog[open]'),expanded:!!this.shadowRoot.querySelector('details[open]')});}
   async load(background=false) {
     if(this.fetching)return;this.fetching=true;
     try {
@@ -162,14 +162,14 @@ class BriansCareerBoard extends HTMLElement {
     try{const results=await Promise.all(['/api/research','/api/ai/status'].map(async path=>{const r=await apiFetch(path);if(!r.ok)throw Error();return r.json();}));this.researchInfo=results[0];this.aiStatus=results[1];if(this.isConnected)this.render();}catch{this.aiMessage='AI status could not be verified. Live source checks remain available.';if(this.isConnected)this.render();}
   }
   async runAI(){
-    if(!canEdit||this.aiBusy||!this.aiStatus?.configured)return;
+    if(!canEdit||this.aiBusy||this.refreshing||!this.aiStatus?.configured)return;
     this.aiBusy=true;this.aiMessage='Searching current web sources using your saved preferences…';this.render();
     try{const r=await apiFetch('/api/ai/career',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',timeoutMs:200000});const d=await r.json();if(!r.ok)throw Error(d.error||'AI research could not finish.');this.aiMessage='Research saved. Updated jobs and people are shown below; events are in Local events.';await this.load();await this.loadResearch();}
     catch(e){this.aiMessage=e.message;}
     finally{this.aiBusy=false;this.render();}
   }
   async refreshSources(){
-    if(this.refreshing)return;this.refreshing=true;this.refreshMessage='';this.render();
+    if(!canEdit||this.refreshing||this.aiBusy)return;this.refreshing=true;this.refreshMessage='';this.render();
     try{
       const response=await apiFetch('/api/discovery/refresh',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',timeoutMs:65000});
       const data=await response.json();

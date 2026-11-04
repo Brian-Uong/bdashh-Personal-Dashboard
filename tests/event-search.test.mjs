@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {localRegion,localEventMatches,pacificDay} from '../public/dashboard/local-regions.mjs';
-import {parseEventLinks,parseEventDetail,validateEvent,mergeEvents,collectEvents,parseLocalistEvents,saveEvents,EVENT_SOURCES} from '../lib/event-search.mjs';
+import {parseEventLinks,parseEventDetail,validateEvent,mergeEvents,collectEvents,parseLocalistEvents,parseCityEvents,saveEvents,EVENT_SOURCES} from '../lib/event-search.mjs';
 const now=Date.parse('2026-10-31T03:00:00Z');
 const event={name:'Analytics workshop',date:'2026-11-05',time:'5:30 PM',location:'1035 Montecito Drive, Corona, CA 92879',organizer:'Organizer',url:'https://example.test/event/1',summary:'An upcoming local workshop.'};
 test('California regions include IE cities and exclude other states and virtual venues',()=>{
@@ -41,6 +41,24 @@ test('source failures remain visible without erasing saved events',async()=>{
  const old=mergeEvents(null,[validateEvent(event,now)],{checkedAt:new Date(now).toISOString()});
  const next=mergeEvents(old,[],result);assert.equal(next.eventSearch.status,'failed');assert.equal(next.sheets['Potential Events'].length,5);
 });
+
+test('Corona uses its official alternate calendar when the primary is unavailable',async()=>{
+ const calls=[];
+ const fetcher=async url=>{
+  calls.push(url);
+  if(url.startsWith('https://member.mychamber.org/'))return new Response('',{status:403});
+  if(url.includes('growthzoneapp.com')){
+   if(url.endsWith('/Search'))return new Response('<div class="gz-events-cards"><h5 class="card-title"><a href="https://coronachamberofcommerce.growthzoneapp.com/events/Details/workshop">Workshop</a></h5></div>');
+   return new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Event',startDate:'2026-11-05',location:{name:'Venue',address:{addressLocality:'Corona',addressRegion:'CA'}}})+'</script>');
+  }
+  return Response.json({events:[]});
+ };
+ const result=await collectEvents({region:'Inland Empire'},fetcher,now);
+ assert.equal(result.events.length,1,'Overlapping calendars must still deduplicate');
+ assert.ok(result.sources.filter(s=>s.name.startsWith('Corona')).every(s=>s.status==='success'&&s.url.includes('growthzoneapp.com')));
+ const rateCalls=[];await collectEvents({region:'Inland Empire'},async url=>{rateCalls.push(url);return new Response('',{status:429});},now);
+ assert.ok(!rateCalls.some(u=>u.includes('growthzoneapp.com')),'Do not retry around provider rate limits');
+});
 test('conditional event saves retry conflicts and leave unrelated concurrent edits intact',async()=>{
  let data={holdings:[],quotes:{},sheets:{}},attempt=0;
  const bucket={get:async()=>({etag:String(attempt),json:async()=>structuredClone(data)}),put:async(_key,value)=>{if(++attempt===1){data.briefing={text:'concurrent briefing'};return null;}data=JSON.parse(value);return {etag:String(attempt)};}};
@@ -53,4 +71,14 @@ test('university feed uses actual venue and instance date and excludes virtual o
  const e={title:'Community workshop',status:'live',experience:'inperson',location_name:'Research Center',address:'1084 Columbia Ave, Riverside, CA',localist_url:'https://events.ucr.edu/event/workshop',first_date:'2025-01-01',event_instances:[{event_instance:{start:'2026-11-05T12:00:00-08:00',end:'2026-11-05T13:00:00-08:00'}}],ticket_cost:'Free for students; guests $20',free:true};
  const data={events:[{event:e},{event:{...e,experience:'virtual'}},{event:{...e,address:'',location_name:'Unknown venue'}},{event:{...e,event_instances:[{event_instance:{start:'2026-10-01T12:00:00-07:00'}}]}}]};
  const items=parseLocalistEvents(data,source,'workshop',now);assert.equal(items.length,1);assert.equal(items[0].date,'2026-11-05');assert.equal(items[0].free,'Unconfirmed');assert.equal(items[0].region,'Inland Empire');
+});
+
+test('city feed requires public local events with matching dates and never infers free admission',()=>{
+ const source=EVENT_SOURCES.find(s=>s.key==='corona-city');
+ const item={organizationId:34,approvedCommunities:[208],resourceType:'regular',isPrivateEvent:false,closed:false,isExpired:false,timezone:'America/Los_Angeles',name:'Community event',startsAt:'2026-11-05 18:00',startsAtUtc:'2026-11-06T02:00:00Z',endsAtUtc:'2026-11-06T04:00:00Z',locationText:'400 S Vicentia Ave, Corona, CA',resourceUrl:'https://community.coronaca.gov/coronaca_main/123?utm_source=calendar',price:0};
+ const data={status:'OK',data:{records:[item,{...item,isPrivateEvent:true},{...item,closed:true},{...item,approvedCommunities:[]},{...item,resourceUrl:'https://other.example/123'},{...item,locationText:'Riverside, IL'},{...item,startsAt:'2026-11-06 18:00'}]}};
+ const rows=parseCityEvents(data,source,'community',now);assert.equal(rows.length,1);assert.equal(rows[0].free,'Unconfirmed');assert.equal(rows[0].date,'2026-11-05');assert.equal(rows[0].time,'6:00 PM Pacific');assert.equal(rows[0].url,'https://community.coronaca.gov/coronaca_main/123');
+ assert.deepEqual(parseCityEvents(data,source,'unmatched',now),[]);
+ const midnight={...item,startsAt:'2026-11-05 00:00',startsAtUtc:'2026-11-05T08:00:00Z'};assert.match(parseCityEvents({status:'OK',data:{records:[midnight]}},source,'',now)[0].time,/unconfirmed/);
+ assert.throws(()=>parseCityEvents({status:'NOK'},source,'',now),/format/);
 });

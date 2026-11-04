@@ -17,7 +17,7 @@ async function route(name){
  code=stripTypeScriptTypes(code,{mode:'strip'});
  return import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
 }
-const paths=['news','sync','records','holdings','quotes/refresh','portfolio/history','discovery','discovery/refresh','research'];
+const paths=['ai/briefing','ai/career','ai/news','events','news','sync','records','holdings','quotes/refresh','portfolio/history','discovery','discovery/refresh','research'];
 test('retired sports requests return gone without network or storage access',async()=>{
  const api=await route('sports/nba'),previous=globalThis.fetch,beforeReads=reads,beforeWrites=writes;
  let providerCalls=0;
