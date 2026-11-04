@@ -1,6 +1,10 @@
+# Current repository — November 4, 2026
+
+Brian renamed the existing repository to `Brian-Uong/bdashh-Personal-Dashboard` and made it public. GitHub repository ID `1439328336` is unchanged. Use this canonical name for future source mirrors and releases; preserve public repository visibility. This supersedes historical private-repository requirements only. Live records and server credentials remain private in Cloudflare. The rename does not authorize a new website deployment or changes to its access, AI settings or data.
+
 # Current release scope — November 4, 2026
 
-Brian explicitly requested the latest website release, matching GitHub source and a resume-ready README. Version 73 is selected. This request supersedes the historical development-only and v57/v66 publication restrictions below for this release. Preserve the current controls theme, private repository, owner authentication, live records, secrets, visibility and AI settings. Future releases still require an explicit request. Never change the separate business project or original Site schedules as a side effect.
+Brian explicitly requested the latest website release, matching GitHub source and a resume-ready README. Version 73 is selected. This request supersedes the historical development-only and v57/v66 publication restrictions below for this release. Preserve the current controls theme, repository visibility, owner authentication, live records, secrets, visibility and AI settings. Future releases still require an explicit request. Never change the separate business project or original Site schedules as a side effect.
 
 # Canonical BDashh development workspace
 
@@ -46,12 +50,12 @@ Brian’s October 30 clarification authorizes publication to the ChatGPT-hosted 
 
 After every completed Site version, prepare a versioned release package with
 `npm run release:package -- --site-version NUMBER --site-commit FULL_SHA --site-snapshot PATH`.
-Read the exact Site source and latest private GitHub release workflow first. Preserve
+Read the exact Site source and latest GitHub release workflow first. Preserve
 concurrent UI changes. This development packaging mode does not change deployment
 authorization, production settings or data. Include the full standalone source,
 compiled Worker, immutable assets, exact Site snapshot, hashes and release instructions.
 Brian's standing instruction in the current upstream GitHub workflow authorizes
-synchronizing the exact published Site source to its private site-source branch.
+synchronizing the exact published Site source to its site-source branch.
 Keep main and bdashh.com publication separate and honor the latest explicit scope.
 
 ## Hosted API cost preference (November 3, 2026)

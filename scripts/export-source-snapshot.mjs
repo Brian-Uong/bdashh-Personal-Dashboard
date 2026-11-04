@@ -1,5 +1,5 @@
 // Run from the cloud checkout that already contains the published Site source.
-// This prepares a private GitHub handoff. It performs no network calls or deployment.
+// This prepares a GitHub source handoff. It performs no network calls or deployment.
 import {readFile} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 import path from 'node:path';

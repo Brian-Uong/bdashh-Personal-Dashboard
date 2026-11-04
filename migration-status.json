@@ -37,7 +37,7 @@
     "access_app_blocker": null,
     "access_configuration_readback_verified": true,
     "access_note": "Public read-only testing was explicitly authorized. Cloudflare Access protects /owner; Worker verifies the same signed application JWT on every write. Preview remains private.",
-    "github_repository": "Brian-Uong/bdashh-private",
+    "github_repository": "Brian-Uong/bdashh-Personal-Dashboard",
     "github_connector_private_access_verified": true,
     "api_key_configured": true,
     "main_domain_id": "487a0e7a200d80ec5480c5b7f5935955c40cd01f",
@@ -177,7 +177,7 @@
     "updates_require_explicit_owner_request": true,
     "authorization": "Owner requested latest website update, synchronized GitHub and a resume-ready README on November 4, 2026.",
     "sync_github_on_every_publication": true,
-    "github_repository": "Brian-Uong/bdashh-private",
+    "github_repository": "Brian-Uong/bdashh-Personal-Dashboard",
     "github_sync_authorization": "Lets update the website with the latest version, and everytime I do so update the github as well. Thanks",
     "mirror_published_site_source_after_updates": true,
     "source_mirror_branch": "site-source",
@@ -259,8 +259,8 @@
   },
   "daily_schedule_trigger_installed": true,
   "github": {
-    "repository": "Brian-Uong/bdashh-private",
-    "visibility": "private",
+    "repository": "Brian-Uong/bdashh-Personal-Dashboard",
+    "visibility": "public",
     "installation_id": 176991194,
     "repository_selection": "selected",
     "access_verified_at": "2026-10-30T18:39:45.940102+00:00",
@@ -287,7 +287,16 @@
     "source_branch": "site-source",
     "site_source_commit": "439dcf34faa0118f00f5e209eeb26b182bb97502",
     "site_source_files_verified": 300,
-    "release_source_files_verified": 204
+    "release_source_files_verified": 204,
+    "repository_id": "1439328336",
+    "repository_identity_checked_at": "2026-11-04T21:51:43.382983+00:00",
+    "repository_rename": {
+      "previous_name": "Brian-Uong/bdashh-private",
+      "current_name": "Brian-Uong/bdashh-Personal-Dashboard",
+      "owner_reported": true,
+      "visibility_observed": "public",
+      "website_deployment_changed": false
+    }
   },
   "requested_release": {
     "source_version": 73,

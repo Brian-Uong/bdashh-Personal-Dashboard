@@ -4,7 +4,7 @@
   "publishAuthorized": false,
   "githubPushAuthorized": false,
   "baseline": "docs/online-source-baseline.json",
-  "githubRepository": "Brian-Uong/bdashh-private",
+  "githubRepository": "Brian-Uong/bdashh-Personal-Dashboard",
   "githubBranch": "main",
   "originalSiteVersion": 73,
   "originalSiteCommit": "7c0ac4e8d71082ed4af24325b68353b1385cd9a3",

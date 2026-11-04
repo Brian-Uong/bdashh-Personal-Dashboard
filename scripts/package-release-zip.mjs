@@ -60,7 +60,7 @@ Compare fresh GitHub and deployed source before merging. Preserve production sec
 site-settings.json and saved data. Confirm the version Brian requests, then record
 actual reconciliation and authorization before release:check/release:prepare.
 Upload and verify immutable assets before deploying their matching Worker, sync the
-standalone source to private GitHub, then read back the deployment and remote hashes.
+standalone source to GitHub, then read back the deployment and remote hashes.
 Never replace the standalone runtime with the Sites-only source tree.
 
 To make the next development package after updating workspace-status.json:

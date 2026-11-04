@@ -2,11 +2,11 @@
 
 A personal command center that brings planning, portfolio tracking, career discovery, local exploration, and news into one independently hosted web application.
 
-**Built by Brian Uong** · [Live dashboard](https://bdashh.com/dashboard/) · [Website controls](https://bdashh.com/owner/settings)
+**Built by Brian Uong** · [Source code](https://github.com/Brian-Uong/bdashh-Personal-Dashboard) · [Live dashboard](https://bdashh.com/dashboard/) · [Website controls](https://bdashh.com/owner/settings)
 
 The project began as a way to reduce switching between spreadsheets, job boards, calendars, maps, and news sites. It now runs on its own domain with a Cloudflare Worker backend, persistent storage, owner authentication, and optional server-side AI research. Visitors can explore the published dashboard without a ChatGPT account or subscription; editing and research actions require the owner’s sign-in.
 
-This is a personal project and live demonstration, not a multi-user service. The repository is private; the live link is the shareable demo. The current release brings the version 73 dashboard to the standalone website while retaining its updated Website controls.
+This is a personal project and live demonstration, not a multi-user service. The source repository and live demo are public and can both be shared on a résumé or portfolio. The current release brings the version 73 dashboard to the standalone website while retaining its updated Website controls.
 
 ## What the dashboard does
 

@@ -1,6 +1,6 @@
 # Shared source and website releases
 
-Brian wants routine updates to be easy to publish, with the exact released source saved in private GitHub. A request to update bdashh.com authorizes completing its Cloudflare release and GitHub synchronization together. Development edits alone still do not authorize a production release.
+Brian wants routine updates to be easy to publish, with the exact released source saved in GitHub. A request to update bdashh.com authorizes completing its Cloudflare release and GitHub synchronization together. Development edits alone still do not authorize a production release.
 
 ## The two source branches
 
@@ -9,7 +9,7 @@ Brian wants routine updates to be easy to publish, with the exact released sourc
 
 **Version 73 handoff:** the exact release package and all 603 payload checksums were verified. Its standalone source has been reconciled against the current GitHub main, retaining the live controls-theme fix and release history. Consult migration-status.json and VERIFICATION.md for publication state and verified commits. Both branches were synchronized and hash-verified: main source commit `158ea83ef3c5d07cda7e8c05b141d8cd45292caa`, Site mirror `439dcf34faa0118f00f5e209eeb26b182bb97502`. A later documentation commit records the completed deployment.
 
-Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uong/bdashh-private`. Keep the separate pdashboards business project out of this workflow.
+Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uong/bdashh-Personal-Dashboard`. GitHub repository ID: `1439328336`. The owner renamed it and made it public on November 4, 2026. The Worker and R2 bucket names are independent infrastructure identifiers; keep them unchanged. Keep the separate pdashboards business project out of this workflow.
 
 ## After a dashboard update in the cloud development chat
 
@@ -23,7 +23,7 @@ Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uo
 
    Replace version and commit with the current Sites result. The command checks the Site identity, exact Git commit and clean tracked files; excludes saved data, environment files, dependencies and build output; checks common credential patterns; and writes an ASCII JSON packet with hashes. It does not upload or publish. Review the export; a pattern scan is not a guarantee that arbitrary sensitive content is absent.
 
-4. Use the connected GitHub tools to synchronize the packet to `site-source`, retaining existing branch history. If absent, create the branch from a verified existing commit, then replace that branch's tree with the exact exported source plus `source-release.json` (the packet's `source` object). Do not mix the original Site and standalone runtime in one branch. Confirm the repository is private first.
+4. Use the connected GitHub tools to synchronize the packet to `site-source`, retaining existing branch history. If absent, create the branch from a verified existing commit, then replace that branch's tree with the exact exported source plus `source-release.json` (the packet's `source` object). Do not mix the original Site and standalone runtime in one branch. Confirm the canonical repository ID and expected visibility first. Brian made this repository public on November 4, 2026; keep live data and credentials out of both branches.
 5. For text files, use Git tree entries with `content`; for binary files, create a base64 blob and use its returned SHA. Compare blob hashes with the remote tree and send only changed content. Commit, update the ref with the expected old head, then verify every remote path/hash and the recorded version. On a concurrent change, read and reconcile the new head; never force past another update.
 6. Report source synchronization only after readback succeeds. If Brian also requested a bdashh.com release, continue below in the same cloud workspace. Do not modify Site schedules or its sharing as a side effect.
 
@@ -43,7 +43,7 @@ Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uo
 
 ## Publish using the connected GitHub and Cloudflare tools
 
-1. Reconfirm the owner-requested release, private GitHub access, current branch heads, production deployment, bindings and private `site-settings.json`. Back up the current deployment metadata and relevant data before any schema migration. Preserve all secret bindings without reading their values.
+1. Reconfirm the owner-requested release, GitHub write access, current branch heads, production deployment, bindings and private `site-settings.json`. Back up the current deployment metadata and relevant data before any schema migration. Preserve all secret bindings without reading their values.
 2. Sync the prepared standalone source to GitHub and verify remote blob hashes. Keep that source commit as the release reference. A partial GitHub upload is not a completed release.
 3. Upload immutable assets to `bdashh-private-assets` under their packet keys. Verify every size and checksum before pointing the Worker at the new asset release. Reuse already verified identical objects and retain old releases for rollback.
 4. Deploy the prepared Worker to `bdashh-live`, preserving the current bindings and secret bindings. Do not overwrite the private settings object or change the owner's AI, daily-research or visibility choices. No paid AI test is required when AI is off.
