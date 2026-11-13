@@ -1,0 +1,28 @@
+{
+  "version": 80,
+  "state": "deployed_verified",
+  "sourceCommit": "7816fbd1233480aca36fb90a8ed07f87cfa5305f",
+  "developmentSourceCommit": "2aebbedc4d77d760aeae6738ca7604eaf428127f",
+  "testsPassed": 207,
+  "testsFailed": 0,
+  "assetsVerified": 124,
+  "standaloneFilesVerifiedBeforeRecord": 255,
+  "developmentFilesVerified": 344,
+  "packageChecksumsVerified": 730,
+  "deployedCodeMatchesBuild": true,
+  "settingsPreserved": true,
+  "savedDataPreserved": true,
+  "ownerOnlyWritesVerified": true,
+  "aiEnabled": false,
+  "dailyResearchEnabled": false,
+  "paidCalls": 0,
+  "desktopOverviewAndJournalVerified": true,
+  "holdingLogosLoaded": 11,
+  "smokeChecksPassed": 11,
+  "notRun": [
+    "Live authenticated owner save or settings toggle",
+    "Paid AI calls (owner left disabled)",
+    "Mobile browser visual check"
+  ],
+  "verifiedAt": "2026-11-13T21:41:04.744Z"
+}
