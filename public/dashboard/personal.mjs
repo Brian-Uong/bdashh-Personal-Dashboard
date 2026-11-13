@@ -2,7 +2,7 @@
 // Workbook and CSV imports remain in tab memory. No brokerage credentials, API keys, or account access.
 export const personalSections=[
  {key:'career',name:'Career hub',icon:'↗',title:'Career pipeline',sub:'Applications, networking and the next move toward analytics.'},
- {key:'investments',name:'Investments',icon:'◈',title:'Investment intelligence',sub:'Your holdings, market-news shortcuts and a daily research candidate.'},
+ {key:'investments',name:'Investments',icon:'◈',title:'Investment intelligence',sub:'Your portfolio, three daily stock ideas and a record of their results.'},
  {key:'planner',name:'Daily planner',icon:'◷',title:'Daily planner',sub:'What matters today, this week and the next deadline.'}
 ];
 const safe=v=>String(v??'').trim();

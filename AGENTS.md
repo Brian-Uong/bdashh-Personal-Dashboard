@@ -25,8 +25,8 @@ Apply these rules to every future dashboard change, including before a .com move
 - The ChatGPT-hosted Site is Brian’s development dashboard here. His October 30
   correction authorizes this Site publication only; do not deploy bdashh.com.
 - /owner/settings on this Site shows disabled previews. The complete functional
-  controls/backend live in /workspace/sites/bdashh-workspace and the private
-  Brian-Uong/bdashh-private repository. Use that complete tree for .com releases.
+  controls/backend live in the complete standalone workspace and the public
+  Brian-Uong/bdashh-Personal-Dashboard repository. Use that complete tree for .com releases.
 - Preserve its Cloudflare owner JWT authentication, private router, OpenAI and daily
   switches, and site-settings.json when merging shared UI changes. Never replace it
   with this Sites-only checkout. Compare current online source before releases.
@@ -78,3 +78,19 @@ Brian requires no paid API use on the ChatGPT-hosted dashboard here. Do not crea
 or configure an OpenAI key or enable paid calls here based only on a ChatGPT
 subscription. A later request must explicitly acknowledge separate API billing.
 Public-feed news refresh is independent of paid AI. Preserve the 7 AM ChatGPT task.
+
+## Source handoff correction — November 8, 2026 Pacific
+
+The canonical GitHub repository is Brian-Uong/bdashh-Personal-Dashboard, repository
+ID 1439328336. Its main branch contains the standalone runtime; site-source is the
+exact development Site mirror. Read current docs/RELEASE-WORKFLOW.md before each
+handoff. Brian’s standing instruction authorizes mirroring each published Site
+version to site-source, with provenance and full hash readback. This does not
+publish bdashh.com or authorize writes to main, settings, schedules or saved data.
+
+## Latest owner instruction — November 9, 2026
+
+Do not update GitHub from this development chat, including site-source. GitHub
+updates happen only in Move Dashboard Online when Brian requests updating
+bdashh.com to the newest version. This supersedes earlier source-mirroring rules.
+Continue development, ChatGPT Site publication and portable packaging here.

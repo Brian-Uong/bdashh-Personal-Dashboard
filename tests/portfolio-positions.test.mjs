@@ -21,3 +21,10 @@ test('chart geometry handles constant prices and never fabricates an out-of-rang
  assert.match(pacificTime(Date.parse('2026-10-28T20:00:00Z')),/1:00 PM PT/);assert.equal(pacificTime(null),'Time unavailable');
  assert.equal(pacificTime('2026-10-28'),'Oct 28, 2026 (date only)');
 });
+
+test('quote status distinguishes retained prices, provider failures and completed extended sessions',async()=>{
+ const {refreshStatus}=await import('../public/dashboard/portfolio-positions.mjs');
+ const checked={...data,quotes:{...data.quotes,KO:{...data.quotes.KO,session:'After-Hours',providerNotes:'<provider unavailable>'}},quoteRefresh:{checkedAt:'2026-11-13T03:00:00Z',retained:['KO'],failed:['AMZN']}};
+ assert.match(refreshStatus('KO',checked),/no newer quote available/);assert.match(refreshStatus('AMZN',checked),/failed/);
+ const html=positionCards(checked);assert.match(html,/Saved price \/ share · After-Hours/);assert.match(html,/Last checked:/);assert.match(html,/&lt;provider unavailable&gt;/);assert.doesNotMatch(html,/<provider unavailable>/);
+});

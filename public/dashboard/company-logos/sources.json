@@ -1,0 +1,286 @@
+{
+  "retrievedOn": "2026-11-13",
+  "assets": [
+    {
+      "ticker": "ADBE",
+      "company": "Adobe",
+      "website": "https://www.adobe.com/",
+      "sourceAssetUrl": "https://www.adobe.com/favicon.ico",
+      "filename": "adbe.png",
+      "bytes": 1027,
+      "sha256": "e8f5869d6aa8ea2c6ed6c793fa129dad081333e564213fffb531b9a316690c64",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        48,
+        48
+      ],
+      "packagedFile": "ADBE.png"
+    },
+    {
+      "ticker": "AMAT",
+      "company": "Applied Materials",
+      "website": "https://www.appliedmaterials.com/",
+      "sourceAssetUrl": "https://www.appliedmaterials.com/content/dam/applied-materials/image/favicon/favicon.svg",
+      "filename": "amat.svg",
+      "bytes": 945,
+      "sha256": "4737be4e00f23685c2b322346f37ab50dc4ae79436723f2c8ffd300d009d70ac",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "note": "Official SVG sanitized to remove active/external content; preserves its original mark.",
+      "packagedFile": "AMAT.svg"
+    },
+    {
+      "ticker": "AMZN",
+      "company": "Amazon",
+      "website": "https://www.aboutamazon.com/",
+      "sourceAssetUrl": "https://www.aboutamazon.com/_next/static/media/apple-touch-icon.706b1b87.png",
+      "filename": "amzn.png",
+      "bytes": 4165,
+      "sha256": "1e17646e993aeb9ea355f696197514443c8502372032bddabc9e4e89c26ba690",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        180,
+        180
+      ],
+      "packagedFile": "AMZN.png"
+    },
+    {
+      "ticker": "BN",
+      "company": "Brookfield Corporation",
+      "website": "https://bn.brookfield.com/",
+      "sourceAssetUrl": "https://bn.brookfield.com/themes/custom/brookfield_project/images/new-favicons/apple-touch-icon.png",
+      "filename": "bn.png",
+      "bytes": 6734,
+      "sha256": "bab2ee33ac6e11a7ffd7ee6536630ff9b0acaf467ba52897a111b912a49485ab",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        180,
+        180
+      ],
+      "packagedFile": "BN.png"
+    },
+    {
+      "ticker": "CI",
+      "company": "The Cigna Group",
+      "website": "https://www.thecignagroup.com/",
+      "sourceAssetUrl": "https://www.thecignagroup.com/themes/custom/thecignagroup/favicon.ico",
+      "filename": "ci.png",
+      "bytes": 1088,
+      "sha256": "4701962126a2d7372ceae2209cf4db197ba88c23a628422b3985c784104f5523",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        32,
+        32
+      ],
+      "note": "Official compact favicon; source resolution is limited. Preserve aspect ratio.",
+      "packagedFile": "CI.png"
+    },
+    {
+      "ticker": "CSCO",
+      "company": "Cisco Systems",
+      "website": "https://www.cisco.com/",
+      "sourceAssetUrl": "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cisco_logo_blue_2016.svg",
+      "sourceType": "Wikimedia Commons copy of company mark",
+      "filename": "csco.png",
+      "bytes": 5136,
+      "sha256": "069905eb423fd175cdead4f33b5fae9fcc990a77bb480ec3380d50acd3cee0a9",
+      "dimensions": [
+        192,
+        101
+      ],
+      "retrievedOn": "2026-11-13",
+      "copyrightStatusOnSource": "PD-textlogo; trademark restrictions remain",
+      "note": "Official identity verified; source SVG validated against active/external content, then proportionally rasterized for local display.",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "packagedFile": "CSCO.png"
+    },
+    {
+      "ticker": "GOOGL",
+      "company": "Alphabet",
+      "website": "https://abc.xyz/",
+      "sourceAssetUrl": "https://s206.q4cdn.com/479360582/files/favicon-16.png",
+      "filename": "googl.png",
+      "bytes": 3417,
+      "sha256": "da1344d10d80557758dbcde1e6eafcd804660836513bd7df0fe673845c6d9929",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        16,
+        16
+      ],
+      "note": "Official compact favicon; source resolution is limited. Preserve aspect ratio.",
+      "packagedFile": "GOOGL.png"
+    },
+    {
+      "ticker": "JPM",
+      "company": "JPMorgan Chase",
+      "website": "https://www.jpmorganchase.com/",
+      "sourceAssetUrl": "https://www.jpmorganchase.com/etc.clientlibs/cws/clientlibs/clientlib-base/resources/jpmc/images/jpmc-favicon.ico",
+      "filename": "jpm.png",
+      "bytes": 672,
+      "sha256": "18abcd37b017d10eb96f6a64636b8f7de76f0aa512af8a18b0e0d215132452f1",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        16,
+        16
+      ],
+      "note": "Official compact favicon; source resolution is limited. Preserve aspect ratio.",
+      "packagedFile": "JPM.png"
+    },
+    {
+      "ticker": "KO",
+      "company": "The Coca-Cola Company",
+      "website": "https://www.coca-colacompany.com/",
+      "sourceAssetUrl": "https://www.coca-colacompany.com/content/dam/corporate/us/en/header-footer/Header%20Icon.svg",
+      "filename": "ko.svg",
+      "bytes": 13847,
+      "sha256": "6b4b7a53a1ffb4d7ee3f2c43a0afae201f68e3f389084d75b004f6bb3cd802c3",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "note": "Official SVG sanitized to remove active/external content; preserves its original mark.",
+      "packagedFile": "KO.svg"
+    },
+    {
+      "ticker": "NU",
+      "company": "Nu Holdings",
+      "website": "https://www.investors.nu/",
+      "sourceAssetUrl": "https://cdn-sites-assets.mziq.com/wp-content/uploads/sites/898/2021/10/logo-nubank-purple.png",
+      "filename": "nu.png",
+      "bytes": 657,
+      "sha256": "84b0227a301d08412b31d64854d78991bb580623d199aca5dfdb3154a1d1cc5f",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        44,
+        24
+      ],
+      "note": "Official compact favicon; source resolution is limited. Preserve aspect ratio.",
+      "packagedFile": "NU.png"
+    },
+    {
+      "ticker": "NVDA",
+      "company": "NVIDIA",
+      "website": "https://investor.nvidia.com/home/default.aspx",
+      "sourceAssetUrl": "https://s201.q4cdn.com/141608511/files/favicon.ico",
+      "filename": "nvda.png",
+      "bytes": 785,
+      "sha256": "ff82af7f92e1210baa037facd81dc733cffc84c7bcf0b9e6829dcf2181315e85",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        48,
+        48
+      ],
+      "packagedFile": "NVDA.png"
+    },
+    {
+      "ticker": "ORCL",
+      "company": "Oracle Corporation",
+      "website": "https://www.oracle.com/",
+      "sourceAssetUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Oracle_Corporation_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Oracle_Corporation_logo.svg",
+      "sourceType": "Wikimedia Commons copy of company mark",
+      "filename": "orcl.png",
+      "bytes": 4040,
+      "sha256": "7e9722b7f4e3c05b252d6a5d57e8b6ebe6c932258889ac3995d67b73ffbc50a2",
+      "dimensions": [
+        192,
+        120
+      ],
+      "retrievedOn": "2026-11-13",
+      "copyrightStatusOnSource": "PD-textlogo; trademark restrictions remain",
+      "note": "Official identity verified; source SVG validated against active/external content, then proportionally rasterized for local display.",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "packagedFile": "ORCL.png"
+    },
+    {
+      "ticker": "SPCX",
+      "company": "Space Exploration Technologies Corp.",
+      "website": "https://ir.spacex.com/faqs-and-contact/",
+      "sourceAssetUrl": "https://s21.q4cdn.com/184289198/files/favicon.ico",
+      "filename": "spcx.png",
+      "bytes": 1386,
+      "sha256": "fa32b6d55fa667624f876dafde55ae3e4b7edfd2df3c0cc305eb27db17a3ab25",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        48,
+        48
+      ],
+      "packagedFile": "SPCX.png"
+    },
+    {
+      "ticker": "V",
+      "company": "Visa",
+      "website": "https://www.visa.com/",
+      "sourceAssetUrl": "https://www.visa.com/vcom-assets/content/dam/visa/favicon.ico",
+      "filename": "v.png",
+      "bytes": 1354,
+      "sha256": "81b485aed8e85d111801ac8cb9b9585b39e644a9140090eddca091e20f9b4735",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        48,
+        48
+      ],
+      "packagedFile": "V.png"
+    },
+    {
+      "ticker": "WDC",
+      "company": "Western Digital",
+      "website": "https://investor.wdc.com/",
+      "sourceAssetUrl": "https://investor.wdc.com/sites/g/files/knoqqb101726/themes/site/client_site/dist/images/header-mainlogo.svg",
+      "filename": "wdc.svg",
+      "bytes": 3799,
+      "sha256": "e42a47a15508c468968102262d34771d5993d335a5c486c5f4ac35a66181ed59",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "note": "Official SVG sanitized to remove active/external content; preserves its original mark.",
+      "packagedFile": "WDC.svg"
+    },
+    {
+      "ticker": "WM",
+      "company": "Waste Management",
+      "website": "https://www.wm.com/",
+      "sourceAssetUrl": "https://cdn.sanity.io/images/mg4hutlo/production/140080a36b8e0dfe9dcd59cdff16b7f06a9c447d-1920x783.png?auto=format&q=80&w=184&h=76&fit=max",
+      "filename": "wm.png",
+      "bytes": 6157,
+      "sha256": "acaafb7230684b08d08690a7c1971c99b9572c54a8537566ae920e9e62a232b4",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        184,
+        75
+      ],
+      "packagedFile": "WM.png"
+    },
+    {
+      "ticker": "XOM",
+      "company": "ExxonMobil",
+      "website": "https://corporate.exxonmobil.com/",
+      "sourceAssetUrl": "https://corporate.exxonmobil.com/-/media/global/icons/xx-favicon.ico",
+      "filename": "xom.png",
+      "bytes": 343,
+      "sha256": "f8096c26127977c9c1d8348305e1ad9a98886de6f60b1a18b085084ef5ef907e",
+      "retrievedOn": "2026-11-13",
+      "purpose": "Company identification in stock research and holdings UI; no affiliation or endorsement implied.",
+      "dimensions": [
+        16,
+        16
+      ],
+      "note": "Official compact favicon; source resolution is limited. Preserve aspect ratio.",
+      "packagedFile": "XOM.png"
+    }
+  ],
+  "notes": [
+    "Only files named by assets/alternatives should be copied into the application.",
+    "Company trademarks belong to their owners. Assets are source-provided, not generated.",
+    "SPCX mapping verified through SpaceX IR FAQ and SEC 10-Q for quarter ended September 30, 2026."
+  ]
+}

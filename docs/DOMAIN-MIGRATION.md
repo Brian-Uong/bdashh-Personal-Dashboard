@@ -9,8 +9,8 @@ Here it returns an inert preview of the production controls; on bdashh.com the
 owner-verified router serves the functional controls. The preview contains no
 active script, provider request or settings writer. It never reads live settings.
 
-The complete deployment source is /workspace/sites/bdashh-workspace, based on
-Brian-Uong/bdashh-private. Merge shared UI changes into that source and retain its
+The complete deployment source is the standalone workspace, based on the current
+Brian-Uong/bdashh-Personal-Dashboard main branch. Merge shared UI changes into that source and retain its
 authentication, site-settings backend, AI gates, scheduler, bindings and secrets.
 Do not deploy this Sites-only tree wholesale to bdashh.com. Follow the complete
 workspace’s source comparison and release instructions before a .com release.
@@ -237,3 +237,15 @@ the News page loads, and Owner sign in reaches OpenAI's login form. Anonymous
 browser sessions correctly stay read-only; no owner session was impersonated.
 No authentication rule, public/private setting, key, paid API flag or bdashh.com
 deployment was changed. The existing 7 AM task is preserved.
+
+## Recommendation journal — November 13, 2026
+
+Migrate recommendations-v1.json alongside dashboard.json and portfolio history.
+It is included in the authenticated migration backup as data.recommendations.
+Preserve all original records, editions, references and entries; never regenerate
+history from today's briefing. recommendation-refresh-lock.json is disposable.
+Register /api/recommendations in the standalone private router and preserve owner
+JWT enforcement. The existing 7 AM task reads recommendations-updater.md revision 1.
+No origin is embedded in browser code or task-source documents. Quote and research
+updates do not require publication, and new hosted work still excludes GitHub and
+bdashh.com deployment. See RECOMMENDATION-JOURNAL-2026-11-13.md for data semantics.

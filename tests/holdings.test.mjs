@@ -2,11 +2,27 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {addSavedHolding,changeSavedHolding,validateHolding,validateHoldingChange,mergeCooldowns} from '../lib/holdings.mjs';
 import {portfolioStats,renderPortfolioCharts} from '../public/dashboard/portfolio-charts.mjs';
+import {positionCards} from '../public/dashboard/portfolio-positions.mjs';
+import {positionView,setPositionView,reconcilePositionView} from '../public/dashboard/investment-view.mjs';
 const now=()=>Date.parse('2026-10-29T03:00:00Z');
 const original={holdings:[{ticker:'KO',shares:1,avgCost:80}],quotes:{KO:{price:91,asOf:'2026-10-28T22:00:00Z',currency:'USD'}},sheets:{Custom:[['Untouched']]},briefing:{asOf:'2026-10-28T22:00:00Z',text:'Saved briefing'},updatedAt:'2026-10-28T22:00:00Z'};
 function bucket(seed=original){let sequence=0;const map=new Map([['dashboard.json',{data:structuredClone(seed),etag:'0'}]]);return {async get(key){const object=map.get(key);return object?{etag:object.etag,json:async()=>structuredClone(object.data)}:null},async put(key,body,{onlyIf}={}){const old=map.get(key);if(onlyIf?.etagMatches&&old?.etag!==onlyIf.etagMatches||onlyIf?.etagDoesNotMatch==='*'&&old)return null;const etag=String(++sequence);map.set(key,{data:JSON.parse(body),etag});return {etag};}};}
 const input=(ticker='MSFT',requestId='request-id-00001')=>({ticker,shares:2.75,avgCost:400,requestId});
 const quote=async ticker=>({price:430,asOf:'2026-10-28',timePrecision:'day',currency:'USD',source:'Test provider',company:ticker+' company'});
+test('adding, removing and re-adding a new ticker updates its logo, filters and allocation',async()=>{
+ const store=bucket();setPositionView({query:'KO',sort:'daily'});
+ const added=(await addSavedHolding(store,input(),{lookup:quote,now})).state;
+ reconcilePositionView(original,added);assert.deepEqual(positionView(),{query:'',sort:'daily'});
+ assert.match(positionCards(added),/symbol\/MSFT.png/);assert.match(renderPortfolioCharts(added),/symbol\/MSFT.png/);
+ setPositionView({query:'MSFT'});
+ const removed=(await changeSavedHolding(store,{action:'remove',ticker:'MSFT',base:{shares:2.75,avgCost:400},requestId:'remove-msft-00001'},{now})).state;
+ reconcilePositionView(added,removed);assert.equal(positionView().query,'');
+ assert.doesNotMatch(positionCards(removed),/MSFT/);assert.doesNotMatch(renderPortfolioCharts(removed),/MSFT/);
+ assert.deepEqual(removed.holdings,original.holdings);assert.deepEqual(removed.briefing,original.briefing);
+ const readded=(await addSavedHolding(store,input('MSFT','readd-msft-00001'),{lookup:quote,now})).state;
+ assert.match(positionCards(readded),/symbol\/MSFT.png/);assert.equal(portfolioStats(readded).rows.length,2);
+ setPositionView({query:'',sort:'value'});
+});
 test('validates and normalizes a single holding without accepting bad or empty numbers',()=>{
  assert.equal(validateHolding(input(' msft ')).ticker,'MSFT');assert.equal(validateHolding({...input(),avgCost:0}).avgCost,0);
  for(const bad of [{ticker:'<script>'},{shares:0},{shares:-1},{shares:Infinity},{shares:'2'},{avgCost:-1},{avgCost:NaN},{requestId:''}])assert.throws(()=>validateHolding({...input(),...bad}));

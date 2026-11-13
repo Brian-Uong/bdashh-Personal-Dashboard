@@ -1,3 +1,5 @@
+import {companyMark} from './company-brand.mjs';
+import {setPositionView} from './investment-view.mjs';
 import {mountWidget,widgetConfig} from './tradingview-widget.mjs';
 import {getData} from './synced.mjs';
 import {portfolioStats} from './portfolio-charts.mjs';
@@ -8,7 +10,7 @@ const metric=(label,value)=>`<div><dt>${e(label)}</dt><dd>${e(value)}</dd></div>
 
 function updatePositions(){
  const target=document.getElementById('positionCards'),data=getData();
- if(target&&data)target.innerHTML=positionCards(data,document.getElementById('positionSearch')?.value,document.getElementById('positionSort')?.value);
+ if(target&&data){const view=setPositionView({query:document.getElementById('positionSearch')?.value,sort:document.getElementById('positionSort')?.value});target.innerHTML=positionCards(data,view.query,view.sort);}
 }
 document.addEventListener('input',event=>{if(event.target.id==='positionSearch')updatePositions();});
 document.addEventListener('change',event=>{if(event.target.id==='positionSort')updatePositions();});
@@ -56,7 +58,7 @@ export function openStock(ticker,trigger){
  if(current)current.dialog.close();
  const dialog=document.createElement('dialog');dialog.className='stock-dialog';dialog.setAttribute('aria-labelledby','stockTitle');
  const entry=current={dialog,ticker,range:'1mo'};
- dialog.innerHTML=`<header class="stock-dialog-head"><div><span class="pd-kicker">STOCK EXPLORER</span><h2 id="stockTitle">${e(ticker)}</h2><p id="stockCompany">${e(data.quotes?.[ticker]?.company||'Price history & your position')}</p></div><button class="quiet" data-stock-close aria-label="Close stock details" autofocus>✕</button></header>
+ dialog.innerHTML=`<header class="stock-dialog-head"><div class="stock-dialog-brand">${companyMark(ticker,'large')}<div><span class="pd-kicker">STOCK EXPLORER</span><h2 id="stockTitle">${e(ticker)}</h2><p id="stockCompany">${e(data.quotes?.[ticker]?.company||'Price history & your position')}</p></div></div><button class="quiet" data-stock-close aria-label="Close stock details" autofocus>✕</button></header>
  <div class="stock-detail-controls"><label>Holding<select id="stockHolding" aria-label="Select holding">${data.holdings.map(h=>`<option value="${e(h.ticker)}" ${h.ticker===ticker?'selected':''}>${e(h.ticker)}</option>`).join('')}</select></label><div class="stock-ranges" role="group" aria-label="Chart time range">${ranges.map(([key,label])=>`<button type="button" data-stock-range="${key}" aria-pressed="${key==='1mo'}">${label}</button>`).join('')}</div></div>
  <section id="stockMarket" aria-label="Stock market information"></section><div id="stockSavedPosition">${savedPosition(ticker)}</div>
  <footer class="stock-links"><a href="https://finance.yahoo.com/quote/${encodeURIComponent(ticker.replaceAll('.','-'))}/news/" target="_blank" rel="noopener noreferrer">Company news ↗</a><a href="https://finance.yahoo.com/quote/${encodeURIComponent(ticker.replaceAll('.','-'))}/profile/" target="_blank" rel="noopener noreferrer">Company profile ↗</a></footer>`;

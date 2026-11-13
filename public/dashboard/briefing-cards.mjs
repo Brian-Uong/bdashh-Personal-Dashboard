@@ -1,3 +1,5 @@
+import {companyMark} from './company-brand.mjs';
+import {recommendationItem,recommendationHeading,newsBriefingText} from './briefing-content.mjs';
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clean=value=>typeof value==='string'?value.replace(/\s+/g,' ').trim():'';
 function limit(value,max,words=Infinity){
@@ -11,6 +13,15 @@ function dateLabel(value){
  // A publication date without a time is a calendar date, not midnight UTC.
  return new Date(/^\d{4}-\d{2}-\d{2}$/.test(value)?value+'T12:00:00Z':value).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'America/Los_Angeles'});
 }
+export function briefingFreshness(asOf,now=new Date()) {
+ const timestamp=typeof asOf==='string'?Date.parse(asOf):NaN;
+ if(!Number.isFinite(timestamp))return {state:'unknown',label:'Saved date unavailable'};
+ const day=value=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Los_Angeles',year:'numeric',month:'2-digit',day:'2-digit'}).format(value);
+ const saved=/^\d{4}-\d{2}-\d{2}$/.test(asOf)?asOf:day(new Date(timestamp));
+ const today=day(now);
+ if(saved>today||(!/^\d{4}-\d{2}-\d{2}$/.test(asOf)&&timestamp>now.getTime()+300000))return {state:'unknown',label:'Check saved briefing date'};
+ return saved===today?{state:'current',label:'Today’s briefing'}:{state:'previous',label:'Previous briefing · Awaiting today’s update'};
+}
 function normalize(item){
  if(!item||typeof item!=='object')return null;
  const headline=limit(item.headline,110,16),summary=limit(item.summary,280,40);
@@ -22,8 +33,8 @@ function normalize(item){
 // Older saved reports remain readable without migration or invented citations.
 export function briefingItems(brief){
  const items=Array.isArray(brief?.items)?brief.items.map(normalize).filter(Boolean):[];
- if(items.length)return items.slice(0,5);
- const text=typeof brief?.text==='string'?brief.text.trim():'';
+ if(items.length)return items.filter(item=>!recommendationItem(item)).slice(0,5);
+ const text=newsBriefingText(brief?.text);
  const blocks=text.split(/\n\s*\n/).filter(Boolean),result=[];
  for(let i=0;i<blocks.length;i++){
   const lines=blocks[i].split('\n').map(s=>s.trim()).filter(Boolean);
@@ -41,10 +52,13 @@ export function briefingItems(brief){
 }
 function story(item,asOf){
  const date=item.publishedAt||dateLabel(asOf),badge=item.tickers.join(' / ')||'NEWS';
- return `<article class="brief-story"><div class="brief-copy"><div class="brief-meta"><span class="brief-source-mark" aria-hidden="true">${esc(item.source[0].toUpperCase())}</span><span>${esc(item.source)}</span>${date?`<span class="brief-date">${item.publishedAt?'':'Briefed '}${esc(date)}</span>`:''}</div><h3>${item.url?`<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">${esc(item.headline)}<span class="brief-link-arrow" aria-hidden="true"> ↗</span></a>`:esc(item.headline)}</h3><p>${esc(item.summary)}</p></div><div class="brief-ticker" aria-hidden="true">${esc(badge)}<span>${esc(item.kind||'UPDATE')}</span></div></article>`;
+ return `<article class="brief-story"><div class="brief-copy"><div class="brief-meta"><span class="brief-source-mark" aria-hidden="true">${esc(item.source[0].toUpperCase())}</span><span>${esc(item.source)}</span>${date?`<span class="brief-date">${item.publishedAt?'':'Briefed '}${esc(date)}</span>`:''}</div><h3>${item.url?`<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">${esc(item.headline)}<span class="brief-link-arrow" aria-hidden="true"> ↗</span></a>`:esc(item.headline)}</h3><p>${esc(item.summary)}</p></div><div class="brief-ticker" aria-hidden="true">${item.tickers.length===1?companyMark(item.tickers[0],'small'):''}${esc(badge)}<span>${esc(item.kind||'UPDATE')}</span></div></article>`;
 }
-export function renderBriefing(brief,{compact=false,expanded=false}={}){
+export function renderBriefing(brief,{compact=false,expanded=false,now=new Date()}={}){
+ const freshness=briefingFreshness(brief?.asOf,now);
  const items=briefingItems(brief),date=dateLabel(brief?.asOf),shown=compact?items.slice(0,1):items;
- const sources=(Array.isArray(brief?.sources)?brief.sources:[]).filter(s=>s&&safeUrl(s.url));
- return `<section class="pd-panel pd-daily-briefing brief-feed${compact?' brief-compact':''}" aria-label="Daily investment briefing${compact?' summary':''}"><header class="brief-heading"><div><span class="pd-kicker">DAILY BRIEFING</span><h2>${brief?'Your market, at a glance.':'First briefing pending'}</h2></div>${date?`<span class="brief-stamp">${esc(date)} · PT</span>`:''}</header>${shown.length?`<div class="brief-stories">${shown.map(item=>story(item,brief.asOf)).join('')}</div>`:'<p class="brief-empty">Your researched briefing will appear here after the scheduled update.</p>'}${compact?'<button class="quiet brief-more" data-section="investments" aria-label="Read full daily briefing in Investments">Read more ↗</button>':brief?`<details class="brief-full" data-briefing-details="${esc(brief.asOf)}"${expanded?' open':''}><summary>Read full briefing &amp; sources${items.length?`<span>${items.length} highlights above</span>`:''}</summary><div class="brief-full-text">${esc(brief.text)}</div>${sources.length?`<ul class="brief-sources">${sources.map(s=>`<li><a href="${esc(safeUrl(s.url))}" target="_blank" rel="noopener noreferrer">${esc(s.title||s.url)} ↗</a></li>`).join('')}</ul>`:''}</details>`:''}</section>`;
+ const newsText=newsBriefingText(brief?.text),rawItems=Array.isArray(brief?.items)?brief.items:[],newsUrls=new Set(rawItems.filter(i=>i&&!recommendationItem(i)).map(i=>safeUrl(i.url)));
+ const pickUrls=new Set(rawItems.filter(recommendationItem).map(i=>safeUrl(i.url)).filter(url=>!newsUrls.has(url)));
+ const sources=(Array.isArray(brief?.sources)?brief.sources:[]).filter(s=>s&&safeUrl(s.url)&&!pickUrls.has(safeUrl(s.url))&&!recommendationHeading(s.title));
+ return `<section class="pd-panel pd-daily-briefing brief-feed${compact?' brief-compact':''}" aria-label="Daily investment briefing${compact?' summary':''}"><header class="brief-heading"><div><span class="pd-kicker">DAILY BRIEFING</span><h2>${brief?'Your market, at a glance.':'First briefing pending'}</h2></div>${date?`<span class="brief-stamp">${esc(date)} · PT</span>`:''}</header>${brief?`<p class="brief-freshness" data-freshness="${freshness.state}">${esc(freshness.label)}</p>`:''}${shown.length?`<div class="brief-stories">${shown.map(item=>story(item,brief.asOf)).join('')}</div>`:`<p class="brief-empty">${brief?'No market or holdings news in this saved briefing. Daily stock picks are in the recommendation journal.':'Your researched briefing will appear here after the scheduled update.'}</p>`}${compact?'<button class="quiet brief-more" data-section="investments" aria-label="Read full daily briefing in Investments">Read more ↗</button>':brief&&(newsText||sources.length)?`<details class="brief-full" data-briefing-details="${esc(brief.asOf)}"${expanded?' open':''}><summary>Read full briefing &amp; sources${items.length?`<span>${items.length} highlights above</span>`:''}</summary><div class="brief-full-text">${esc(newsText)}</div>${sources.length?`<ul class="brief-sources">${sources.map(s=>`<li><a href="${esc(safeUrl(s.url))}" target="_blank" rel="noopener noreferrer">${esc(s.title||s.url)} ↗</a></li>`).join('')}</ul>`:''}</details>`:''}</section>`;
 }
