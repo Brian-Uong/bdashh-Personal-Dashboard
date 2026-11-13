@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "mode": "deployed-source",
-  "publishAuthorized": false,
-  "githubPushAuthorized": false,
+  "mode": "authorized_release",
+  "publishAuthorized": true,
+  "githubPushAuthorized": true,
   "baseline": "docs/online-source-baseline.json",
   "githubRepository": "Brian-Uong/bdashh-Personal-Dashboard",
   "githubBranch": "main",
-  "originalSiteVersion": 73,
-  "originalSiteCommit": "7c0ac4e8d71082ed4af24325b68353b1385cd9a3",
+  "originalSiteVersion": 80,
+  "originalSiteCommit": "488025bd0a4664e5874c5a57fe3764d25933dea0",
   "featuresReconciled": [
     "Website visibility",
     "OpenAI API control",
@@ -24,14 +24,20 @@
     "Audit fixes for news retention, background polling and career preferences",
     "Hosted AI routes and explicit setup status",
     "Independent market-history fallback and official Corona calendar alternative",
-    "City of Corona public calendar and Eastern intraday timestamp normalization"
+    "City of Corona public calendar and Eastern intraday timestamp normalization",
+    "v74 navigation history and safe hash recovery",
+    "v74 Pacific briefing freshness and controls preview context",
+    "v75 after-hours quote refresh, precise session ordering and no-newer-data status",
+    "v77 recommendation journal, daily three-pick workflow and date-precision-aware quote tracking",
+    "v79 verified company logos, transparent quote comparisons, compact section shortcuts and stable investment view state",
+    "v80 news-only briefings, automatic new-ticker logos and add/remove view reconciliation"
   ],
   "runtimeDataPolicy": "Preserve production site-settings.json, records and secrets; never initialize or overwrite them from this workspace.",
-  "githubBaselineCommit": "2da39cc58462d8ca853c48260016ab1df4a79c9e",
-  "githubSourceFilesVerified": 192,
+  "githubBaselineCommit": "69a630159611e74860f18b0379cc49fa084931bf",
+  "githubSourceFilesVerified": 205,
   "hostedWorkspacePreview": {
     "projectId": "appgprj_6ae23020eb70819199a6dbf59b793ff9",
-    "version": 73,
+    "version": 80,
     "controlsPath": "/owner/settings",
     "controlsMode": "disabled-preview",
     "productionDeploymentAuthorized": false,
@@ -58,18 +64,20 @@
     "cityCalendarMatches": 8,
     "stockHistoryTimestampVerified": true,
     "newsOnDemandMode": "public-feeds",
-    "newsOnDemandLiveVerified": true
+    "newsOnDemandLiveVerified": true,
+    "recommendationsUpdaterRevision": 2
   },
   "releasePackaging": {
     "requiredAfterEveryVersion": true,
     "command": "npm run release:package -- --site-version NUMBER --site-commit FULL_SHA --site-snapshot PATH",
     "publishesWebsite": false
   },
-  "freshComparisonAt": "2026-11-04T20:49:34.243967+00:00",
-  "releaseAuthorization": "Owner requested latest website update, synchronized GitHub and a resume-ready README on November 4, 2026.",
-  "releaseScope": "v73 feature release, retain controls-theme fix, synchronize both GitHub branches and rewrite README",
+  "freshComparisonAt": "2026-11-13T21:09:32.409710+00:00",
+  "releaseAuthorization": "Push the latest version to the github and bdashh.com \u2014 November 13, 2026",
+  "releaseScope": "News-only briefings and reliable holdings/logo lifecycle",
   "lastCompletedRelease": 73,
   "lastDeploymentId": "124db0d7-edb6-4b2c-9c96-f847fcd44dd8",
   "lastReleaseAt": "2026-11-04T21:00:55.720Z",
-  "nextReleaseRequiresOwnerRequest": true
+  "nextReleaseRequiresOwnerRequest": true,
+  "portableSourceBase": "v80 standalone package reconciled with current GitHub main and deployed v73 Worker"
 }

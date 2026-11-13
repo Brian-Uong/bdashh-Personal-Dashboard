@@ -1,3 +1,4 @@
+import * as recommendations from '../app/api/recommendations/route.ts';
 import * as events from '../app/api/events/route.ts';
 import * as news from '../app/api/news/route.ts';
 import * as access from '../app/api/access/route.ts';
@@ -21,7 +22,7 @@ import {serveR2Asset} from '../lib/private-assets.mjs';
 import {runStartupCheck} from '../lib/startup-check.mjs';
 import {runtimeEnv,siteSettingsRoute} from '../lib/site-settings.mjs';
 import {protectResponse} from '../lib/private-access.mjs';
-const existing={'/api/events':events,'/api/news':news,'/api/access':access,'/api/sync':sync,'/api/records':records,'/api/holdings':holdings,'/api/discovery':discovery,'/api/discovery/refresh':careerRefresh,'/api/research':research,'/api/quotes/refresh':quotes,'/api/portfolio/history':history,'/api/stocks/detail':stocks,'/api/places/search':places,'/api/places/nearby':nearby,'/api/fc-market':retiredMarket,'/api/sports/nba':retiredSports};
+const existing={'/api/recommendations':recommendations,'/api/events':events,'/api/news':news,'/api/access':access,'/api/sync':sync,'/api/records':records,'/api/holdings':holdings,'/api/discovery':discovery,'/api/discovery/refresh':careerRefresh,'/api/research':research,'/api/quotes/refresh':quotes,'/api/portfolio/history':history,'/api/stocks/detail':stocks,'/api/places/search':places,'/api/places/nearby':nearby,'/api/fc-market':retiredMarket,'/api/sports/nba':retiredSports};
 export default {
   async fetch(request,env){
     if(new URL(request.url).hostname!==env.APP_HOSTNAME)return protectResponse(new Response('Unknown host',{status:403}));

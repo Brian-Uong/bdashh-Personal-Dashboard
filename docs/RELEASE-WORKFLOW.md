@@ -1,3 +1,7 @@
+> Latest owner workflow: Development in this chat does not update GitHub, including
+> site-source. GitHub synchronization happens only in Move Dashboard Online when
+> Brian requests updating bdashh.com. Prepare downloadable packages here.
+
 # Shared source and website releases
 
 Brian wants routine updates to be easy to publish, with the exact released source saved in GitHub. A request to update bdashh.com authorizes completing its Cloudflare release and GitHub synchronization together. Development edits alone still do not authorize a production release.
@@ -7,7 +11,7 @@ Brian wants routine updates to be easy to publish, with the exact released sourc
 - `site-source`: the latest source from the Brian's Dash development Site, with its exact Site version and source commit recorded in `source-release.json`. Populate and verify it from the cloud development checkout after each published dashboard update. This branch is a source handoff; it does not deploy bdashh.com.
 - `main`: the independently hosted application, including Cloudflare owner authentication, private R2 storage, server-side AI and persistent website controls. Every bdashh.com release must have matching source here.
 
-**Version 73 handoff:** the exact release package and all 603 payload checksums were verified. Its standalone source has been reconciled against the current GitHub main, retaining the live controls-theme fix and release history. Consult migration-status.json and VERIFICATION.md for publication state and verified commits. Both branches were synchronized and hash-verified: main source commit `158ea83ef3c5d07cda7e8c05b141d8cd45292caa`, Site mirror `439dcf34faa0118f00f5e209eeb26b182bb97502`. A later documentation commit records the completed deployment.
+**Current release:** version 80, requested November 13, 2026. See migration-status.json and VERIFICATION.md for publication and verification status. The original v80 source snapshot and reconciled standalone source are kept on their respective branches.
 
 Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uong/bdashh-Personal-Dashboard`. GitHub repository ID: `1439328336`. The owner renamed it and made it public on November 4, 2026. The Worker and R2 bucket names are independent infrastructure identifiers; keep them unchanged. Keep the separate pdashboards business project out of this workflow.
 

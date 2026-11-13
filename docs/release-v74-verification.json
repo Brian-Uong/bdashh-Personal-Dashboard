@@ -1,0 +1,41 @@
+{
+  "siteVersion": 74,
+  "siteCommit": "88b92beca48778089983218a4decf6abac45df2d",
+  "siteUrl": "https://brians-dash-uong.uongb03.chatgpt.site",
+  "deploymentId": "appgdep_6af16452d310819188520a85f6c5a9f9",
+  "deploymentStatus": "succeeded",
+  "checkedAt": "2026-11-09T06:15:37.569097+00:00",
+  "siteTests": 135,
+  "standaloneTests": 166,
+  "siteProductionBuild": "passed",
+  "standaloneWorkerDryRun": "passed",
+  "hostedReads": {
+    "aiStatus": "passed",
+    "news": "passed",
+    "dashboard": "passed",
+    "newsRevision": 19,
+    "paidAIConfigured": false
+  },
+  "desktopBrowser": [
+    "seven main dashboard views",
+    "Career Applications",
+    "Back and Forward",
+    "keyboard skip link retains view and hash",
+    "published controls preview",
+    "published Investments Today\u2019s briefing label"
+  ],
+  "limitations": [
+    "Mobile viewport not exercised",
+    "Browser session is anonymous; no live owner save performed",
+    "No paid AI or provider-refresh calls performed"
+  ],
+  "onlineSourceComparison": {
+    "repository": "Brian-Uong/bdashh-Personal-Dashboard",
+    "mainCommit": "69a630159611e74860f18b0379cc49fa084931bf",
+    "allBaselineFilesMatched": true,
+    "onlineControlsTemplatePreserved": true
+  },
+  "githubSiteSourceSync": "blocked by automatic approval review; explicit authorization for public GitHub publication requested",
+  "bdashhDeploymentPerformed": false,
+  "settingsOrDataChanged": false
+}

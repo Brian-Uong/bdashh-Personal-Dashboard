@@ -1,0 +1,55 @@
+{
+  "version": 80,
+  "siteCommit": "488025bd0a4664e5874c5a57fe3764d25933dea0",
+  "deploymentId": "appgdep_6af76a66dc0c8191a5eda10ded9783d4",
+  "verifiedAt": "2026-11-13T19:53:49.243652+00:00",
+  "tests": {
+    "site": 175,
+    "standalone": 206,
+    "failed": 0
+  },
+  "builds": {
+    "site": "passed"
+  },
+  "browser": {
+    "desktopHostedOverviewNewsOnly": true,
+    "desktopHostedFullBriefingNewsOnly": true,
+    "hostedNewsCards": 4,
+    "hostedJournalVisible": true,
+    "localFictionalAddRemoveReadd": true,
+    "localAutomaticMSFTLogoLoaded": true,
+    "localFilterClearedAfterAddAndRemoval": true,
+    "localEmptyHoldingsState": true
+  },
+  "logos": {
+    "publicImageSmokeChecks": [
+      "AAPL",
+      "MSFT",
+      "AMD"
+    ],
+    "apiKeyRequired": false,
+    "fallback": "Ticker initials when missing; failure remembered until reload"
+  },
+  "automation": {
+    "id": "Automation_ca518c40817881919a1e7a48cb6c4fa7",
+    "enabled": true,
+    "scheduleUnchanged": "Daily 07:00 America/Los_Angeles",
+    "recommendationsUpdaterRevision": 2,
+    "journalOnlyRecommendations": true
+  },
+  "scope": {
+    "sitePublished": true,
+    "githubChanged": false,
+    "bdashhChanged": false,
+    "paidAPICalls": false,
+    "livePortfolioMutation": false,
+    "savedBriefingRewritten": false
+  },
+  "notRun": [
+    "Mobile visual checks this turn",
+    "Live authenticated portfolio add/remove (fictional local UI and isolated backend tests used)",
+    "Fresh GitHub/production source reconciliation",
+    "bdashh.com deployment and smoke checks",
+    "Paid AI provider calls"
+  ]
+}

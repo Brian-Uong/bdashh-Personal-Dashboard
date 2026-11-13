@@ -1,3 +1,7 @@
+# Current release authorization — November 13, 2026
+
+Brian explicitly requested pushing the latest release to GitHub and bdashh.com. Version 80, Site commit 488025bd0a4664e5874c5a57fe3764d25933dea0, is selected. This authorizes both source branches and the matching standalone production deployment. Preserve all saved data, secrets, visibility and AI controls. Future releases still require an explicit request.
+
 # Current repository — November 4, 2026
 
 Brian renamed the existing repository to `Brian-Uong/bdashh-Personal-Dashboard` and made it public. GitHub repository ID `1439328336` is unchanged. Use this canonical name for future source mirrors and releases; preserve public repository visibility. This supersedes historical private-repository requirements only. Live records and server credentials remain private in Cloudflare. The rename does not authorize a new website deployment or changes to its access, AI settings or data.
@@ -64,3 +68,10 @@ Brian requires no paid API use on the ChatGPT-hosted dashboard here. Do not crea
 or configure an OpenAI key or enable paid calls here based only on a ChatGPT
 subscription. A later request must explicitly acknowledge separate API billing.
 Public-feed news refresh is independent of paid AI. Preserve the 7 AM ChatGPT task.
+
+## Latest owner instruction — November 9, 2026
+
+Do not update GitHub from this development chat, including site-source. GitHub
+updates happen only in Move Dashboard Online when Brian requests updating
+bdashh.com to the newest version. This supersedes earlier source-mirroring rules.
+Continue development, ChatGPT Site publication and portable packaging here.

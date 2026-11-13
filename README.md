@@ -6,7 +6,7 @@ A personal command center that brings planning, portfolio tracking, career disco
 
 The project began as a way to reduce switching between spreadsheets, job boards, calendars, maps, and news sites. It now runs on its own domain with a Cloudflare Worker backend, persistent storage, owner authentication, and optional server-side AI research. Visitors can explore the published dashboard without a ChatGPT account or subscription; editing and research actions require the owner’s sign-in.
 
-This is a personal project and live demonstration, not a multi-user service. The source repository and live demo are public and can both be shared on a résumé or portfolio. The current release brings the version 73 dashboard to the standalone website while retaining its updated Website controls.
+This is a personal project and live demonstration, not a multi-user service. The source repository and live demo are public and can both be shared on a résumé or portfolio. The current release brings the version 80 dashboard to the standalone website while retaining its updated Website controls.
 
 ## What the dashboard does
 
@@ -14,12 +14,13 @@ This is a personal project and live demonstration, not a multi-user service. The
 | --- | --- |
 | Planning | Organize tasks, routines, goals, and saved records in a shared workspace. |
 | Portfolio | Track fractional holdings, valuations, saved portfolio history, and stock charts with timestamps and fallback data sources. |
+| Recommendation journal | Review source-linked stock research separately from holdings and track paper performance from recorded entry references. Existing development records are not copied into production. |
 | Career | Maintain job and recruiter leads, search preferences, and source-linked research; refresh public listings and optionally run AI web research. |
 | Local discovery | Explore places and maps, find local events, and retain source links, dates, and eligibility details for review. |
 | News | Save up to five topics and refresh recent headlines from public feeds without an OpenAI call. Filter duplicates, show partial results honestly, and retain articles when a source fails. Optional AI research is separately controlled. |
 | Website controls | Switch public viewing on or off, enable or disable OpenAI requests, and opt into daily research without redeploying. |
 
-Version 73 includes public-feed news refresh and fallback handling, improved career filtering and record retention, an official City of Corona calendar adapter, and stock-history fallback and Eastern time normalization. Public visitors see saved content; they cannot trigger owner-only refreshes or paid AI requests.
+Version 80 adds a stock recommendation journal with immutable entry references and tracked paper returns, company logos with automatic new-ticker fallback, clearer quote session timestamps, after-hours refresh, and news-only briefings. Earlier news, career and local-discovery features remain available. Public visitors see saved content; they cannot trigger owner-only refreshes or paid AI requests.
 
 ## Architecture
 
@@ -54,10 +55,10 @@ The standalone application does not depend on a running ChatGPT conversation. Ch
 
 ## Run locally
 
-Requires Node.js **22.13 or newer**, npm, and the dependencies pinned in `package-lock.json`.
+Requires Node.js **22.13 or newer**, npm, and the Wrangler version pinned in `package.json`.
 
 ```sh
-npm ci
+npm install
 npm run dev
 ```
 

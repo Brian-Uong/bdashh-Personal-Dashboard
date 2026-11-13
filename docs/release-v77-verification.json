@@ -1,0 +1,167 @@
+{
+  "testedAt": "2026-11-13T18:56:27.606889+00:00",
+  "elapsedSeconds": 35.78,
+  "checks": {
+    "siteTests": 164,
+    "standaloneTests": 195,
+    "siteBuild": true,
+    "sitePublished": true
+  },
+  "aiConfigured": false,
+  "records": [
+    {
+      "ticker": "BN",
+      "recordedAt": "2026-11-13T18:55:55.588Z",
+      "originalBriefedAt": null,
+      "referenceAt": "2026-11-13T15:00:00.000Z",
+      "reference": {
+        "price": 41.16,
+        "asOf": "2026-11-13T15:00:00.000Z",
+        "source": "Nasdaq",
+        "currency": "USD",
+        "timePrecision": "minute",
+        "session": "Regular session",
+        "kind": "7 AM minute quote"
+      },
+      "entry": {
+        "price": 40.965,
+        "asOf": "2026-11-13T18:55:00.000Z",
+        "timePrecision": "minute",
+        "source": "Nasdaq",
+        "currency": "USD",
+        "company": "Brookfield Corporation Class A Limited Voting Shares",
+        "session": "Regular session",
+        "previousClose": 41.64,
+        "checkedAt": "2026-11-13T18:55:58.322Z"
+      },
+      "entryMethod": "First quote after publication"
+    },
+    {
+      "ticker": "CSCO",
+      "recordedAt": "2026-11-13T18:55:55.588Z",
+      "originalBriefedAt": null,
+      "referenceAt": "2026-11-13T15:00:00.000Z",
+      "reference": {
+        "price": 96.49,
+        "asOf": "2026-11-13T15:00:00.000Z",
+        "source": "Nasdaq",
+        "currency": "USD",
+        "timePrecision": "minute",
+        "session": "Regular session",
+        "kind": "7 AM minute quote"
+      },
+      "entry": {
+        "price": 95.79,
+        "asOf": "2026-11-13T18:55:00.000Z",
+        "timePrecision": "minute",
+        "source": "Nasdaq",
+        "currency": "USD",
+        "company": "Cisco Systems, Inc. Common Stock (DE)",
+        "session": "Regular session",
+        "previousClose": 102.01,
+        "checkedAt": "2026-11-13T18:55:58.328Z"
+      },
+      "entryMethod": "First quote after publication"
+    },
+    {
+      "ticker": "NU",
+      "recordedAt": "2026-11-13T18:55:55.588Z",
+      "originalBriefedAt": null,
+      "referenceAt": "2026-11-13T15:00:00.000Z",
+      "reference": {
+        "price": 12.675,
+        "asOf": "2026-11-13T15:00:00.000Z",
+        "source": "Nasdaq",
+        "currency": "USD",
+        "timePrecision": "minute",
+        "session": "Regular session",
+        "kind": "7 AM minute quote"
+      },
+      "entry": {
+        "price": 12.985,
+        "asOf": "2026-11-13T18:55:00.000Z",
+        "timePrecision": "minute",
+        "source": "Nasdaq",
+        "currency": "USD",
+        "company": "Nu Holdings Ltd. Class A Ordinary Shares",
+        "session": "Regular session",
+        "previousClose": 11.83,
+        "checkedAt": "2026-11-13T18:55:58.376Z"
+      },
+      "entryMethod": "First quote after publication"
+    }
+  ],
+  "lastRefresh": {
+    "checkedAt": "2026-11-13T18:56:01.672Z",
+    "checked": [
+      "BN",
+      "CSCO",
+      "NU"
+    ],
+    "failed": [],
+    "errors": {},
+    "remainingTickers": 0
+  },
+  "subsequentRefresh": {
+    "baselineUnchanged": true,
+    "readbackMatches": true,
+    "lastRefresh": {
+      "checkedAt": "2026-11-13T18:57:32.533Z",
+      "checked": [
+        "BN",
+        "CSCO",
+        "NU"
+      ],
+      "failed": [],
+      "errors": {},
+      "remainingTickers": 0
+    },
+    "quotes": {
+      "BN": {
+        "price": 40.985,
+        "asOf": "2026-11-13T18:57:00.000Z",
+        "source": "Nasdaq",
+        "checkedAt": "2026-11-13T18:57:31.482Z"
+      },
+      "CSCO": {
+        "price": 95.77,
+        "asOf": "2026-11-13T18:57:00.000Z",
+        "source": "Nasdaq",
+        "checkedAt": "2026-11-13T18:57:32.443Z"
+      },
+      "NU": {
+        "price": 12.965,
+        "asOf": "2026-11-13T18:57:00.000Z",
+        "source": "Nasdaq",
+        "checkedAt": "2026-11-13T18:57:32.415Z"
+      }
+    }
+  },
+  "siteVersion": 77,
+  "siteCommit": "337628436fea3b7cdb94fda23d13568abb002207",
+  "deploymentId": "appgdep_6af75d1097948191b5dac99efd21a01b",
+  "url": "https://brians-dash-uong.uongb03.chatgpt.site",
+  "automation": {
+    "id": "Automation_ca518c40817881919a1e7a48cb6c4fa7",
+    "enabled": true,
+    "schedule": "BEGIN:VEVENT\nDTSTART;TZID=America/Los_Angeles:20261031T070000\nRRULE:FREQ=DAILY;BYHOUR=7;BYMINUTE=0;BYSECOND=0\nEND:VEVENT",
+    "nextRun": "2026-11-14T07:00:00-08:00",
+    "promptUpdated": true,
+    "otherTasksUnchanged": true
+  },
+  "paidApiCalls": 0,
+  "githubUpdated": false,
+  "productionWebsitePublished": false,
+  "browser": {
+    "desktopCards": true,
+    "search": true,
+    "expandedResearch": true,
+    "ownerRefreshButton": false,
+    "mobileViewport": false,
+    "liveGainsAndLosses": true
+  },
+  "limits": [
+    "Mobile viewport was not exercised.",
+    "Owner browser refresh button was not exercised; authenticated service refresh was verified."
+  ]
+}

@@ -89,6 +89,19 @@ test('public testing permits saved-data reads without granting owner privileges'
   assert.deepEqual(await (await servePrivate(new Request('https://bdashh.com/api/sync'),config,{assets,routes})).json(),{saved:true});
 });
 
+test('recommendation journal follows public viewing, private access and owner-only writes',async()=>{
+  let reads=0,writes=0;
+  const routes={'/api/recommendations':{GET:()=>{reads++;return Response.json({records:[]});},POST:()=>{writes++;return Response.json({ok:true});}}};
+  const request=()=>new Request('https://bdashh.com/api/recommendations');
+  const visitor=request();
+  assert.deepEqual(await (await servePrivate(visitor,{...env,PUBLIC_READ_ONLY:'true'},{routes})).json(),{records:[]});
+  assert.equal(isDashboardOwner(visitor),false);
+  assert.equal((await servePrivate(request(),{...env,PUBLIC_READ_ONLY:'false'},{routes})).status,401);
+  const write=new Request('https://bdashh.com/api/recommendations',{method:'POST',headers:{Origin:'https://bdashh.com'}});
+  assert.equal((await servePrivate(write,{...env,PUBLIC_READ_ONLY:'true'},{routes})).status,401);
+  assert.equal(reads,1);assert.equal(writes,0);
+});
+
 test('public visitors cannot invoke writes, AI, owner login handlers or unapproved APIs',async()=>{
   const config={...env,PUBLIC_READ_ONLY:'true'};let touched=0;
   const routes=Object.fromEntries(['/api/sync','/api/ai/briefing','/api/ai/career','/api/holdings','/api/records'].map(p=>[p,{POST:()=>{touched++;return Response.json({ok:true});}}]));

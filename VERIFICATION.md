@@ -1,3 +1,28 @@
+# Version 80 standalone release preparation — November 13, 2026
+
+Owner requested GitHub and bdashh.com publication. Verified 730 original package checksums, all 205 upstream files, and deployed v73 Worker SHA-256. Reconciled v80 features while retaining owner authentication, settings, data bindings and controls theme. Added the recommendation read route to public mode; private access and anonymous write denial have regression coverage. Current release checks: 207 tests pass, Worker dry-run build passes, 124 static assets verified. Production publication and smoke checks are pending. Paid AI calls and authenticated owner writes were not tested.
+
+# Development Site v80 — November 13, 2026
+
+Published news-only briefings, automatic new-ticker logos and holding view fixes.
+175 Site tests and 206 standalone tests pass. Desktop hosted checks confirm
+Overview shows news and all four news cards remain in Investments; the stock
+recommendation journal remains visible. Fictional local browser checks cover
+add/remove/re-add, automatic MSFT logo loading, filter reset and an empty portfolio.
+The existing 7 AM task now keeps recommendations exclusively in the journal;
+its schedule and enabled state are unchanged. No live portfolio mutations, paid
+API calls, GitHub writes or bdashh.com changes.
+See docs/release-v80-verification.json for scope and unperformed checks.
+
+# Development Site v79 — November 13, 2026
+
+Published company identity and investment detail refinements to the ChatGPT Site.
+170 Site tests and 201 standalone tests pass. All 17 hosted logo assets match
+their source hashes. Desktop UI checks and real quote refreshes succeeded for
+14 holdings and 3 journal tickers, preserving positions and immutable entries.
+See docs/release-v79-verification.json for exact scope and unperformed checks.
+No GitHub or bdashh.com changes and no paid AI calls.
+
 # Version 73 standalone release — November 4, 2026
 
 Published the exact v73 dashboard features to bdashh.com, retaining the live Website controls theme. The original development Site and schedules were not changed.
@@ -176,3 +201,43 @@ Added source snapshot export, release provenance checks, checksum-based GitHub d
 All 107 automated tests passed. Tests include a real local Git source export, wrong-commit/dirty-checkout rejection, sensitive-file exclusion, exact UTF-8 and binary round trips, credential-pattern rejection without logging values, changed-file comparisons and stale source/asset rejection. Release-check correctly rejects the real v65 request against the current v57 standalone source before building or publishing.
 
 A separate fixture copied from the verified v57 standalone source exercised the full preparation path with Wrangler 4.92.0. It produced GitHub, assets, Worker and release-plan packets, verified 83 assets under release 671c30ec3423cb541805ecf8, and reproduced Worker SHA256 35c5cd87d7a4f8df66f87b8edb8f7af2978bc0c46316296bc4bd61589457e177. Only the isolated fixture's provenance was set to v57 for this test; production and the real pending v65 request were unchanged. No remote deployment, saved-data change or paid AI call occurred.
+
+## Development Site v74 — November 8, 2026 Pacific
+
+Published and read back original Site commit 88b92beca48778089983218a4decf6abac45df2d.
+135 Site tests and 166 standalone tests passed; both builds succeeded. Desktop
+browser checks verified the main views, navigation and published controls and
+briefing freshness. Authenticated read-only checks confirmed saved news/dashboard
+access and paid AI disabled. No production settings, live records or .com release
+were changed. Mobile emulation and an authenticated owner browser save were not
+performed. See docs/release-v74-verification.json for details.
+
+The GitHub site-source mirror was blocked by automatic approval review, which
+requires explicit authorization for public GitHub source publication. The branch
+was not changed. The exact Site snapshot and prepared handoff are in this package.
+
+## Site v75 after-hours refresh — November 12, 2026 Pacific
+
+148 Site tests and 179 standalone tests passed. Site build and publication passed.
+Authenticated hosted refresh updated all 13 holdings to timestamped after-hours
+quotes in 23.33 seconds, with zero failures. Saved holdings, briefing and other
+sheets were unchanged; readback and 45-second request reuse passed. Browser
+verified After-Hours labels, updated values/history and last-check timestamps.
+See docs/release-v75-verification.json. No paid AI, GitHub update or bdashh.com
+deployment was performed. Standalone source retains its existing owner controls
+and authentication; the route tests use its verified-owner test identity.
+
+## Site v77 recommendation journal — November 13, 2026 Pacific
+
+164 Site tests and 195 standalone tests passed. Hosted build and publication
+passed. Three real non-held recommendations (BN, CSCO, NU) were recorded with
+verified 7 AM Pacific minute references and actual publication-time tracking
+entries. Readback, idempotent retries, authorization, cooldown reuse and data
+preservation passed. A subsequent live refresh updated all three latest quotes
+without changing any original record. Browser checks verified cards, searchable
+history, research details and positive/negative paper returns. The daily 7 AM
+Pacific automation prompt was updated; its enabled state, schedule and all
+unrelated daily tasks were preserved. See docs/release-v77-verification.json.
+No paid API call, GitHub update or bdashh.com deployment was performed.
+Mobile viewport and owner-browser refresh controls were not exercised; the
+authenticated service writer and refresh route were verified live.

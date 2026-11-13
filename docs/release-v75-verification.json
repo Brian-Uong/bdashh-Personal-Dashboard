@@ -1,0 +1,35 @@
+{
+  "siteVersion": 75,
+  "siteCommit": "74d5879ea0be10ac751e19985ed34dffc9840a24",
+  "deployedAt": "2026-11-13T03:07:35.973268+00:00",
+  "testedAt": "2026-11-13T03:08:51.842962+00:00",
+  "siteTests": 148,
+  "standaloneTests": 179,
+  "siteBuild": "passed",
+  "hostedRefresh": {
+    "checkedAt": "2026-11-13T03:08:39.992Z",
+    "elapsedSeconds": 23.33,
+    "holdingsChecked": 13,
+    "updated": 13,
+    "failed": 0,
+    "afterHoursQuotes": 13,
+    "checks": {
+      "holdingsUnchanged": true,
+      "briefingUnchanged": true,
+      "otherSheetsUnchanged": true,
+      "quotesReadbackMatches": true,
+      "metadataReadbackMatches": true,
+      "repeatReused": true
+    }
+  },
+  "browserVerification": "Published Investments page shows 13/13 timestamped quotes, After-Hours labels, updated valuation/history and separate quote/check times. Browser session is read-only; authenticated refresh tested through the authorized service route.",
+  "aiConfigured": false,
+  "paidAIInvoked": false,
+  "githubUpdated": false,
+  "bdashhComUpdated": false,
+  "limitations": [
+    "No new bdashh.com deployment or live website checks",
+    "No fresh GitHub reconciliation; portable standalone base is v74",
+    "Prices are latest provider-reported trades, not guaranteed real time or a continuous overnight feed"
+  ]
+}

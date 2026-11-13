@@ -56,3 +56,12 @@
   .website-controls-page .switch input:checked + .track { background: Highlight; }
   .website-controls-page .card { border-color: CanvasText; }
 }
+
+/* Context added only by the ChatGPT preview; shared online cards stay unchanged. */
+.website-controls-page .workspace-context .eyebrow { margin: 0 0 8px; }
+.website-controls-page .workspace-context strong { color: var(--nd-text); }
+.website-controls-page .workspace-links { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 10px; }
+.website-controls-page .workspace-links a { display: inline-flex; align-items: center; min-height: 44px; }
+.website-controls-page .controls-section { margin: 32px 0 6px; }
+.website-controls-page .controls-section p { font-size: 13px; }
+.website-controls-page .online-controls-link { display: inline-flex; align-items: center; }

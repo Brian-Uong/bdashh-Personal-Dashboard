@@ -1,0 +1,31 @@
+{
+  "version": 79,
+  "siteCommit": "722e672e38720d2ad74938bafe517e29add59af8",
+  "deploymentId": "appgdep_6af7650e6b708191a14be757278192b0",
+  "verifiedAt": "2026-11-13T19:32:54.849806+00:00",
+  "siteUrl": "https://brians-dash-uong.uongb03.chatgpt.site/dashboard/#investments",
+  "siteTestsPassed": 170,
+  "standaloneTestsPassed": 201,
+  "productionSiteBuild": "passed",
+  "hostedChecks": {
+    "logoFiles": 17,
+    "logoBytes": 55552,
+    "assetHashes": "all match packaged sources",
+    "desktop": "verified live company marks, holding and recommendation cards, horizontal shortcuts, sort/filter persistence, research disclosure stability and Adobe stock explorer chart",
+    "holdingsRefreshed": 14,
+    "recommendationsRefreshed": 3,
+    "providerErrors": 0,
+    "holdingsPreserved": true,
+    "referenceAndEntryPricesPreserved": true,
+    "briefingPreserved": true
+  },
+  "notRun": [
+    "Mobile browser visual inspection",
+    "Owner-authenticated browser controls (read-only browser; authorized service refresh verified)",
+    "Live after-hours session (current test was regular session)",
+    "Fresh GitHub reconciliation or any GitHub update",
+    "bdashh.com deployment or settings change"
+  ],
+  "paidAICalls": 0,
+  "productionAudienceChanged": false
+}
