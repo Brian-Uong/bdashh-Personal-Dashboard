@@ -53,6 +53,10 @@
     "authorized": true,
     "githubBranch": "main",
     "baseCommit": "9e2bf219968d61d2a28db89ae088c58bf3bd033d",
-    "productionSourceMatched": true
+    "productionSourceMatched": true,
+    "state": "completed",
+    "completed_at": "2026-11-19T09:25:31.104998+00:00",
+    "sourceCommit": "a916ce4e75840e4d1bd3b9080aa4611f67271a5b",
+    "futurePublicationRequiresOwnerRequest": true
   }
 }

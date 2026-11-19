@@ -1,0 +1,326 @@
+{
+  "task": "Orbital bdashh-online-001",
+  "scope": "Online favicon only",
+  "completed_at": "2026-11-19T09:25:31.104998+00:00",
+  "production_url": "https://bdashh.com/dashboard/",
+  "source_commit": "a916ce4e75840e4d1bd3b9080aa4611f67271a5b",
+  "base_commit": "9e2bf219968d61d2a28db89ae088c58bf3bd033d",
+  "dashboard_version": 80,
+  "asset_release": "bb4ae06cb72ea86e2bc31e5d",
+  "assets_verified": 128,
+  "tests_passed": 207,
+  "tests_failed": 0,
+  "worker_sha256": "0f0d5eac92f4c554a5cc05ca9764c76f0bd762369bd17db33ce09160c962f40c",
+  "worker_configuration_preserved": true,
+  "worker_code_unchanged_outside_generated_manifest": true,
+  "design": {
+    "foreground": "#25E8FF",
+    "background": "#071421",
+    "contrast_ratio": 12.44,
+    "grid": "16x16",
+    "glyphs": "B/D"
+  },
+  "browser": {
+    "Chrome_dashboard_loaded": true,
+    "dashboard_heading": "Your day, in focus.",
+    "head_icon_links": 5,
+    "icon_32_png_complete": true,
+    "icon_32_png_natural_dimensions": [
+      32,
+      32
+    ]
+  },
+  "http_checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "final_url": "https://bdashh.com/dashboard/",
+      "type": "text/html; charset=utf-8",
+      "bytes": 14861,
+      "icon_links": [
+        {
+          "rel": "icon",
+          "href": "/favicon.ico?v=bd-online-1",
+          "sizes": "16x16 32x32 48x48"
+        },
+        {
+          "rel": "icon",
+          "type": "image/png",
+          "sizes": "16x16",
+          "href": "/favicon-16x16.png?v=bd-online-1"
+        },
+        {
+          "rel": "icon",
+          "type": "image/png",
+          "sizes": "32x32",
+          "href": "/favicon-32x32.png?v=bd-online-1"
+        },
+        {
+          "rel": "icon",
+          "type": "image/svg+xml",
+          "sizes": "any",
+          "href": "/favicon.svg?v=bd-online-1"
+        },
+        {
+          "rel": "apple-touch-icon",
+          "sizes": "180x180",
+          "href": "/apple-touch-icon.png?v=bd-online-1"
+        }
+      ]
+    },
+    {
+      "path": "/dashboard",
+      "status": 200,
+      "final_url": "https://bdashh.com/dashboard/",
+      "type": "text/html; charset=utf-8",
+      "bytes": 14861,
+      "icon_links": [
+        {
+          "rel": "icon",
+          "href": "/favicon.ico?v=bd-online-1",
+          "sizes": "16x16 32x32 48x48"
+        },
+        {
+          "rel": "icon",
+          "type": "image/png",
+          "sizes": "16x16",
+          "href": "/favicon-16x16.png?v=bd-online-1"
+        },
+        {
+          "rel": "icon",
+          "type": "image/png",
+          "sizes": "32x32",
+          "href": "/favicon-32x32.png?v=bd-online-1"
+        },
+        {
+          "rel": "icon",
+          "type": "image/svg+xml",
+          "sizes": "any",
+          "href": "/favicon.svg?v=bd-online-1"
+        },
+        {
+          "rel": "apple-touch-icon",
+          "sizes": "180x180",
+          "href": "/apple-touch-icon.png?v=bd-online-1"
+        }
+      ]
+    },
+    {
+      "path": "/dashboard/",
+      "status": 200,
+      "final_url": "https://bdashh.com/dashboard/",
+      "type": "text/html; charset=utf-8",
+      "bytes": 14861,
+      "icon_links": [
+        {
+          "rel": "icon",
+          "href": "/favicon.ico?v=bd-online-1",
+          "sizes": "16x16 32x32 48x48"
+        },
+        {
+          "rel": "icon",
+          "type": "image/png",
+          "sizes": "16x16",
+          "href": "/favicon-16x16.png?v=bd-online-1"
+        },
+        {
+          "rel": "icon",
+          "type": "image/png",
+          "sizes": "32x32",
+          "href": "/favicon-32x32.png?v=bd-online-1"
+        },
+        {
+          "rel": "icon",
+          "type": "image/svg+xml",
+          "sizes": "any",
+          "href": "/favicon.svg?v=bd-online-1"
+        },
+        {
+          "rel": "apple-touch-icon",
+          "sizes": "180x180",
+          "href": "/apple-touch-icon.png?v=bd-online-1"
+        }
+      ]
+    },
+    {
+      "path": "/dashboard/index.html",
+      "status": 200,
+      "final_url": "https://bdashh.com/dashboard/index.html",
+      "type": "text/html; charset=utf-8",
+      "bytes": 14861,
+      "icon_links": [
+        {
+          "rel": "icon",
+          "href": "/favicon.ico?v=bd-online-1",
+          "sizes": "16x16 32x32 48x48"
+        },
+        {
+          "rel": "icon",
+          "type": "image/png",
+          "sizes": "16x16",
+          "href": "/favicon-16x16.png?v=bd-online-1"
+        },
+        {
+          "rel": "icon",
+          "type": "image/png",
+          "sizes": "32x32",
+          "href": "/favicon-32x32.png?v=bd-online-1"
+        },
+        {
+          "rel": "icon",
+          "type": "image/svg+xml",
+          "sizes": "any",
+          "href": "/favicon.svg?v=bd-online-1"
+        },
+        {
+          "rel": "apple-touch-icon",
+          "sizes": "180x180",
+          "href": "/apple-touch-icon.png?v=bd-online-1"
+        }
+      ]
+    },
+    {
+      "path": "/favicon.svg?v=bd-online-1",
+      "status": 200,
+      "final_url": "https://bdashh.com/favicon.svg?v=bd-online-1",
+      "type": "image/svg+xml",
+      "bytes": 1369,
+      "sha256": "1801c4870caf11396d46e7f30402692a06834fd47eb4391ac8bae716ec338fd1",
+      "bytes_match": true
+    },
+    {
+      "path": "/favicon.ico?v=bd-online-1",
+      "status": 200,
+      "final_url": "https://bdashh.com/favicon.ico?v=bd-online-1",
+      "type": "image/x-icon",
+      "bytes": 461,
+      "sha256": "5d3256a541750e175e945bba87dc8e912c078f4f4b6a49d5c1e001f1c4a35d32",
+      "bytes_match": true,
+      "format": "ICO",
+      "dimensions": [
+        48,
+        48
+      ],
+      "ico_sizes": [
+        [
+          16,
+          16
+        ],
+        [
+          32,
+          32
+        ],
+        [
+          48,
+          48
+        ]
+      ]
+    },
+    {
+      "path": "/favicon-16x16.png?v=bd-online-1",
+      "status": 200,
+      "final_url": "https://bdashh.com/favicon-16x16.png?v=bd-online-1",
+      "type": "image/png",
+      "bytes": 114,
+      "sha256": "61188f26ffabb71d97ca122de5186b43d1fe41f1b20e04c79bf80775ad0725c4",
+      "bytes_match": true,
+      "format": "PNG",
+      "dimensions": [
+        16,
+        16
+      ]
+    },
+    {
+      "path": "/favicon-32x32.png?v=bd-online-1",
+      "status": 200,
+      "final_url": "https://bdashh.com/favicon-32x32.png?v=bd-online-1",
+      "type": "image/png",
+      "bytes": 133,
+      "sha256": "dfa8fef704a4df4d3dbd9cb8c3ba7b4b86ec9343194ff407e42bce6cadc5f2bb",
+      "bytes_match": true,
+      "format": "PNG",
+      "dimensions": [
+        32,
+        32
+      ]
+    },
+    {
+      "path": "/apple-touch-icon.png?v=bd-online-1",
+      "status": 200,
+      "final_url": "https://bdashh.com/apple-touch-icon.png?v=bd-online-1",
+      "type": "image/png",
+      "bytes": 537,
+      "sha256": "81f24b04015dd4fa9005dd0d6f7a159b7f83fdbb5dad53b7be30f5c13e454716",
+      "bytes_match": true,
+      "format": "PNG",
+      "dimensions": [
+        180,
+        180
+      ]
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200,
+      "final_url": "https://bdashh.com/favicon.ico",
+      "type": "image/x-icon",
+      "bytes": 461,
+      "sha256": "5d3256a541750e175e945bba87dc8e912c078f4f4b6a49d5c1e001f1c4a35d32",
+      "bytes_match": true,
+      "format": "ICO",
+      "dimensions": [
+        48,
+        48
+      ],
+      "ico_sizes": [
+        [
+          16,
+          16
+        ],
+        [
+          32,
+          32
+        ],
+        [
+          48,
+          48
+        ]
+      ]
+    },
+    {
+      "path": "/api/access",
+      "status": 200,
+      "final_url": "https://bdashh.com/api/access",
+      "type": "application/json",
+      "bytes": 43,
+      "result": {
+        "canEdit": false,
+        "canManageWorkbook": false
+      }
+    },
+    {
+      "path": "/api/ai/status",
+      "status": 200,
+      "final_url": "https://bdashh.com/api/ai/status",
+      "type": "application/json",
+      "bytes": 80,
+      "result": {
+        "configured": false,
+        "dailyBriefing": false,
+        "dailyCareer": false,
+        "dailyNews": false
+      }
+    }
+  ],
+  "limitations": [
+    "Private R2 settings/data comparison was rejected by automatic approval review because it could expose sensitive records. No private data-bucket reads or writes were performed.",
+    "An initial verification payload containing deployment configuration was rejected; the successful replacement compared only a configuration fingerprint and did not embed owner or access metadata.",
+    "The first urllib smoke-check attempt returned 403. Curl completed all 12 checks, and Chrome independently loaded the page and image.",
+    "No existing browser bookmark was modified; its cached icon may require reopening the dashboard."
+  ],
+  "preserved": [
+    "All unrelated source changes from current main",
+    "Original private ChatGPT Site and site-source branch",
+    "Runtime data and paid API controls: no data-bucket writes or paid calls",
+    "Existing Worker bindings and configuration, verified by fingerprint"
+  ]
+}

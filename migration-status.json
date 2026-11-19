@@ -10,8 +10,8 @@
   "live_ai_verified": true,
   "deployed": true,
   "assets_uploaded": true,
-  "asset_release": "65c30f6f0a04968fdfdebb79",
-  "asset_count": 124,
+  "asset_release": "bb4ae06cb72ea86e2bc31e5d",
+  "asset_count": 128,
   "worker_deployed": true,
   "main_domain_cutover_approved": true,
   "release_policy": {
@@ -87,8 +87,16 @@
     "authorization": "Brian requested icon-only edit through the existing bdashh.com release workflow on November 19, 2026.",
     "base_github_commit": "9e2bf219968d61d2a28db89ae088c58bf3bd033d",
     "source_files_verified": 256,
-    "state": "prepared_not_published",
+    "state": "deployed_verified",
     "preserves_dashboard_version": 80,
-    "prepared_at": "2026-11-19T09:16:41.626845+00:00"
+    "prepared_at": "2026-11-19T09:16:41.626845+00:00",
+    "completed_at": "2026-11-19T09:25:31.104998+00:00",
+    "github_source_commit": "a916ce4e75840e4d1bd3b9080aa4611f67271a5b",
+    "asset_release": "bb4ae06cb72ea86e2bc31e5d",
+    "asset_count": 128,
+    "worker_sha256": "0f0d5eac92f4c554a5cc05ca9764c76f0bd762369bd17db33ce09160c962f40c",
+    "configuration_preserved": true,
+    "production_icon_bytes_matched": true,
+    "evidence_file": "docs/bdashh-online-001-evidence.json"
   }
 }

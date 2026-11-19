@@ -1,3 +1,7 @@
+# November 19, 2026 — online favicon-only release
+
+Published the cyan-on-navy pixel B/D icon to bdashh.com. All 207 checks passed; 128 immutable assets and production icon bytes were checksum verified. Worker configuration was preserved. See [the complete evidence](docs/bdashh-online-001-evidence.md) for routes, formats, hashes, browser observations and verification limits.
+
 # Version 80 release verification — November 13, 2026
 
 Version 80 is live on bdashh.com. Both GitHub source branches are synchronized.
