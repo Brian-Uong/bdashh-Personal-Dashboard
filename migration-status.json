@@ -79,5 +79,16 @@
     "site_source_files_verified": 344
   },
   "verification_file": "docs/release-v80-production-verification.json",
-  "operational_metadata_policy": "Public release records omit account identifiers, Access configuration, owner contact information and Cloudflare deployment identifiers. Authorized deployment tools retain those operational details."
+  "operational_metadata_policy": "Public release records omit account identifiers, Access configuration, owner contact information and Cloudflare deployment identifiers. Authorized deployment tools retain those operational details.",
+  "icon_release": {
+    "id": "bdashh-online-001",
+    "scope": "Online favicon only; electric cyan pixel B/D on dark navy",
+    "authorized": true,
+    "authorization": "Brian requested icon-only edit through the existing bdashh.com release workflow on November 19, 2026.",
+    "base_github_commit": "9e2bf219968d61d2a28db89ae088c58bf3bd033d",
+    "source_files_verified": 256,
+    "state": "prepared_not_published",
+    "preserves_dashboard_version": 80,
+    "prepared_at": "2026-11-19T09:16:41.626845+00:00"
+  }
 }

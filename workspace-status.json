@@ -46,5 +46,13 @@
   "lastCompletedRelease": 80,
   "lastReleaseAt": "2026-11-13T21:41:04.744Z",
   "nextReleaseRequiresOwnerRequest": true,
-  "portableSourceBase": "v80 standalone package reconciled with current GitHub main and deployed v73 Worker"
+  "portableSourceBase": "v80 standalone package reconciled with current GitHub main and deployed v73 Worker",
+  "iconReleaseAuthorization": {
+    "id": "bdashh-online-001",
+    "scope": "Only favicon assets, dashboard head links, asset MIME support, generated manifest and release evidence.",
+    "authorized": true,
+    "githubBranch": "main",
+    "baseCommit": "9e2bf219968d61d2a28db89ae088c58bf3bd033d",
+    "productionSourceMatched": true
+  }
 }
