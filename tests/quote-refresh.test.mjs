@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {stripTypeScriptTypes} from 'node:module';
+import {fixture,clock as activeClock} from './fixtures/quote-freshness.mjs';
 const env={DASHBOARD_SERVICE_TOKEN:'test-afterhours-token'};
 globalThis.__afterhoursTestEnv=env;
 const path=new URL('../app/api/quotes/refresh/route.ts',import.meta.url);
@@ -17,7 +18,14 @@ class Bucket{
 }
 const closed={data:{symbol:'NVDA',assetClass:'STOCKS',companyName:'NVIDIA',marketStatus:'Closed',primaryData:{lastSalePrice:'$166.19',netChange:'-7.54',lastTradeTimestamp:'Nov 12, 2026'}}};
 const request=()=>new Request('https://dashboard.test/api/quotes/refresh',{method:'POST',headers:{'X-Dashboard-Service-Authorization':'Bearer test-afterhours-token'}});
-async function run(initial,fetcher,check){const previousFetch=globalThis.fetch,previousNow=Date.now;env.BUCKET=new Bucket();await env.BUCKET.put('dashboard.json',JSON.stringify(initial));globalThis.fetch=fetcher;Date.now=()=>clock;try{await check(await route.POST(request()),env.BUCKET);}finally{globalThis.fetch=previousFetch;Date.now=previousNow;}}
+async function run(initial,fetcher,check,time=clock){
+ const previousFetch=globalThis.fetch,RealDate=globalThis.Date;
+ // Freeze both Date.now() and new Date(): the route uses both for its cache.
+ class FixtureDate extends RealDate{constructor(...args){super(...(args.length?args:[FixtureDate.now()]));}static now=()=>time;}
+ env.BUCKET=new Bucket();await env.BUCKET.put('dashboard.json',JSON.stringify(initial));
+ globalThis.fetch=fetcher;globalThis.Date=FixtureDate;
+ try{await check(await route.POST(request()),env.BUCKET);}finally{globalThis.fetch=previousFetch;globalThis.Date=RealDate;}
+}
 test('after closing, date-only fallback updates older intraday quotes and preserves portfolio and notes',async()=>{
  const before=seed();let calls=0;
  await run(before,async url=>{calls++;return url.includes('/info?')?Response.json(closed):new Response('',{status:503});},async(response,bucket)=>{
@@ -41,4 +49,61 @@ test('a concurrent newer quote and note edit are retained during refresh merge',
  await run(before,async url=>{if(!changed){changed=true;const latest=structuredClone(before);latest.quotes.NVDA={price:168,asOf:'2026-11-13T01:00:00Z',session:'After-Hours'};latest.sheets.Custom=[['Edited in another tab']];await env.BUCKET.put('dashboard.json',JSON.stringify(latest));}return url.includes('/info?')?Response.json(closed):new Response('',{status:503});},async response=>{
   const state=await response.json();assert.equal(state.quotes.NVDA.price,168);assert.deepEqual(state.sheets.Custom,[['Edited in another tab']]);assert.deepEqual(state.quoteRefresh.retained,['NVDA']);
  });
+});
+
+test('active refresh saves the newer fallback and retains the 45-second request guard',async()=>{
+ const before=seed(),f=fixture();
+ before.quotes.NVDA={price:100,asOf:new Date(activeClock-90*60000).toISOString(),session:'Regular session'};
+ await run(before,f.options.fetcher,async(response,bucket)=>{
+  assert.equal(response.status,200);const state=await response.json();
+  assert.equal(state.quoteRefresh.checkedAt,new Date(activeClock).toISOString());
+  assert.equal(state.quotes.NVDA.price,102);assert.equal(state.quotes.NVDA.asOf,new Date(activeClock-2*60000).toISOString());
+  assert.deepEqual(state.quoteRefresh.updated,['NVDA']);assert.deepEqual(state.holdings,before.holdings);
+  assert.deepEqual(state.sheets.Custom,before.sheets.Custom);assert.deepEqual(state.briefing,before.briefing);
+  assert.deepEqual((await (await bucket.get('dashboard.json')).json()).quotes,state.quotes);
+  await route.POST(request());assert.deepEqual(f.calls,['Nasdaq','Yahoo Finance']);
+ },activeClock);
+});
+test('active refresh preserves a newer saved quote when fallback is rate limited, including across refreshes',async()=>{
+ const before=seed(),f=fixture({fallbackStatus:429});
+ before.quotes.NVDA={price:105,asOf:new Date(activeClock-60000).toISOString(),session:'Regular session'};
+ await run(before,f.options.fetcher,async response=>{
+  const state=await response.json();assert.deepEqual(state.quotes.NVDA,before.quotes.NVDA);
+  assert.deepEqual(state.quoteRefresh.retained,['NVDA']);
+  assert.equal(state.quoteRefresh.providerCooldowns['Yahoo Finance'],new Date(activeClock+1200000).toISOString());
+  Date.now=()=>activeClock+60000;
+  const repeat=await (await route.POST(request())).json();
+  assert.deepEqual(repeat.quotes.NVDA,before.quotes.NVDA);
+  assert.deepEqual(f.calls,['Nasdaq','Yahoo Finance','Nasdaq']);
+ },activeClock);
+});
+test('active fallback does not overwrite a concurrently saved newer quote or notes',async()=>{
+ const before=seed(),f=fixture();
+ await run(before,async(url,options)=>{
+  if(url.includes('yahoo')){
+   const latest=structuredClone(before);latest.quotes.NVDA={price:105,asOf:new Date(activeClock-60000).toISOString(),session:'Regular session'};
+   latest.sheets.Custom=[['Concurrent note edit']];await env.BUCKET.put('dashboard.json',JSON.stringify(latest));
+  }
+  return f.options.fetcher(url,options);
+ },async response=>{
+  const state=await response.json();assert.equal(state.quotes.NVDA.price,105);
+  assert.equal(state.quotes.NVDA.asOf,new Date(activeClock-60000).toISOString());
+  assert.deepEqual(state.sheets.Custom,[['Concurrent note edit']]);assert.deepEqual(state.quoteRefresh.retained,['NVDA']);
+ },activeClock);
+});
+
+for(const [name,time,status] of [
+ ['holiday','2026-11-26T18:00:00Z','Open'],
+ ['early-close completed session','2026-11-27T22:00:00Z','After-Hours']
+])test(`${name} preserves quote and avoids an age-only fallback through real refresh route`,async()=>{
+ const at=Date.parse(time),before=seed(),f=fixture({time:at,status,age:1500});
+ before.quotes.NVDA={price:100,asOf:new Date(at-1500*60000).toISOString(),session:'Regular session'};
+ await run(before,f.options.fetcher,async(response,bucket)=>{
+  const state=await response.json();assert.equal(response.status,200);
+  assert.equal(state.quotes.NVDA.price,before.quotes.NVDA.price);assert.equal(state.quotes.NVDA.asOf,before.quotes.NVDA.asOf);
+  assert.deepEqual(state.quoteRefresh.unchanged,['NVDA']);assert.deepEqual(f.calls,['Nasdaq']);
+  assert.deepEqual(state.holdings,before.holdings);assert.deepEqual(state.sheets.Custom,before.sheets.Custom);
+  await route.POST(request());assert.deepEqual(f.calls,['Nasdaq']);
+  assert.equal((await (await bucket.get('quote-refresh-lock.json')).json()).until,0);
+ },at);
 });

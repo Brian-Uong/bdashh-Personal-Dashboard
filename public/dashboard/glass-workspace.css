@@ -1,0 +1,375 @@
+/* Brian's Dash · glass workspace.
+ * An appearance layer over the existing dashboard: no content, data or behavior.
+ * Load after component styles and opt in with .glass-workspace on the body.
+ */
+.nd-flow.glass-workspace {
+  --nd-navy: #101225;
+  --nd-plum: #3c234e;
+  --nd-surface: #191b30;
+  --nd-text: #f2effb;
+  --nd-cyan: #42eee9;
+  --nd-magenta: #f76bd3;
+  --nd-muted: #c6c1d9;
+  --text: var(--nd-text);
+  --muted: var(--nd-muted);
+  --gold: var(--nd-cyan);
+  --nd-line: rgba(221, 213, 255, .20);
+  --nd-radius: 22px;
+  --glass-gutter: clamp(12px, 1.4vw, 24px);
+  --glass-edge: rgba(244, 234, 255, .30);
+  --glass-fill: rgba(21, 23, 44, .64);
+  --glass-light: linear-gradient(130deg, rgba(230, 220, 255, .08), rgba(215, 225, 255, .015));
+  --glass-shadow: inset 0 1px rgba(255, 255, 255, .04), 0 12px 32px rgba(5, 6, 18, .14);
+  --glass-solid: #191b30;
+  background-color: var(--nd-navy);
+  background-image:
+    radial-gradient(ellipse at 95% 5%, #3c234e 0, transparent 55%),
+    radial-gradient(ellipse at 4% 95%, #143b4c 0, transparent 55%);
+  background-attachment: fixed;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
+}
+
+/* Reuse the existing ambient layer and its visibility / reduced-motion controls.
+ * No additional animation loop or pointer-following blur. */
+.nd-flow.glass-workspace .nd-ambient > i { opacity: .22; background: radial-gradient(ellipse, #3c234e66, transparent 70%); animation-duration: 28s; }
+.nd-flow.glass-workspace .nd-ambient > i:nth-child(2) { background: radial-gradient(ellipse, #143b4c66, transparent 70%); animation-duration: 32s; }
+.nd-flow.glass-workspace .nd-ambient svg { opacity: .06; }
+
+/* A gently framed workspace, without a filter/transform on the shell: fixed
+ * drawers, dialogs, sticky content and map fullscreen retain their viewport. */
+.nd-flow.glass-workspace.seamless-nav {
+  --sidebar-width: 232px;
+  --sidebar-paint: linear-gradient(160deg, rgba(17, 18, 38, .46), rgba(17, 18, 38, .35));
+}
+.nd-flow.glass-workspace.seamless-nav .sidebar {
+  inset: var(--glass-gutter) auto var(--glass-gutter) var(--glass-gutter);
+  border-radius: 24px 0 0 24px;
+  border: 1px solid var(--nd-line);
+  border-right: 0;
+  border-top-color: var(--glass-edge);
+}
+.nd-flow.glass-workspace.seamless-nav .sidebar[data-seam-ready]::before {
+  border-top-left-radius: 23px;
+  border-bottom-right-radius: 22px;
+}
+.nd-flow.glass-workspace.seamless-nav .sidebar[data-seam-ready]::after {
+  border-top-right-radius: 22px;
+  border-bottom-left-radius: 23px;
+}
+.nd-flow.glass-workspace.seamless-nav .sidebar[data-seam-ready]::before,
+.nd-flow.glass-workspace.seamless-nav .sidebar[data-seam-ready]::after {
+  border-right-color: rgba(221, 213, 255, .10);
+  background-size: var(--sidebar-width) calc(100dvh - 2 * var(--glass-gutter));
+}
+.nd-flow.glass-workspace.seamless-nav .shell {
+  margin: var(--glass-gutter) var(--glass-gutter) var(--glass-gutter) calc(var(--sidebar-width) + var(--glass-gutter));
+  min-height: calc(100dvh - 2 * var(--glass-gutter));
+  border: 1px solid var(--nd-line);
+  border-top-color: var(--glass-edge);
+  border-left: 0;
+  border-radius: 0 24px 24px 0;
+  background: linear-gradient(132deg, rgba(226, 216, 255, .035), rgba(6, 11, 27, .12));
+  box-shadow: 12px 20px 55px rgba(0, 0, 0, .15);
+}
+.nd-flow.glass-workspace.seamless-nav .sidebar .brand {
+  min-height: 90px;
+  font-family: inherit;
+  font-size: 1.18rem;
+  font-weight: 500;
+  padding-inline: 24px;
+}
+.nd-flow.glass-workspace.seamless-nav #nav .nav-item {
+  font-family: inherit;
+  font-size: .875rem;
+  font-weight: 400;
+  min-height: 48px;
+  padding-inline: 24px;
+}
+.nd-flow.glass-workspace.seamless-nav #nav .nav-item.active { font-weight: 500; }
+.nd-flow.glass-workspace.seamless-nav .sidebar .workspace-controls-link { font-size: .875rem; }
+.nd-flow.glass-workspace.seamless-nav .sidebar .side-bottom,
+.nd-flow.glass-workspace.seamless-nav .side-bottom p,
+.nd-flow.glass-workspace.seamless-nav .side-bottom > a { font-size: .75rem; }
+.nd-flow.glass-workspace .topbar {
+  min-height: 76px;
+  height: auto;
+  padding-block: 18px;
+  border-radius: 0 23px 0 0;
+  border-bottom-color: rgba(221, 213, 255, .10);
+  background: rgba(15, 16, 34, .4);
+  box-shadow: none;
+}
+.nd-flow.glass-workspace .topbar .tiny,
+.nd-flow.glass-workspace #breadcrumb { font-family: inherit; font-size: .75rem; letter-spacing: .07em; }
+.nd-flow.glass-workspace .access-status { font-size: .75rem; letter-spacing: .04em; }
+.nd-flow.glass-workspace .pageheading h1 {
+  font-family: inherit;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: 1.2;
+  text-shadow: none;
+}
+.nd-flow.glass-workspace .pageheading h1 span { text-shadow: none; }
+.nd-flow.glass-workspace #pageSubtitle { color: var(--nd-muted); font-size: 1rem; line-height: 1.65; }
+.nd-flow.glass-workspace .pageheading .eyebrow { font-size: .75rem; letter-spacing: .1em; }
+
+/* Material only: preserve each component's display, overflow and grid rules. */
+.nd-flow.glass-workspace :is(
+  .panel, .metric, .pd-panel, .pd-mini, .pd-overview-card,
+  .contact-card, .event-card, .position-card, .rec-pick,
+  .retro-brief, .pd-hero, .section-toolbar, .section-actions,
+  .connection, .event-map-wrap, .investment-loading
+) {
+  color: var(--nd-text);
+  border-color: var(--nd-line);
+  border-top-color: var(--glass-edge);
+  border-radius: var(--nd-radius);
+  background-color: var(--glass-fill);
+  background-image: var(--glass-light);
+  box-shadow: var(--glass-shadow);
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+/* News has legacy important backgrounds. Keep its layout declarations intact. */
+.nd-flow.glass-workspace :is(.news-picker, .news-topic-card) {
+  border-color: var(--nd-line) !important;
+  border-top-color: var(--glass-edge) !important;
+  border-radius: var(--nd-radius) !important;
+  background: var(--glass-light), var(--glass-fill) !important;
+  box-shadow: var(--glass-shadow);
+}
+.nd-flow.glass-workspace :is(.pd-hero, .pd-daily-briefing, .brief-compact) {
+  background-image: linear-gradient(130deg, rgba(160, 183, 229, .10), rgba(199, 177, 237, .025));
+}
+.nd-flow.glass-workspace .position-card { box-shadow: inset 0 2px var(--position-color), var(--glass-shadow); }
+.nd-flow.glass-workspace .pc-metrics article {
+  background: var(--glass-light), var(--glass-fill);
+  border-color: var(--nd-line);
+  border-radius: 18px;
+  box-shadow: var(--glass-shadow);
+}
+.nd-flow.glass-workspace :is(.metric, .pc-metrics article)::before { opacity: .5; }
+.nd-flow.glass-workspace .pd-panel-head { border-bottom-color: rgba(221, 213, 255, .12); }
+.nd-flow.glass-workspace :is(.pd-panel-head h3, .panel-heading h2, .pd-overview-card h3) {
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: -.025em;
+}
+.nd-flow.glass-workspace :is(.pd-note, .data-note, .pd-small, .brief-stamp, .brief-meta,
+  .metric-label, .metric-foot, .position-quote-time, .position-provenance) { font-size: .75rem; line-height: 1.65; }
+.nd-flow.glass-workspace :is(.pd-overview-card p, .section-actions p, .news-hint,
+  .pd-hero p, .section-guide p, .brief-story p) { font-size: .875rem; line-height: 1.7; }
+.nd-flow.glass-workspace .section-guide > summary { font-size: .875rem; }
+.nd-flow.glass-workspace .section-guide > summary small { font-size: .75rem; }
+.nd-flow.glass-workspace :is(.pd-kicker, .tiny) { font-family: inherit; font-size: .75rem; }
+
+/* Blur selected outer panels only. Never filter the application shell or map
+ * ancestors, and do not stack extra blur on every nested card. */
+@supports ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+  .nd-flow.glass-workspace :is(.panel, .pd-panel, .pd-overview-card, .news-picker, .news-topic-card, .retro-brief)
+    :is(.panel, .pd-panel, .pd-overview-card, .news-picker, .news-topic-card, .retro-brief) { --glass-panel-blur: none; }
+  .nd-flow.glass-workspace :is(.panel, .pd-panel, .pd-overview-card, .news-picker, .news-topic-card, .retro-brief)
+    :is(.position-card, .rec-pick, .metric, .pd-mini) { --glass-panel-blur: none; }
+  .nd-flow.glass-workspace :is(.panel, .pd-panel, .pd-overview-card, .news-picker, .news-topic-card, .retro-brief)
+    :where(.nd-glass) { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .nd-flow.glass-workspace :is(.panel, .pd-panel, .pd-overview-card, .news-picker, .news-topic-card, .retro-brief):not(:has(.geo-root, .maplibregl-map, .leaflet-container, canvas, iframe)) {
+    -webkit-backdrop-filter: var(--glass-panel-blur, blur(16px));
+    backdrop-filter: var(--glass-panel-blur, blur(16px));
+  }
+  .nd-flow.glass-workspace.seamless-nav .sidebar[data-seam-ready]::before,
+  .nd-flow.glass-workspace.seamless-nav .sidebar[data-seam-ready]::after {
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+}
+
+/* Inputs and nested controls have quiet tints; primary and disabled states keep
+ * their established meanings. No visibility or authorization selectors here. */
+.nd-flow.glass-workspace :is(.button.subtle, .quiet, .pd-action, .position-open,
+  .investment-jumps button, .owner-tools > summary) {
+  background: rgba(220, 219, 255, .055);
+  border-color: var(--nd-line);
+  border-radius: 13px;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .035);
+  font-size: .875rem;
+}
+.nd-flow.glass-workspace .button.gold { border-radius: 13px; font-size: .875rem; background: #233d48; border-color: #366773; color: var(--nd-text); box-shadow: none; }
+.nd-flow.glass-workspace .button.gold:not(:disabled):hover { background: #2b4b57; border-color: #50838e; color: var(--nd-text); box-shadow: none; }
+.nd-flow.glass-workspace :is(.eyebrow, .retro-kicker, .pd-kicker) { color: var(--nd-muted); background: none; -webkit-text-fill-color: currentColor; text-shadow: none; }
+.nd-flow.glass-workspace :is(.pageheading h1 span, .brand-dot) { color: var(--nd-magenta); text-shadow: none; }
+.nd-flow.glass-workspace :is(.career-tabs, .stock-ranges) {
+  background: rgba(9, 14, 32, .32);
+  border-color: var(--nd-line);
+  border-radius: 16px;
+  box-shadow: none;
+}
+.nd-flow.glass-workspace .career-tabs [aria-selected="true"] {
+  color: var(--nd-cyan);
+  background: linear-gradient(110deg, rgba(247, 107, 211, .14), rgba(66, 238, 233, .065));
+  border-color: rgba(213, 205, 255, .18);
+  box-shadow: none;
+}
+.nd-flow.glass-workspace :is(.searchbox, .news-search-row, .news-article-search) {
+  background: rgba(9, 14, 32, .4);
+  border-color: var(--nd-line);
+  border-radius: 13px;
+}
+.nd-flow.glass-workspace :is(.searchbox input, .news-search-row input, .news-article-search input) { background: transparent; }
+.nd-flow.glass-workspace :is(input:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea) { font-size: .875rem; }
+.nd-flow.glass-workspace :is(.pd-table th, th) { background: rgba(9, 14, 32, .46); }
+.nd-flow.glass-workspace :is(.table-wrap, .pd-table-wrap) { border-color: var(--nd-line); }
+.nd-flow.glass-workspace :is(.pd-table td, td) { border-bottom-color: rgba(221, 213, 255, .12); }
+
+/* Detached surfaces remain nearly opaque so text stays legible above charts. */
+.nd-flow.glass-workspace :is(dialog, .stock-dialog, .holding-dialog, .owner-tools-panel, .radio-panel) {
+  background: radial-gradient(ellipse at top right, #34233f, transparent 80%), #191b30;
+  border-color: var(--nd-line);
+  border-top-color: var(--glass-edge);
+  border-radius: 22px;
+  box-shadow: 0 22px 65px rgba(0, 0, 0, .34), inset 0 1px rgba(255, 255, 255, .04);
+}
+.nd-flow.glass-workspace :is(.pd-daily-briefing, .brief-feed):fullscreen { background: var(--glass-solid); }
+.nd-flow.glass-workspace .holding-dialog footer { background: #191b30; }
+
+/* Slower Soft cascade on intentional navigation; Depth pop on open surfaces.
+   Disable legacy automatic card reveals so polling cannot replay a transition.
+   Existing data-chart entrances are still owned by the chart motion layer. */
+.nd-flow.glass-workspace .nd-enter:not(svg):not(.fill):not(i) { animation: none; }
+/* The reel-inspired iris is a one-time native snapshot, limited to the content
+   workspace. Navigation stays usable and no permanent mask clips the page. */
+.glass-workspace.workspace-revealing #mainContent { view-transition-name: dashboard-workspace; }
+html:has(.workspace-revealing)::view-transition { pointer-events: none; }
+html:has(.workspace-revealing)::view-transition-group(*) { animation-duration: 0s; }
+html:has(.workspace-revealing)::view-transition-old(root),
+html:has(.workspace-revealing)::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+html:has(.workspace-revealing)::view-transition-old(dashboard-workspace) { animation: none; opacity: 0; }
+html:has(.workspace-revealing)::view-transition-new(dashboard-workspace) {
+  animation: glass-workspace-iris .95s cubic-bezier(.22,1,.36,1) both;
+  mix-blend-mode: normal;
+}
+@keyframes glass-workspace-iris {
+  from { clip-path: circle(0 at 28px 36px); }
+  to { clip-path: circle(150vmax at 28px 36px); }
+}
+.nd-flow.glass-workspace dialog[open] { animation: glass-depth-pop .72s cubic-bezier(.22,1,.36,1) backwards; }
+.nd-flow.glass-workspace dialog[open]::backdrop { background: rgba(6, 8, 20, .73); backdrop-filter: none; animation: glass-backdrop-in .36s ease-out backwards; }
+.nd-flow.glass-workspace .is-expanded .radio-panel { animation: glass-depth-pop .72s cubic-bezier(.22,1,.36,1) backwards; }
+.nd-flow.glass-workspace.seamless-nav .sidebar[data-seam-motion]::before,
+.nd-flow.glass-workspace.seamless-nav .sidebar[data-seam-motion]::after,
+.nd-flow.glass-workspace.seamless-nav .sidebar[data-seam-motion] .nav-current-mark { transition-duration: .56s; transition-timing-function: cubic-bezier(.22,1,.36,1); }
+@keyframes glass-depth-pop {
+  0% { opacity: .12; translate: 0 24px; scale: .94; }
+  78% { opacity: 1; translate: 0 -2px; scale: 1.008; }
+  100% { opacity: 1; translate: 0 0; scale: 1; }
+}
+@keyframes glass-backdrop-in { from { background: transparent; } to { background: rgba(6, 8, 20, .73); } }
+.nd-flow.glass-workspace:is(.no-motion, .nd-no-motion) :is(dialog[open], .radio-panel),
+.nd-flow.glass-workspace:is(.no-motion, .nd-no-motion) dialog[open]::backdrop { animation: none !important; }
+
+/* Website controls shares the same materials, with its existing host behavior. */
+.nd-flow.glass-workspace.website-controls-page main {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 32px clamp(20px, 4vw, 40px) 28px;
+  border: 1px solid var(--nd-line);
+  border-top-color: var(--glass-edge);
+  border-radius: 24px;
+  background: rgba(13, 16, 34, .25);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, .15);
+}
+.nd-flow.glass-workspace.website-controls-page .card {
+  background: var(--glass-light), var(--glass-fill);
+  border-color: var(--nd-line);
+  border-top-color: var(--glass-edge);
+  border-radius: var(--nd-radius);
+  box-shadow: var(--glass-shadow);
+}
+.nd-flow.glass-workspace.website-controls-page :is(.brand, h1, h2) { font-weight: 500; }
+.nd-flow.glass-workspace.website-controls-page .badge,
+.nd-flow.glass-workspace.website-controls-page .eyebrow { font-size: .75rem; }
+.nd-flow.glass-workspace.website-controls-page .controls-section p { font-size: .875rem; }
+.nd-flow.glass-workspace.website-controls-page .reload { background: rgba(220, 219, 255, .055); border-radius: 13px; }
+@supports ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+  .nd-flow.glass-workspace.website-controls-page .card { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+}
+
+@media (hover: hover) {
+  .nd-flow.glass-workspace :is(.panel, .metric, .pd-panel, .pd-mini, .pd-overview-card, .contact-card, .event-card, .rec-pick):hover {
+    border-color: rgba(230, 222, 255, .34);
+    border-top-color: rgba(230, 248, 255, .42);
+    box-shadow: var(--glass-shadow);
+  }
+  .nd-flow.glass-workspace :is(.button.subtle, .quiet, .pd-action, .position-open):not(:disabled):hover {
+    background: rgba(104, 232, 255, .09);
+    border-color: rgba(104, 232, 255, .40);
+    box-shadow: none;
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .nd-flow.glass-workspace:not(.no-motion):not(.nd-no-motion)
+    :is(.metric, .pd-overview-card, .pd-mini, .position-card, .rec-pick, .news-topic-card, .contact-card, .event-card):not(:has(canvas, iframe, .geo-root)) {
+    transition: translate .32s cubic-bezier(.22,1,.36,1), border-color .32s ease, box-shadow .32s ease;
+  }
+  .nd-flow.glass-workspace:not(.no-motion):not(.nd-no-motion)
+    :is(.metric, .pd-overview-card, .pd-mini, .position-card, .rec-pick, .news-topic-card, .contact-card, .event-card):not(:has(canvas, iframe, .geo-root)):hover {
+    translate: 0 -3px;
+    border-color: rgba(166, 238, 242, .38);
+    box-shadow: inset 0 1px rgba(255, 255, 255, .06), 0 16px 32px rgba(5, 6, 18, .24);
+  }
+}
+@media (max-width: 1100px) and (min-width: 851px) {
+  .nd-flow.glass-workspace.seamless-nav { --sidebar-width: 210px; }
+  .nd-flow.glass-workspace.seamless-nav .sidebar .brand,
+  .nd-flow.glass-workspace.seamless-nav #nav .nav-item { padding-inline: 20px; }
+  .nd-flow.glass-workspace .topbar { padding-inline: 24px; flex-wrap: wrap; }
+}
+@media (max-width: 850px) {
+  .nd-flow.glass-workspace.seamless-nav .sidebar {
+    inset: auto;
+    margin: 12px 12px 0;
+    border: 1px solid var(--nd-line);
+    border-bottom-color: rgba(221, 213, 255, .12);
+    border-radius: 20px 20px 0 0;
+    background: var(--sidebar-paint);
+  }
+  .nd-flow.glass-workspace.seamless-nav .shell {
+    margin: 0 12px 12px;
+    min-height: 0;
+    border: 1px solid var(--nd-line);
+    border-top: 0;
+    border-radius: 0 0 20px 20px;
+  }
+  .nd-flow.glass-workspace.seamless-nav .sidebar .brand { min-height: 68px; padding: 18px 20px; }
+  .nd-flow.glass-workspace.seamless-nav #nav .nav-item { padding-inline: 16px; }
+  .nd-flow.glass-workspace.seamless-nav .sidebar .workspace-controls-link { font-size: .75rem; }
+  .nd-flow.glass-workspace .topbar { border-radius: 0; padding: 16px 20px; }
+  .nd-flow.glass-workspace.website-controls-page main { margin: 12px; }
+}
+@media (max-width: 480px) {
+  .nd-flow.glass-workspace.seamless-nav .sidebar .brand { font-size: 1rem; gap: 8px; padding-inline: 14px; }
+  .nd-flow.glass-workspace.seamless-nav .sidebar .workspace-controls-link { margin-right: 6px; padding-inline: 6px; gap: 4px; }
+  .nd-flow.glass-workspace.seamless-nav .sidebar .workspace-controls-link > span { width: 15px; }
+  .nd-flow.glass-workspace #mainContent { padding: 26px 16px; }
+  .nd-flow.glass-workspace .topbar { padding-inline: 16px; }
+  .nd-flow.glass-workspace :is(input:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea) { font-size: 1rem; }
+}
+/* Opaque fallbacks, including preference support, leave the design readable. */
+@supports not ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+  .nd-flow.glass-workspace { --glass-fill: #19192e; --sidebar-paint: linear-gradient(160deg, #17182e, #1d1430); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .nd-flow.glass-workspace { --glass-fill: #19192e; --sidebar-paint: linear-gradient(160deg, #17182e, #1d1430); }
+  .nd-flow.glass-workspace *, .nd-flow.glass-workspace *::before, .nd-flow.glass-workspace *::after { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nd-flow.glass-workspace *, .nd-flow.glass-workspace *::before, .nd-flow.glass-workspace *::after { transition: none !important; }
+  .nd-flow.glass-workspace dialog[open]::backdrop { animation: none !important; }
+  html:has(.workspace-revealing)::view-transition-new(dashboard-workspace) { animation: none !important; }
+}
+@media (forced-colors: active) {
+  .nd-flow.glass-workspace { --glass-fill: Canvas; --glass-light: none; --glass-shadow: none; --glass-edge: CanvasText; --nd-line: CanvasText; --nd-text: CanvasText; --nd-muted: CanvasText; --nd-cyan: LinkText; --sidebar-paint: linear-gradient(Canvas, Canvas); background: Canvas; }
+  .nd-flow.glass-workspace :is(.shell, .topbar, dialog, .owner-tools-panel, .radio-panel),
+  .nd-flow.glass-workspace.website-controls-page main { background: Canvas; color: CanvasText; box-shadow: none; }
+  .nd-flow.glass-workspace *, .nd-flow.glass-workspace *::before, .nd-flow.glass-workspace *::after { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+}

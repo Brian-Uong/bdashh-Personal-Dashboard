@@ -139,3 +139,57 @@ button {cursor:pointer}
 :host(:not([data-owner])) :is(.bdc-file-tools,.bdc-star,.bdc-stage-label){display:none!important}
 
 .bdc-ai-status{border:1px solid #9e8bd744;border-radius:16px;padding:14px;margin:10px 0 14px;background:#17152b99}.bdc-ai-status strong{color:#bde7ff}.bdc-ai-status p{font-size:12px;line-height:1.5;color:#c5c0d9}.bdc-ai-status details{margin-bottom:8px}.bdc-muted:disabled{opacity:.55;cursor:wait}
+
+/* The approved glass treatment crosses this component's shadow boundary only
+   when the host dashboard opts in. Filters, selections and data stay untouched. */
+:host-context(.glass-workspace) .bdc-wrap {
+  --cyan: var(--nd-cyan, #68e8ff);
+  --pink: var(--nd-magenta, #ff64d0);
+  --muted: var(--nd-muted, #c6c1d9);
+  background: var(--glass-light), var(--glass-fill);
+  border-color: var(--nd-line);
+  border-top-color: var(--glass-edge);
+  border-radius: 22px;
+  box-shadow: var(--glass-shadow);
+}
+:host-context(.glass-workspace) .bdc-wrap::before,
+:host-context(.glass-workspace) .bdc-wrap::after,
+:host-context(.glass-workspace) .bdc-halo { display: none; }
+:host-context(.glass-workspace) .bdc-head h2 { font-weight: 500; letter-spacing: -.035em; }
+:host-context(.glass-workspace) .bdc-head h2 .bdc-period { text-shadow: none; }
+:host-context(.glass-workspace) .bdc-head p,
+:host-context(.glass-workspace) .bdc-reason { font-size: .875rem; line-height: 1.65; color: var(--muted); }
+:host-context(.glass-workspace) :is(.bdc-overline, .bdc-company, .bdc-role,
+ .bdc-listmeta, .bdc-meta, .bdc-note, .bdc-foot, .bdc-tags, .bdc-pill,
+ .bdc-stage-label, .bdc-pulse-row span, .bdc-filter-row label, .bdc-last strong) { font-size: .75rem; }
+:host-context(.glass-workspace) :is(.bdc-result, .bdc-pulse-row > div) {
+  background: linear-gradient(132deg, rgba(240, 232, 255, .065), rgba(204, 211, 255, .015)), rgba(15, 18, 37, .24);
+  border-color: var(--nd-line);
+  border-top-color: var(--glass-edge);
+  border-radius: 18px;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .035);
+}
+:host-context(.glass-workspace) .bdc-result:hover { border-color: rgba(230, 222, 255, .34); box-shadow: var(--glass-shadow); }
+:host-context(.glass-workspace) .bdc-result::before { opacity: .25; }
+:host-context(.glass-workspace) .bdc-result h3 { font-size: 1rem; font-weight: 500; }
+:host-context(.glass-workspace) .bdc-tabs { border-radius: 16px; background: rgba(9, 14, 32, .32); border-color: var(--nd-line); }
+:host-context(.glass-workspace) .bdc-tabs button { border-radius: 12px; font-size: .875rem; }
+:host-context(.glass-workspace) .bdc-tabs button.selected { color: var(--cyan); background: linear-gradient(110deg, rgba(247, 107, 211, .14), rgba(66, 238, 233, .065)); box-shadow: inset 0 1px rgba(230, 248, 255, .10); }
+:host-context(.glass-workspace) .bdc-overline { color: var(--muted); }
+:host-context(.glass-workspace) .bdc-import { background: #233d48; border-color: #366773; color: var(--nd-text); box-shadow: none; }
+:host-context(.glass-workspace) :is(.bdc-import, .bdc-muted, .bdc-link) { background: rgba(220, 219, 255, .055); border-color: var(--nd-line); border-radius: 12px; font-size: .875rem; }
+:host-context(.glass-workspace) :is(.bdc-filter-row select, .bdc-filter-row input[type=search]) { background: rgba(9, 14, 32, .4); border-color: var(--nd-line); font-size: .875rem; }
+:host-context(.glass-workspace) :is(.bdc-refresh-status, .bdc-ai-status) { background: rgba(9, 14, 32, .3); border-color: var(--nd-line); border-radius: 16px; }
+@supports ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+  :host-context(.glass-workspace) .bdc-wrap { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+}
+@media (max-width: 480px) {
+  :host-context(.glass-workspace) :is(.bdc-filter-row select, .bdc-filter-row input[type=search]) { font-size: 1rem; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :host-context(.glass-workspace) .bdc-wrap { backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (forced-colors: active) {
+  :host-context(.glass-workspace) :is(.bdc-wrap, .bdc-result, .bdc-pulse-row > div, .bdc-tabs) { background: Canvas; color: CanvasText; border-color: CanvasText; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  :host-context(.glass-workspace) .bdc-tabs button.selected { background: Highlight; color: HighlightText; }
+}

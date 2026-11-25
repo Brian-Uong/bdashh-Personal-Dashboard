@@ -2,6 +2,18 @@
 
 Apply these rules to every future dashboard change, including before a .com move.
 
+## Latest publication instruction — November 21, 2026 Pacific
+
+- Brian's direct instruction: "If the work isn't assigned from orbital, push it immediately."
+- For work Brian requests directly in this dashboard chat, finish the appropriate
+  checks and publish to the existing ChatGPT-hosted Site without a separate
+  permission question. This supersedes the preview-only/separate-publish-request
+  rule below for direct requests.
+- Orbital-assigned work retains its assignment's review and approval requirements;
+  do not treat it as a direct request merely because it is continued in this chat.
+- Preserve the current audience and concurrent changes. The separate Online-chat
+  instructions for GitHub and bdashh.com releases remain applicable.
+
 ## Brian's development workflow (October 30, 2026)
 
 - Develop and test all future updates here as local previews.

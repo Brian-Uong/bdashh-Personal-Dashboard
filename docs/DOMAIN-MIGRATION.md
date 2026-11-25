@@ -1,5 +1,20 @@
 # Current two-host development workflow
 
+## Bookmark icon and private Site — November 19, 2026
+
+Orbital personal-dashboard-004 explicitly requested publication to the private
+ChatGPT dashboard only. The existing Site was public; its Sites access policy is
+now owner-only (`custom`, sole owner allowlist, no groups or external viewers).
+The dashboard origin is resolved from Sites; bdashh.com, GitHub, saved data and
+paid API settings remain unchanged. Earlier Orbital 002/003 quote patches remain
+private drafts and are not part of this icon release.
+
+The mint/deep-teal BD monogram has real ICO, PNG and SVG assets. Dashboard HTML,
+Website controls, the standalone map and retired-route redirects declare icon
+links in their document heads; hash routes share the dashboard document. A root
+ICO supports conventional browser discovery, and versioned icon URLs request a
+fresh cache entry. Browser bookmark caches may update on the next page visit.
+
 As of October 30, 2026, bdashh.com is a separate Cloudflare deployment. This ChatGPT
 Site is the development dashboard. Publishing here does not authorize publishing
 bdashh.com or changing either host’s current visibility or AI settings.
