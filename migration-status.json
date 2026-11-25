@@ -10,8 +10,8 @@
   "live_ai_verified": true,
   "deployed": true,
   "assets_uploaded": true,
-  "asset_release": "bb4ae06cb72ea86e2bc31e5d",
-  "asset_count": 128,
+  "asset_release": "470b0fab3634416eaf785d07",
+  "asset_count": 135,
   "worker_deployed": true,
   "main_domain_cutover_approved": true,
   "release_policy": {
@@ -24,12 +24,15 @@
     "source_commit": "3fb1efb77d6e348d2ce748773d4d6d14c13cc6fc",
     "authorized": true,
     "authorization": "Brian: Pull the latest version of Brian's Dash and upload to bdashh.com alongside with the github. November 25, 2026 Pacific.",
-    "state": "prepared_not_published",
+    "state": "completed",
     "source_retrieved": true,
     "standalone_adaptation_completed": true,
-    "deployed": false,
+    "deployed": true,
     "github_sync_required": true,
-    "current_standalone_source_version": 88
+    "current_standalone_source_version": 88,
+    "completed_at": "2026-11-25T09:25:29.129130+00:00",
+    "standalone_source_commit": "eeef0efa9d2d777eb4beb42b813f42fa84ece5b4",
+    "site_source_branch_commit": "b861bc688d888259e0a82a05183627589c9dcc8c"
   },
   "ai_activation_deferred_by_owner": true,
   "ai_activation": {
@@ -45,7 +48,7 @@
   "owner_controls": {
     "authorized": true,
     "status": "live",
-    "keepsApprovedDashboardVersion": 80,
+    "keepsApprovedDashboardVersion": 88,
     "live_authenticated_owner_save_tested": false
   },
   "preview": {
@@ -55,13 +58,14 @@
     "live_ai_verified": false
   },
   "verification": {
-    "automated_tests_passed": 207,
+    "automated_tests_passed": 307,
     "automated_tests_failed": 0,
-    "asset_checksums_verified": 124,
+    "asset_checksums_verified": 135,
     "live_code_matches_build": true,
-    "live_smoke_checks_passed": 11,
-    "data_preserved": true,
-    "settings_preserved": true,
+    "live_smoke_checks_passed": 19,
+    "data_preserved_by_no_writes": true,
+    "settings_preserved_by_no_writes": true,
+    "configuration_fingerprint_unchanged": true,
     "desktop_browser_verified": true,
     "mobile_browser_verified": false,
     "paid_calls": 0
@@ -69,13 +73,14 @@
   "github": {
     "repository": "Brian-Uong/bdashh-Personal-Dashboard",
     "visibility": "public",
-    "source_commit": "7816fbd1233480aca36fb90a8ed07f87cfa5305f",
-    "site_source_commit": "2aebbedc4d77d760aeae6738ca7604eaf428127f",
-    "source_version": 80,
-    "source_files_verified": 256,
-    "site_source_files_verified": 344
+    "source_commit": "eeef0efa9d2d777eb4beb42b813f42fa84ece5b4",
+    "site_source_commit": "b861bc688d888259e0a82a05183627589c9dcc8c",
+    "source_version": 88,
+    "source_files_verified": 281,
+    "site_source_files_verified": 369,
+    "evidence_followup_expected_files": 282
   },
-  "verification_file": "docs/release-v80-production-verification.json",
+  "verification_file": "docs/release-v88-production-verification.json",
   "operational_metadata_policy": "Public release records omit account identifiers, Access configuration, owner contact information and Cloudflare deployment identifiers. Authorized deployment tools retain those operational details.",
   "icon_release": {
     "id": "bdashh-online-001",

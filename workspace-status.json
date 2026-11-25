@@ -48,8 +48,8 @@
   "freshComparisonAt": "2026-11-25T09:12:54.998253+00:00",
   "releaseAuthorization": "Brian explicitly requested latest Brian's Dash on bdashh.com and GitHub on November 25, 2026.",
   "releaseScope": "Complete hosted v88 features with standalone authentication, controls, and online favicon preserved.",
-  "lastCompletedRelease": 80,
-  "lastReleaseAt": "2026-11-13T21:41:04.744Z",
+  "lastCompletedRelease": 88,
+  "lastReleaseAt": "2026-11-25T09:25:29.129130+00:00",
   "nextReleaseRequiresOwnerRequest": true,
   "portableSourceBase": "Fresh main de2a06ad plus verified v87 standalone package and exact hosted v88 delta.",
   "iconReleaseAuthorization": {
@@ -71,7 +71,7 @@
   },
   "designPackaging": {
     "standaloneBase": "de2a06ad4538f885297f333707f3ec51ec7e9a6d",
-    "mode": "private_package_only",
+    "mode": "published_to_bdashh.com_and_github",
     "ownerControlsScriptUnchanged": true,
     "standaloneFaviconsPreserved": true,
     "testAuthAdaptation": "Quote fixtures grant verified owner identity through the existing standalone helper. Runtime authentication unchanged.",

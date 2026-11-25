@@ -1,0 +1,214 @@
+{
+  "checkedAt": "2026-11-25T09:24:47.736640+00:00",
+  "release": "470b0fab3634416eaf785d07",
+  "sourceVersion": 88,
+  "checks": [
+    {
+      "path": "/dashboard/",
+      "httpStatus": 200,
+      "size": 15081,
+      "sha256": "1a15d517fe5535a821e747c05a240c7b5b3d5a4eea176f14ab8b7c5ea2f39a87",
+      "contentType": "text/html; charset=utf-8",
+      "expectedOnlineOwnerLinkAdaptation": true,
+      "matchesBuild": true
+    },
+    {
+      "path": "/dashboard/index.html",
+      "httpStatus": 200,
+      "size": 15081,
+      "sha256": "1a15d517fe5535a821e747c05a240c7b5b3d5a4eea176f14ab8b7c5ea2f39a87",
+      "contentType": "text/html; charset=utf-8",
+      "expectedOnlineOwnerLinkAdaptation": true,
+      "matchesBuild": true
+    },
+    {
+      "path": "/dashboard/app.js",
+      "httpStatus": 200,
+      "size": 54033,
+      "sha256": "0b53d99de9cd270c095dea22762201b11533eaf4113a5d7610cd9775c3facba6",
+      "contentType": "text/javascript; charset=utf-8",
+      "matchesBuild": true
+    },
+    {
+      "path": "/dashboard/core.mjs",
+      "httpStatus": 200,
+      "size": 8742,
+      "sha256": "07a7aabd632b26d58a170ce188b7f95add47fca2e3a4e4db6dc7c4ebc1ddd65d",
+      "contentType": "text/javascript; charset=utf-8",
+      "matchesBuild": true
+    },
+    {
+      "path": "/dashboard/glass-workspace.css",
+      "httpStatus": 200,
+      "size": 20366,
+      "sha256": "5ef2fa46884304c2bd67b3b0dffe40a48040c0b8b3734025ff3e6ab039b4e512",
+      "contentType": "text/css; charset=utf-8",
+      "matchesBuild": true
+    },
+    {
+      "path": "/dashboard/glass-motion.mjs",
+      "httpStatus": 200,
+      "size": 7264,
+      "sha256": "25a9450bc94a5920e2a29689ef8cb912f6af37ad78cb40fd72aa389d5f170b55",
+      "contentType": "text/javascript; charset=utf-8",
+      "matchesBuild": true
+    },
+    {
+      "path": "/dashboard/role-compare.mjs",
+      "httpStatus": 200,
+      "size": 30467,
+      "sha256": "b054740a57679bc3ec993f1871592577f22efbba5e009d9d9d7d53cab6a8167c",
+      "contentType": "text/javascript; charset=utf-8",
+      "matchesBuild": true
+    },
+    {
+      "path": "/dashboard/role-compare.css",
+      "httpStatus": 200,
+      "size": 1208,
+      "sha256": "ff5c5fd9eab9326bf1112e4d276358c011af1a1cea09cb31e05dc1383b6a03b8",
+      "contentType": "text/css; charset=utf-8",
+      "matchesBuild": true
+    },
+    {
+      "path": "/dashboard/career-date-format.mjs",
+      "httpStatus": 200,
+      "size": 2981,
+      "sha256": "0765f832fe70d02dce376f6286a8dd011e4b78607b2783670891feb61053801d",
+      "contentType": "text/javascript; charset=utf-8",
+      "matchesBuild": true
+    },
+    {
+      "path": "/dashboard/quote-status.mjs",
+      "httpStatus": 200,
+      "size": 3842,
+      "sha256": "7cf60eefae951ab18ee4b12343f9ac731f8d6cb1da50cf903cd73d90ea4581ed",
+      "contentType": "text/javascript; charset=utf-8",
+      "matchesBuild": true
+    },
+    {
+      "path": "/dashboard/market-calendar.mjs",
+      "httpStatus": 200,
+      "size": 2421,
+      "sha256": "577d6d8357ad0502befd0250931e5ca6ad9c78b3f8bfbca5b46c102909c80c07",
+      "contentType": "text/javascript; charset=utf-8",
+      "matchesBuild": true
+    },
+    {
+      "path": "/favicon.svg",
+      "httpStatus": 200,
+      "size": 1369,
+      "sha256": "1801c4870caf11396d46e7f30402692a06834fd47eb4391ac8bae716ec338fd1",
+      "contentType": "image/svg+xml",
+      "matchesBuild": true
+    },
+    {
+      "path": "/favicon.ico",
+      "httpStatus": 200,
+      "size": 461,
+      "sha256": "5d3256a541750e175e945bba87dc8e912c078f4f4b6a49d5c1e001f1c4a35d32",
+      "contentType": "image/x-icon",
+      "matchesBuild": true
+    },
+    {
+      "path": "/apple-touch-icon.png",
+      "httpStatus": 200,
+      "size": 537,
+      "sha256": "81f24b04015dd4fa9005dd0d6f7a159b7f83fdbb5dad53b7be30f5c13e454716",
+      "contentType": "image/png",
+      "matchesBuild": true
+    },
+    {
+      "path": "/favicon-16x16.png",
+      "httpStatus": 200,
+      "size": 114,
+      "sha256": "61188f26ffabb71d97ca122de5186b43d1fe41f1b20e04c79bf80775ad0725c4",
+      "contentType": "image/png",
+      "matchesBuild": true
+    },
+    {
+      "path": "/favicon-32x32.png",
+      "httpStatus": 200,
+      "size": 133,
+      "sha256": "dfa8fef704a4df4d3dbd9cb8c3ba7b4b86ec9343194ff407e42bce6cadc5f2bb",
+      "contentType": "image/png",
+      "matchesBuild": true
+    },
+    {
+      "path": "/api/access",
+      "httpStatus": 200,
+      "size": 43,
+      "sha256": "b6c942aae0430b72c1600ebe471cd9ee81fd0ffb8b8817d53dda70d7d5f448e6",
+      "contentType": "application/json",
+      "response": {
+        "canEdit": false,
+        "canManageWorkbook": false
+      }
+    },
+    {
+      "path": "/api/ai/status",
+      "httpStatus": 200,
+      "size": 80,
+      "sha256": "1b05a9370e558de76274c929c601d903d7221a81ca649ad2727daf0a16952825",
+      "contentType": "application/json",
+      "response": {
+        "configured": false,
+        "dailyBriefing": false,
+        "dailyCareer": false,
+        "dailyNews": false
+      }
+    },
+    {
+      "path": "/owner/settings",
+      "httpStatus": 302,
+      "size": 143,
+      "sha256": "12755429beb15d5eb57eafa45b8dba326343dd099bf0552038694c3856e8860e",
+      "contentType": "text/html; charset=UTF-8",
+      "ownerAccessRedirect": true
+    }
+  ],
+  "iconHeadLinks": [
+    "<link rel=\"icon\" href=\"/favicon.ico?v=bd-online-1\" sizes=\"16x16 32x32 48x48\">",
+    "<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png?v=bd-online-1\">",
+    "<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png?v=bd-online-1\">",
+    "<link rel=\"icon\" type=\"image/svg+xml\" sizes=\"any\" href=\"/favicon.svg?v=bd-online-1\">",
+    "<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png?v=bd-online-1\">"
+  ],
+  "careerYearPresent": true,
+  "glassStylesheetPresent": true,
+  "siteSourceCommit": "3fb1efb77d6e348d2ce748773d4d6d14c13cc6fc",
+  "githubReleaseCommit": "eeef0efa9d2d777eb4beb42b813f42fa84ece5b4",
+  "githubSiteSourceCommit": "b861bc688d888259e0a82a05183627589c9dcc8c",
+  "automatedTests": {
+    "passed": 307,
+    "failed": 0
+  },
+  "immutableAssetsReadbackVerified": 135,
+  "workerSha256": "90988814d5db01e35736ec6f6692e3cd01e90ad484bd07c7e792d9ccd5b3ff39",
+  "liveWorkerMatchesBuild": true,
+  "configurationFingerprintUnchanged": true,
+  "githubFilesVerified": {
+    "main": 281,
+    "site-source": 369
+  },
+  "browser": {
+    "desktopOverview": true,
+    "careerNavigation": true,
+    "careerYearVisible": true,
+    "ownerOnlyControls": true,
+    "mobileNotRun": true
+  },
+  "preservation": {
+    "runtimeDataNotWritten": true,
+    "siteSettingsNotWritten": true,
+    "secretBindingsRetained": true,
+    "schedulesNotChanged": true,
+    "onlineCyanFaviconsUnchanged": true,
+    "originalHostedSiteNotModified": true
+  },
+  "limitations": [
+    "No authenticated owner save performed.",
+    "No live provider refresh or paid AI request performed.",
+    "No runtime data migration; production records are retained independently of the development Site.",
+    "No mobile browser visual pass in this release."
+  ]
+}
