@@ -1,3 +1,7 @@
+# Current release authorization — November 25, 2026
+
+Brian directly requested the latest Brian’s Dash on bdashh.com and GitHub. Version 88, Site commit 3fb1efb77d6e348d2ce748773d4d6d14c13cc6fc, is selected. Complete the standalone main release and exact site-source mirror. Preserve saved data, secrets, API flags, audience, schedules, owner authentication, online favicon and unrelated changes. Future releases require their applicable explicit authorization.
+
 # Current release authorization — November 13, 2026
 
 Brian explicitly requested pushing the latest release to GitHub and bdashh.com. Version 80, Site commit 488025bd0a4664e5874c5a57fe3764d25933dea0, is selected. This authorizes both source branches and the matching standalone production deployment. Preserve all saved data, secrets, visibility and AI controls. Future releases still require an explicit request.

@@ -6,7 +6,7 @@ A personal command center that brings planning, portfolio tracking, career disco
 
 The project began as a way to reduce switching between spreadsheets, job boards, calendars, maps, and news sites. It now runs on its own domain with a Cloudflare Worker backend, persistent storage, owner authentication, and optional server-side AI research. Visitors can explore the published dashboard without a ChatGPT account or subscription; editing and research actions require the owner’s sign-in.
 
-This is a personal project and live demonstration, not a multi-user service. The source repository and live demo are public and can both be shared on a résumé or portfolio. The current release brings the version 80 dashboard to the standalone website while retaining its updated Website controls.
+This is a personal project and live demonstration, not a multi-user service. The source repository and live demo are public and can both be shared on a résumé or portfolio. The current release brings the version 88 dashboard to the standalone website while retaining its updated Website controls.
 
 ## What the dashboard does
 
@@ -112,3 +112,7 @@ External sources can be unavailable, rate limited, delayed, or incomplete. News 
 - Developed resilient data integrations and a release workflow with automated regression checks, versioned assets, checksum verification, and synchronized GitHub source.
 
 These bullets describe implemented capabilities. Add measured outcomes as the project develops.
+
+## Latest release — v88
+
+The November 25 release adds the glass workspace design with adjustable motion, application and offer comparison, market-calendar-aware quote freshness, and career-year filtering with preserved date metadata. The standalone owner sign-in, live controls, saved data, and cyan B/D bookmark icon are retained.

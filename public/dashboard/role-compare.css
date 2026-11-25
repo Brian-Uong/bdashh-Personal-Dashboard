@@ -1,0 +1,17 @@
+dialog.application-compare{box-sizing:border-box;width:min(52rem,94vw);max-height:90vh;overflow:auto;border:1px solid #415874;border-radius:.8rem;background:#101b2a;color:#edf4fa;padding:1.25rem;font:1rem/1.45 system-ui}
+.application-compare::backdrop{background:#060c14bd}.application-compare .comparison-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem}.application-compare fieldset{min-width:0;margin:0;border:1px solid #50627c}.application-compare label{display:grid;gap:.2rem;margin:.55rem 0}.application-compare input,.application-compare select{box-sizing:border-box;max-width:100%;font:inherit;padding:.3rem}.application-compare [role=status]{color:#a7f0da;font-weight:bold}
+.application-record-button {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-align: start;
+}
+.application-record-button:hover { text-decoration: underline; }
+.application-compare .comparison-table-wrap { overflow-x: auto; }
+.application-compare table { width: 100%; }
+.application-compare td input { min-width: 5rem; }
+.application-compare caption { padding-block: .4rem; text-align: start; }

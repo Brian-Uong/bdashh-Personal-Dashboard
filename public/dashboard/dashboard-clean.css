@@ -33,3 +33,14 @@
  .nd-flow .pd-mini-grid{gap:12px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+
+/* Keep both native period controls readable in the narrow Overview panel. */
+.readiness .panel-heading { flex-wrap: wrap; gap: 12px; }
+.career-period {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 10px;
+  max-width: 100%;
+}
+.career-period select { width: 100%; min-width: 0; }

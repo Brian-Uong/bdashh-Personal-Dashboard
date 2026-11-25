@@ -1,10 +1,10 @@
 {
   "purpose": "Brian's personal dashboard, publicly viewable for testing with owner-only writes. Business remains separate.",
-  "latest_observed_site_version": 80,
-  "latest_observed_commit": "488025bd0a4664e5874c5a57fe3764d25933dea0",
+  "latest_observed_site_version": 88,
+  "latest_observed_commit": "3fb1efb77d6e348d2ce748773d4d6d14c13cc6fc",
   "source_reconciled": true,
-  "source_reconciliation_note": "Verified 730 package payload hashes and all 205 current GitHub files. Reviewed v73-to-v80 changes; owner auth, private/public router, settings, scheduler, R2 bindings and controls markup are unchanged. Retained all current upstream files; added recommendation route and supporting UI, logos and quote improvements. No data migration. Added /api/recommendations to the public read allowlist with a regression covering private-mode and anonymous write denial.",
-  "reconciled_source_commit": "488025bd0a4664e5874c5a57fe3764d25933dea0",
+  "source_reconciliation_note": "Verified all 263 current main blobs and 787 v87 package payloads; actual Site v88 retrieved at exact commit. Reviewed the v80-to-v87 standalone adaptations and applied the exact six-file v87-to-v88 patch. Retained online favicon, authentication, functional settings controls, private assets gateway, bindings, data and AI gates. No data migration.",
+  "reconciled_source_commit": "3fb1efb77d6e348d2ce748773d4d6d14c13cc6fc",
   "data_migrated": true,
   "hosting_configured": true,
   "live_ai_verified": true,
@@ -15,24 +15,21 @@
   "worker_deployed": true,
   "main_domain_cutover_approved": true,
   "release_policy": {
-    "approved_source_version": 80,
-    "approved_source_commit": "488025bd0a4664e5874c5a57fe3764d25933dea0",
+    "approved_source_version": 88,
+    "approved_source_commit": "3fb1efb77d6e348d2ce748773d4d6d14c13cc6fc",
     "sync_github_on_every_publication": true
   },
   "requested_release": {
-    "source_version": 80,
-    "source_commit": "488025bd0a4664e5874c5a57fe3764d25933dea0",
+    "source_version": 88,
+    "source_commit": "3fb1efb77d6e348d2ce748773d4d6d14c13cc6fc",
     "authorized": true,
-    "authorization": "Push the latest version to the github and bdashh.com \u2014 November 13, 2026",
-    "state": "deployed_verified",
+    "authorization": "Brian: Pull the latest version of Brian's Dash and upload to bdashh.com alongside with the github. November 25, 2026 Pacific.",
+    "state": "prepared_not_published",
     "source_retrieved": true,
     "standalone_adaptation_completed": true,
-    "deployed": true,
+    "deployed": false,
     "github_sync_required": true,
-    "current_standalone_source_version": 80,
-    "github_source_commit": "7816fbd1233480aca36fb90a8ed07f87cfa5305f",
-    "github_site_source_commit": "2aebbedc4d77d760aeae6738ca7604eaf428127f",
-    "completed_at": "2026-11-13T21:41:04.744Z"
+    "current_standalone_source_version": 88
   },
   "ai_activation_deferred_by_owner": true,
   "ai_activation": {
@@ -98,5 +95,45 @@
     "configuration_preserved": true,
     "production_icon_bytes_matched": true,
     "evidence_file": "docs/bdashh-online-001-evidence.json"
-  }
+  },
+  "release_history": [
+    {
+      "requested_release": {
+        "source_version": 80,
+        "source_commit": "488025bd0a4664e5874c5a57fe3764d25933dea0",
+        "authorized": true,
+        "authorization": "Push the latest version to the github and bdashh.com \u2014 November 13, 2026",
+        "state": "deployed_verified",
+        "source_retrieved": true,
+        "standalone_adaptation_completed": true,
+        "deployed": true,
+        "github_sync_required": true,
+        "current_standalone_source_version": 80,
+        "github_source_commit": "7816fbd1233480aca36fb90a8ed07f87cfa5305f",
+        "github_site_source_commit": "2aebbedc4d77d760aeae6738ca7604eaf428127f",
+        "completed_at": "2026-11-13T21:41:04.744Z"
+      },
+      "verification": {
+        "automated_tests_passed": 207,
+        "automated_tests_failed": 0,
+        "asset_checksums_verified": 124,
+        "live_code_matches_build": true,
+        "live_smoke_checks_passed": 11,
+        "data_preserved": true,
+        "settings_preserved": true,
+        "desktop_browser_verified": true,
+        "mobile_browser_verified": false,
+        "paid_calls": 0
+      },
+      "github": {
+        "repository": "Brian-Uong/bdashh-Personal-Dashboard",
+        "visibility": "public",
+        "source_commit": "7816fbd1233480aca36fb90a8ed07f87cfa5305f",
+        "site_source_commit": "2aebbedc4d77d760aeae6738ca7604eaf428127f",
+        "source_version": 80,
+        "source_files_verified": 256,
+        "site_source_files_verified": 344
+      }
+    }
+  ]
 }

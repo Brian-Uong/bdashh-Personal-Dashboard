@@ -1,4 +1,5 @@
 /* Presentation only: no data requests, numeric tweening, or map mutations. */
+import {mountGlassMotion} from './glass-motion.mjs';
 const root = document.body;
 const preference = matchMedia('(prefers-reduced-motion: reduce)');
 const storageKey = 'brians-dash-motion';
@@ -120,3 +121,4 @@ if ('IntersectionObserver' in window) {
     if (pending.size) schedule();
   }).observe(main, {childList: true, subtree: true});
 }
+mountGlassMotion();

@@ -11,7 +11,7 @@ Brian wants routine updates to be easy to publish, with the exact released sourc
 - `site-source`: the latest source from the Brian's Dash development Site, with its exact Site version and source commit recorded in `source-release.json`. Populate and verify it from the cloud development checkout after each published dashboard update. This branch is a source handoff; it does not deploy bdashh.com.
 - `main`: the independently hosted application, including Cloudflare owner authentication, private R2 storage, server-side AI and persistent website controls. Every bdashh.com release must have matching source here.
 
-**Current release:** version 80, requested November 13, 2026. See migration-status.json and VERIFICATION.md for publication and verification status. The original v80 source snapshot and reconciled standalone source are kept on their respective branches.
+**Current release:** version 88, requested November 25, 2026. See migration-status.json and VERIFICATION.md for publication and verification status. The original v88 source snapshot and reconciled standalone source are kept on their respective branches.
 
 Original Site: `appgprj_6ae23020eb70819199a6dbf59b793ff9`. Repository: `Brian-Uong/bdashh-Personal-Dashboard`. GitHub repository ID: `1439328336`. The owner renamed it and made it public on November 4, 2026. The Worker and R2 bucket names are independent infrastructure identifiers; keep them unchanged. Keep the separate pdashboards business project out of this workflow.
 

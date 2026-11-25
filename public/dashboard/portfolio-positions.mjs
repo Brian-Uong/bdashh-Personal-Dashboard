@@ -1,3 +1,4 @@
+import {quoteFreshness,quoteRefreshStatus} from './quote-status.mjs';
 import {companyMark,companyIdentity,externalArrow} from './company-brand.mjs';
 import {quoteChange,positionView} from './investment-view.mjs';
 import {portfolioStats} from './portfolio-charts.mjs';
@@ -8,15 +9,7 @@ export const money=x=>Number.isFinite(x)?x.toLocaleString('en-US',{style:'curren
 export const percent=x=>Number.isFinite(x)?`${x>0?'+':''}${x.toFixed(2)}%`:'—';
 export const signedMoney=x=>Number.isFinite(x)?`${x>0?'+':''}${money(x)}`:'—';
 export const tone=x=>!Number.isFinite(x)?'neutral':x>0?'positive':x<0?'negative':'neutral';
-export function refreshStatus(ticker,data){
- const refresh=data.quoteRefresh;
- if(!data.quotes?.[ticker])return 'No saved quote. Reload prices to check availability.';
- if(refresh?.failed?.includes(ticker))return 'Last refresh failed; saved quote retained.';
- if(refresh?.retained?.includes(ticker))return 'Checked; no newer quote available. Your newer saved price is retained.';
- if(refresh?.updated?.includes(ticker))return 'Updated on last price check.';
- if(refresh?.unchanged?.includes(ticker))return 'Verified unchanged on last price check.';
- return 'Saved snapshot. Reload prices to check for updates.';
-}
+export const refreshStatus=quoteRefreshStatus;
 export function positionCards(data,query='',sort='value'){
  const stats=portfolioStats(data),term=query.toLowerCase().trim();
  const rows=stats.rows.filter(row=>`${row.ticker} ${row.quote?.company||''} ${companyIdentity(row.ticker)?.company||''}`.toLowerCase().includes(term));
@@ -30,11 +23,12 @@ export function positionCards(data,query='',sort='value'){
    <header><button class="position-ticker" data-stock-open="${escape(row.ticker)}" aria-label="Open ${escape(row.ticker)} stock details">${companyMark(row.ticker)}<span><strong>${escape(row.ticker)}</strong><small>${escape(row.quote?.company||'Stock details & charts')}</small></span></button><span class="position-arrow" aria-hidden="true">${externalArrow}</span></header>
    <div class="position-price"><strong>${money(row.value===null?null:row.quote.price)}</strong><span>Saved price / share${row.quote?.session?` · ${escape(row.quote.session)}`:''}</span></div>
    <time class="position-quote-time">${escape(pacificTime(row.quote?.asOf))} · ${escape(row.quote?.source||'No source')}</time>
+   <p class="pd-note position-freshness" data-quote-freshness="${escape(row.ticker)}">${escape(quoteFreshness(row.quote))}</p>
    <div class="position-daily ${tone(day?.dollars)}"><b>${day?percent(day.percent):'—'}</b><span>${day?signedMoney(day.dollars):'Change unavailable'}</span><small>vs. prior close</small></div>
    <div class="position-return ${tone(row.gain)}"><b>${signedMoney(row.gain)}</b><span>${percent(row.returnPct)} since purchase</span></div>
    <dl class="position-numbers"><div><dt>Market value</dt><dd>${money(row.value)}</dd></div><div><dt>Shares</dt><dd>${Number(row.shares).toLocaleString('en-US',{maximumFractionDigits:6})}</dd></div><div><dt>Avg. cost</dt><dd>${money(row.avgCost)}</dd></div></dl>
    <div class="position-weight"><span>Portfolio weight</span><b>${weight===null?'—':weight.toFixed(1)+'%'}</b><div><i style="width:${weight===null?0:Math.max(0,Math.min(100,weight))}%"></i></div></div>
-   <details class="position-provenance"><summary>Quote details</summary><p>Cost basis: ${money(row.cost)}<br>${escape(row.quote?.source||'No provider')} · ${escape(row.quote?.session||'Saved snapshot')}<br>${escape(pacificTime(row.quote?.asOf))}</p><p>${escape(refreshStatus(row.ticker,data))}${data.quoteRefresh?.checkedAt?`<br>Last checked: ${escape(pacificTime(data.quoteRefresh.checkedAt))}`:''}</p>${row.quote?.providerNotes?`<p>Source note: ${escape(row.quote.providerNotes)}</p>`:''}</details>
+   <details class="position-provenance"><summary>Quote details</summary><p>Cost basis: ${money(row.cost)}<br>${escape(row.quote?.source||'No provider')} · ${escape(row.quote?.session||'Saved snapshot')}<br>${escape(pacificTime(row.quote?.asOf))}</p><p data-quote-refresh-status="${escape(row.ticker)}">${escape(refreshStatus(row.ticker,data))}</p><p>${data.quoteRefresh?.checkedAt?`Last checked: ${escape(pacificTime(data.quoteRefresh.checkedAt))}`:''}</p>${row.quote?.providerNotes?`<p>Source note: ${escape(row.quote.providerNotes)}</p>`:''}</details>
    <button class="position-open" data-stock-open="${escape(row.ticker)}">Explore ${escape(row.ticker)} ${externalArrow}</button>
    <div class="position-manage"><button type="button" data-edit-stock="${escape(row.ticker)}" aria-label="Edit ${escape(row.ticker)} position">Edit</button><button type="button" data-remove-stock="${escape(row.ticker)}" aria-label="Remove ${escape(row.ticker)} from portfolio">Remove</button></div>
   </article>`;

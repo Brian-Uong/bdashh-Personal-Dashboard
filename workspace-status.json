@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "mode": "development",
-  "publishAuthorized": false,
-  "githubPushAuthorized": false,
+  "publishAuthorized": true,
+  "githubPushAuthorized": true,
   "baseline": "docs/online-source-baseline.json",
   "githubRepository": "Brian-Uong/bdashh-Personal-Dashboard",
   "githubBranch": "main",
-  "originalSiteVersion": 80,
-  "originalSiteCommit": "488025bd0a4664e5874c5a57fe3764d25933dea0",
+  "originalSiteVersion": 88,
+  "originalSiteCommit": "3fb1efb77d6e348d2ce748773d4d6d14c13cc6fc",
   "featuresReconciled": [
     "Website visibility",
     "OpenAI API control",
@@ -30,23 +30,28 @@
     "v75 after-hours quote refresh, precise session ordering and no-newer-data status",
     "v77 recommendation journal, daily three-pick workflow and date-precision-aware quote tracking",
     "v79 verified company logos, transparent quote comparisons, compact section shortcuts and stable investment view state",
-    "v80 news-only briefings, automatic new-ticker logos and add/remove view reconciliation"
+    "v80 news-only briefings, automatic new-ticker logos and add/remove view reconciliation",
+    "v81-v84 market-calendar and quote-freshness reporting, application/offer comparison",
+    "v85 approved glass design; functional standalone controls script retained",
+    "v86 slower Soft cascade navigation, Depth pop dialogs and preview navy/plum/teal palette; independent settings and authorization preserved",
+    "v87 one-time opening iris, individual-card cascade and bounded hover; saved motion preference preserved",
+    "v88 career-year filtering, persisted date metadata, conditional Excel date-format selection and literal-date safeguards"
   ],
   "runtimeDataPolicy": "Preserve production site-settings.json, records and secrets; never initialize or overwrite them from this workspace.",
-  "githubBaselineCommit": "69a630159611e74860f18b0379cc49fa084931bf",
-  "githubSourceFilesVerified": 205,
+  "githubBaselineCommit": "de2a06ad4538f885297f333707f3ec51ec7e9a6d",
+  "githubSourceFilesVerified": 263,
   "releasePackaging": {
     "requiredAfterEveryVersion": true,
     "command": "npm run release:package -- --site-version NUMBER --site-commit FULL_SHA --site-snapshot PATH",
     "publishesWebsite": false
   },
-  "freshComparisonAt": "2026-11-13T21:09:32.409710+00:00",
-  "releaseAuthorization": "The November 13 requested v80 GitHub and bdashh.com release is complete. Future publication requires an explicit owner request.",
-  "releaseScope": "News-only briefings and reliable holdings/logo lifecycle",
+  "freshComparisonAt": "2026-11-25T09:12:54.998253+00:00",
+  "releaseAuthorization": "Brian explicitly requested latest Brian's Dash on bdashh.com and GitHub on November 25, 2026.",
+  "releaseScope": "Complete hosted v88 features with standalone authentication, controls, and online favicon preserved.",
   "lastCompletedRelease": 80,
   "lastReleaseAt": "2026-11-13T21:41:04.744Z",
   "nextReleaseRequiresOwnerRequest": true,
-  "portableSourceBase": "v80 standalone package reconciled with current GitHub main and deployed v73 Worker",
+  "portableSourceBase": "Fresh main de2a06ad plus verified v87 standalone package and exact hosted v88 delta.",
   "iconReleaseAuthorization": {
     "id": "bdashh-online-001",
     "scope": "Only favicon assets, dashboard head links, asset MIME support, generated manifest and release evidence.",
@@ -58,5 +63,23 @@
     "completed_at": "2026-11-19T09:25:31.104998+00:00",
     "sourceCommit": "a916ce4e75840e4d1bd3b9080aa4611f67271a5b",
     "futurePublicationRequiresOwnerRequest": true
+  },
+  "hostedWorkspacePreview": {
+    "version": 88,
+    "url": "https://brians-dash-uong.uongb03.chatgpt.site",
+    "verified": true
+  },
+  "designPackaging": {
+    "standaloneBase": "de2a06ad4538f885297f333707f3ec51ec7e9a6d",
+    "mode": "private_package_only",
+    "ownerControlsScriptUnchanged": true,
+    "standaloneFaviconsPreserved": true,
+    "testAuthAdaptation": "Quote fixtures grant verified owner identity through the existing standalone helper. Runtime authentication unchanged.",
+    "latestSharedFiles": [
+      "public/dashboard/app.js",
+      "public/dashboard/glass-motion.mjs",
+      "public/dashboard/glass-workspace.css",
+      "tests/glass-motion.test.mjs"
+    ]
   }
 }
